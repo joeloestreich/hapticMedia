@@ -78,104 +78,106 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="cs\config\theme\ThemeBase.cs" />
-    <Compile Include="cs\config\theme\ThemeDark.cs" />
-    <Compile Include="cs\config\theme\ThemeLight.cs" />
-    <Compile Include="cs\config\theme\ThemeManager.cs" />
-    <Compile Include="cs\config\Config.cs" />
-    <Compile Include="cs\applicationFrame\OwoMedia.cs">
+    <Compile Include="config\theme\ThemeBase.cs" />
+    <Compile Include="config\theme\ThemeDark.cs" />
+    <Compile Include="config\theme\ThemeLight.cs" />
+    <Compile Include="config\theme\ThemeManager.cs" />
+    <Compile Include="config\data\Config.cs" />
+    <Compile Include="applicationFrame\OwoMedia.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="cs\applicationFrame\OwoMedia.Designer.cs">
+    <Compile Include="applicationFrame\OwoMedia.Designer.cs">
       <DependentUpon>OwoMedia.cs</DependentUpon>
     </Compile>
-    <Compile Include="cs\applicationFrame\UserControlOwoBase.cs">
+    <Compile Include="genericComponents\pageDefinition\UserControlOwoBase.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="cs\applicationFrame\UserControlOwoBase.Designer.cs">
+    <Compile Include="genericComponents\pageDefinition\UserControlOwoBase.Designer.cs">
       <DependentUpon>UserControlOwoBase.cs</DependentUpon>
     </Compile>
-    <Compile Include="cs\applicationFrame\UserControlPage.cs">
+    <Compile Include="genericComponents\pageDefinition\UserControlPage.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="cs\applicationFrame\UserControlPage.Designer.cs">
+    <Compile Include="genericComponents\pageDefinition\UserControlPage.Designer.cs">
       <DependentUpon>UserControlPage.cs</DependentUpon>
     </Compile>
-    <Compile Include="cs\pages\components\VideoSearch.cs">
+    <Compile Include="videoViewer\components\VideoSearch.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="cs\pages\components\VideoSearch.Designer.cs">
+    <Compile Include="videoViewer\components\VideoSearch.Designer.cs">
       <DependentUpon>VideoSearch.cs</DependentUpon>
     </Compile>
-    <Compile Include="cs\pages\components\ViewerHeader.cs">
+    <Compile Include="videoViewer\components\ViewerHeader.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="cs\pages\components\ViewerHeader.Designer.cs">
+    <Compile Include="videoViewer\components\ViewerHeader.Designer.cs">
       <DependentUpon>ViewerHeader.cs</DependentUpon>
     </Compile>
-    <Compile Include="cs\pages\home\HomePage.cs">
+    <Compile Include="home\components\pages\HomePage.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="cs\pages\home\HomePage.Designer.cs">
+    <Compile Include="home\components\pages\HomePage.Designer.cs">
       <DependentUpon>HomePage.cs</DependentUpon>
     </Compile>
-    <Compile Include="cs\pages\videoSelector\VideoSelectorPage.cs">
+    <Compile Include="videoViewer\data\SelectorData.cs" />
+    <Compile Include="videoViewer\components\pages\VideoSelectorPage.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="cs\pages\videoSelector\VideoSelectorPage.Designer.cs">
+    <Compile Include="videoViewer\components\pages\VideoSelectorPage.Designer.cs">
       <DependentUpon>VideoSelectorPage.cs</DependentUpon>
     </Compile>
-    <Compile Include="cs\pages\videoSelector\VideoSelectorEntry.cs">
+    <Compile Include="videoViewer\components\VideoSelectorEntry.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="cs\pages\videoSelector\VideoSelectorEntry.Designer.cs">
+    <Compile Include="videoViewer\components\VideoSelectorEntry.Designer.cs">
       <DependentUpon>VideoSelectorEntry.cs</DependentUpon>
     </Compile>
-    <Compile Include="cs\pages\videoViewer\VideoViewerPage.cs">
+    <Compile Include="SensationPlayer\SyncableStopwatch.cs" />
+    <Compile Include="videoViewer\components\pages\VideoViewerPage.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="cs\pages\videoViewer\VideoViewerPage.Designer.cs">
+    <Compile Include="videoViewer\components\pages\VideoViewerPage.Designer.cs">
       <DependentUpon>VideoViewerPage.cs</DependentUpon>
     </Compile>
-    <Compile Include="cs\pages\videoViewer\VideoInfo.cs" />
-    <Compile Include="cs\pages\welcome\WelcomePage.cs">
+    <Compile Include="videoViewer\data\WsVideoData.cs" />
+    <Compile Include="welcome\components\pages\WelcomePage.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="cs\pages\welcome\WelcomePage.Designer.cs">
+    <Compile Include="welcome\components\pages\WelcomePage.Designer.cs">
       <DependentUpon>WelcomePage.cs</DependentUpon>
     </Compile>
-    <Compile Include="cs\Program.cs" />
-    <Compile Include="cs\websocket\WsVideoViewerBehavior.cs" />
-    <Compile Include="cs\websocket\WebSocketController.cs" />
+    <Compile Include="Program.cs" />
+    <Compile Include="websocket\WsVideoViewerBehavior.cs" />
+    <Compile Include="websocket\WebSocketService.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <EmbeddedResource Include="cs\applicationFrame\OwoMedia.resx">
+    <EmbeddedResource Include="applicationFrame\OwoMedia.resx">
       <DependentUpon>OwoMedia.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="cs\applicationFrame\UserControlOwoBase.resx">
+    <EmbeddedResource Include="genericComponents\pageDefinition\UserControlOwoBase.resx">
       <DependentUpon>UserControlOwoBase.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="cs\applicationFrame\UserControlPage.resx">
+    <EmbeddedResource Include="genericComponents\pageDefinition\UserControlPage.resx">
       <DependentUpon>UserControlPage.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="cs\pages\components\VideoSearch.resx">
+    <EmbeddedResource Include="videoViewer\components\VideoSearch.resx">
       <DependentUpon>VideoSearch.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="cs\pages\components\ViewerHeader.resx">
+    <EmbeddedResource Include="videoViewer\components\ViewerHeader.resx">
       <DependentUpon>ViewerHeader.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="cs\pages\home\HomePage.resx">
+    <EmbeddedResource Include="home\components\pages\HomePage.resx">
       <DependentUpon>HomePage.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="cs\pages\videoSelector\VideoSelectorPage.resx">
+    <EmbeddedResource Include="videoViewer\components\pages\VideoSelectorPage.resx">
       <DependentUpon>VideoSelectorPage.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="cs\pages\videoSelector\VideoSelectorEntry.resx">
+    <EmbeddedResource Include="videoViewer\components\VideoSelectorEntry.resx">
       <DependentUpon>VideoSelectorEntry.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="cs\pages\videoViewer\VideoViewerPage.resx">
+    <EmbeddedResource Include="videoViewer\components\pages\VideoViewerPage.resx">
       <DependentUpon>VideoViewerPage.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="cs\pages\welcome\WelcomePage.resx">
+    <EmbeddedResource Include="welcome\components\pages\WelcomePage.resx">
       <DependentUpon>WelcomePage.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
@@ -221,9 +223,12 @@
       <EmbedInteropTypes>True</EmbedInteropTypes>
     </COMReference>
   </ItemGroup>
-  <ItemGroup />
   <ItemGroup>
-    <EmbeddedResource Include="html\videoViewer.html" />
+    <Folder Include="videoEditor\components\pages\" />
+    <Folder Include="videoEditor\data\" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="videoViewer\html\videoViewer.html" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

@@ -1,0 +1,130 @@
+<html>
+<head>
+    <meta content='IE=Edge' http-equiv='X-UA-Compatible' />
+
+    <script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
+
+    <script>
+        const serverAddress = "ws://127.0.0.1:$WS_PORT$$WS_STATE_ROUTE$";
+
+        const socket = new WebSocket(serverAddress);
+
+        socket.onopen = function () {
+            sendState("init", "null");
+        }
+
+        socket.onmessage = function (event) {
+            console.log(event.data);
+        }
+
+        function sendState(useCase, value) {
+            let message = {
+                videoId: player.getVideoData().video_id,
+                timeStamp: player.getCurrentTime(),
+                useCase: useCase,
+                value: value
+            };
+            socket.send(JSON.stringify(message));
+        }
+
+        function onPlayerReady(event) {
+            event.target.playVideo();
+        }
+
+        function onPlayerStateChange(event) {
+            sendState("state", event.data);
+        }
+
+        // This is the source "window" that will emit the events.
+        var iframeWindow;
+        var lastTimeUpdate = 0;
+
+        function onPlayerTimeChange(time) {
+            sendState("time", time);
+        }
+
+    </script>
+
+    <style>
+        body {
+            overflow: hidden;
+            margin: 0;
+            background-color: black;
+        }
+
+        .video-container {
+            width: 100vw;
+            height: 56.25vw; /* height:width ratio = 9/16 = .5625  */
+            max-height: 100vh;
+            max-width: 177.78vh; /* 16/9 = 1.778 */
+            margin: auto;
+            position: absolute;
+            top: 0;
+            bottom: 0; /* vertical center */
+            left: 0;
+            right: 0; /* horizontal center */
+        }
+
+        .video-container iframe {
+            width: 100%;
+            height: 100%;
+        }
+
+
+    </style>
+</head>
+<body>
+    <div class="video-container">
+        <div id="player"></div>
+    </div>
+
+    <script>
+        // 2. This code loads the IFrame Player API code asynchronously.
+        var tag = document.createElement('script');
+
+        tag.src = "https://www.youtube.com/iframe_api";
+        var firstScriptTag = document.getElementsByTagName('script')[0];
+        firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
+
+        // 3. This function creates an <iframe> (and YouTube player)
+        //    after the API code downloads.
+        var player;
+        function onYouTubeIframeAPIReady() {
+            player = new YT.Player('player', {
+                height: window.innerHeight,
+                width: window.innerWidth,
+                videoId: '$VIDEO_ID$',
+                playerVars: {
+                    'playsinline': 1
+                },
+                events: {
+                    'onReady': onPlayerReady,
+                    'onStateChange': onPlayerStateChange
+                }
+            });
+            iframeWindow = player.getIframe().contentWindow;
+            window.addEventListener("message", function(event) {
+                // Check that the event was sent from the YouTube IFrame.
+                if (event.source === iframeWindow) {
+                    var data = JSON.parse(event.data);
+
+                    // The "infoDelivery" event is used by YT to transmit any
+                    // kind of information change in the player,
+                    // such as the current time or a playback quality change.
+                    if (data.event === "infoDelivery" && data.info && data.info.currentTime) {
+
+                        // currentTime is emitted very frequently,
+                        // but we only care about whole second changes.
+                        var time = Math.floor(data.info.currentTime);
+
+                        if (time !== lastTimeUpdate) {
+                            lastTimeUpdate = time;
+                            onPlayerTimeChange(time);
+                        }
+                    }
+                }
+            });
+        }
+    </script>
+</body>
+</html>

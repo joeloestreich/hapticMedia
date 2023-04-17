@@ -73,16 +73,14 @@ namespace owoMedia.Properties {
         ///        const socket = new WebSocket(serverAddress);
         ///
         ///        socket.onopen = function () {
-        ///            socket.send(&quot;{&apos;state&apos;: -1}&quot;);
+        ///            sendState(&quot;init&quot;, &quot;null&quot;);
         ///        }
         ///
         ///        socket.onmessage = function (event) {
-        ///            alert(event.data);
+        ///            console.log(event.data);
         ///        }
         ///
-        ///        
-        ///
-        ///    &lt;/script [rest of string was truncated]&quot;;.
+        ///        function send [rest of string was truncated]&quot;;.
         /// </summary>
         internal static string videoViewer {
             get {
