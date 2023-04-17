@@ -1,0 +1,229 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{E06FB3A9-CD8B-4140-9DC3-2B6D0F96D859}</ProjectGuid>
+    <OutputType>WinExe</OutputType>
+    <RootNamespace>owoMedia</RootNamespace>
+    <AssemblyName>owoMedia</AssemblyName>
+    <TargetFrameworkVersion>v4.8</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
+    <Deterministic>true</Deterministic>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="Google.Apis, Version=1.60.0.0, Culture=neutral, PublicKeyToken=4b01fa6e34db77ab, processorArchitecture=MSIL">
+      <HintPath>packages\Google.Apis.1.60.0\lib\net45\Google.Apis.dll</HintPath>
+    </Reference>
+    <Reference Include="Google.Apis.Auth, Version=1.60.0.0, Culture=neutral, PublicKeyToken=4b01fa6e34db77ab, processorArchitecture=MSIL">
+      <HintPath>packages\Google.Apis.Auth.1.60.0\lib\net461\Google.Apis.Auth.dll</HintPath>
+    </Reference>
+    <Reference Include="Google.Apis.Auth.PlatformServices, Version=1.60.0.0, Culture=neutral, PublicKeyToken=4b01fa6e34db77ab, processorArchitecture=MSIL">
+      <HintPath>packages\Google.Apis.Auth.1.60.0\lib\net461\Google.Apis.Auth.PlatformServices.dll</HintPath>
+    </Reference>
+    <Reference Include="Google.Apis.Core, Version=1.60.0.0, Culture=neutral, PublicKeyToken=4b01fa6e34db77ab, processorArchitecture=MSIL">
+      <HintPath>packages\Google.Apis.Core.1.60.0\lib\net45\Google.Apis.Core.dll</HintPath>
+    </Reference>
+    <Reference Include="Google.Apis.PlatformServices, Version=1.60.0.0, Culture=neutral, PublicKeyToken=4b01fa6e34db77ab, processorArchitecture=MSIL">
+      <HintPath>packages\Google.Apis.1.60.0\lib\net45\Google.Apis.PlatformServices.dll</HintPath>
+    </Reference>
+    <Reference Include="Google.Apis.YouTube.v3, Version=1.60.0.2945, Culture=neutral, PublicKeyToken=4b01fa6e34db77ab, processorArchitecture=MSIL">
+      <HintPath>packages\Google.Apis.YouTube.v3.1.60.0.2945\lib\net45\Google.Apis.YouTube.v3.dll</HintPath>
+    </Reference>
+    <Reference Include="Newtonsoft.Json, Version=13.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>packages\Newtonsoft.Json.13.0.3\lib\net45\Newtonsoft.Json.dll</HintPath>
+    </Reference>
+    <Reference Include="OWO, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>packages\OWO.2.1.0\lib\net45\OWO.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Collections.NonGeneric, Version=4.0.2.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>packages\System.Collections.NonGeneric.4.3.0\lib\net46\System.Collections.NonGeneric.dll</HintPath>
+      <Private>True</Private>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Core" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Deployment" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Net.Http" />
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Xml" />
+    <Reference Include="websocket-sharp, Version=1.0.2.32519, Culture=neutral, PublicKeyToken=5660b08a1845a91e, processorArchitecture=MSIL">
+      <HintPath>packages\WebSocketSharp-NonPreRelease.1.0.0\lib\net35\websocket-sharp.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="cs\config\theme\ThemeBase.cs" />
+    <Compile Include="cs\config\theme\ThemeDark.cs" />
+    <Compile Include="cs\config\theme\ThemeLight.cs" />
+    <Compile Include="cs\config\theme\ThemeManager.cs" />
+    <Compile Include="cs\config\Config.cs" />
+    <Compile Include="cs\applicationFrame\OwoMedia.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="cs\applicationFrame\OwoMedia.Designer.cs">
+      <DependentUpon>OwoMedia.cs</DependentUpon>
+    </Compile>
+    <Compile Include="cs\applicationFrame\UserControlOwoBase.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="cs\applicationFrame\UserControlOwoBase.Designer.cs">
+      <DependentUpon>UserControlOwoBase.cs</DependentUpon>
+    </Compile>
+    <Compile Include="cs\applicationFrame\UserControlPage.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="cs\applicationFrame\UserControlPage.Designer.cs">
+      <DependentUpon>UserControlPage.cs</DependentUpon>
+    </Compile>
+    <Compile Include="cs\pages\components\VideoSearch.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="cs\pages\components\VideoSearch.Designer.cs">
+      <DependentUpon>VideoSearch.cs</DependentUpon>
+    </Compile>
+    <Compile Include="cs\pages\components\ViewerHeader.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="cs\pages\components\ViewerHeader.Designer.cs">
+      <DependentUpon>ViewerHeader.cs</DependentUpon>
+    </Compile>
+    <Compile Include="cs\pages\home\HomePage.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="cs\pages\home\HomePage.Designer.cs">
+      <DependentUpon>HomePage.cs</DependentUpon>
+    </Compile>
+    <Compile Include="cs\pages\videoSelector\VideoSelectorPage.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="cs\pages\videoSelector\VideoSelectorPage.Designer.cs">
+      <DependentUpon>VideoSelectorPage.cs</DependentUpon>
+    </Compile>
+    <Compile Include="cs\pages\videoSelector\VideoSelectorEntry.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="cs\pages\videoSelector\VideoSelectorEntry.Designer.cs">
+      <DependentUpon>VideoSelectorEntry.cs</DependentUpon>
+    </Compile>
+    <Compile Include="cs\pages\videoViewer\VideoViewerPage.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="cs\pages\videoViewer\VideoViewerPage.Designer.cs">
+      <DependentUpon>VideoViewerPage.cs</DependentUpon>
+    </Compile>
+    <Compile Include="cs\pages\videoViewer\VideoInfo.cs" />
+    <Compile Include="cs\pages\welcome\WelcomePage.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="cs\pages\welcome\WelcomePage.Designer.cs">
+      <DependentUpon>WelcomePage.cs</DependentUpon>
+    </Compile>
+    <Compile Include="cs\Program.cs" />
+    <Compile Include="cs\websocket\WsVideoViewerBehavior.cs" />
+    <Compile Include="cs\websocket\WebSocketController.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <EmbeddedResource Include="cs\applicationFrame\OwoMedia.resx">
+      <DependentUpon>OwoMedia.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="cs\applicationFrame\UserControlOwoBase.resx">
+      <DependentUpon>UserControlOwoBase.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="cs\applicationFrame\UserControlPage.resx">
+      <DependentUpon>UserControlPage.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="cs\pages\components\VideoSearch.resx">
+      <DependentUpon>VideoSearch.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="cs\pages\components\ViewerHeader.resx">
+      <DependentUpon>ViewerHeader.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="cs\pages\home\HomePage.resx">
+      <DependentUpon>HomePage.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="cs\pages\videoSelector\VideoSelectorPage.resx">
+      <DependentUpon>VideoSelectorPage.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="cs\pages\videoSelector\VideoSelectorEntry.resx">
+      <DependentUpon>VideoSelectorEntry.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="cs\pages\videoViewer\VideoViewerPage.resx">
+      <DependentUpon>VideoViewerPage.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="cs\pages\welcome\WelcomePage.resx">
+      <DependentUpon>WelcomePage.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Properties\Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Resources.resx</DependentUpon>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <None Include="packages.config" />
+    <None Include="Properties\Settings.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
+    </None>
+    <Compile Include="Properties\Settings.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Settings.settings</DependentUpon>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="App.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <COMReference Include="AxWMPLib">
+      <Guid>{6BF52A50-394A-11D3-B153-00C04F79FAA6}</Guid>
+      <VersionMajor>1</VersionMajor>
+      <VersionMinor>0</VersionMinor>
+      <Lcid>0</Lcid>
+      <WrapperTool>aximp</WrapperTool>
+      <Isolated>False</Isolated>
+    </COMReference>
+    <COMReference Include="WMPLib">
+      <Guid>{6BF52A50-394A-11D3-B153-00C04F79FAA6}</Guid>
+      <VersionMajor>1</VersionMajor>
+      <VersionMinor>0</VersionMinor>
+      <Lcid>0</Lcid>
+      <WrapperTool>tlbimp</WrapperTool>
+      <Isolated>False</Isolated>
+      <EmbedInteropTypes>True</EmbedInteropTypes>
+    </COMReference>
+  </ItemGroup>
+  <ItemGroup />
+  <ItemGroup>
+    <EmbeddedResource Include="html\videoViewer.html" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+</Project>
