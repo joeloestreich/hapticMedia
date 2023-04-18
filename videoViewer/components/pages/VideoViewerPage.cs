@@ -13,9 +13,10 @@ using System.Security.Cryptography;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-using owoMedia.SensationPlayer;
+using owoMedia.sensationPlayer;
 using owoMedia.videoViewer.data;
 using owoMedia.websocket;
+using System.Runtime.Remoting.Messaging;
 
 namespace owoMedia.videoViewer.components.pages {
     public partial class VideoViewerPage : UserControlPage {
@@ -32,7 +33,7 @@ namespace owoMedia.videoViewer.components.pages {
             string html = Resources.videoViewer;
             html = html.Replace("$VIDEO_ID$", videoId);
             html = html.Replace("$WS_PORT$", OwoMedia.Instance.Config.Port.ToString());
-            html = html.Replace("$WS_STATE_ROUTE$", WsVideoViewerBehavior.Route);
+            html = html.Replace("$WS_ROUTE$", WsVideoViewerBehavior.Route);
             //this.webVideo.DocumentText = html;
 
             string testName = "videoViewerTest.html";
@@ -49,10 +50,10 @@ namespace owoMedia.videoViewer.components.pages {
 
 
         WsVideoData.StateEnum lastState = WsVideoData.StateEnum.Unstarted;
-        public String OnWsMessage(WsVideoData dto) {
+        public List<string> OnWsMessage(WsVideoData dto) {
             if (this.lblState.InvokeRequired) {
-                return (string)this.lblState.Invoke(
-                  new Func<String>(() => ActualOnWsMessage(dto))
+                return (List<string>)this.lblState.Invoke(
+                  new Func<List<string>>(() => ActualOnWsMessage(dto))
                 );
             } else {
                 return ActualOnWsMessage(dto);
@@ -62,20 +63,23 @@ namespace owoMedia.videoViewer.components.pages {
 
         public delegate void OnWsMessageDelegate(WsVideoData dto);
         public OnWsMessageDelegate wsMessageDelegate;
-        public String ActualOnWsMessage(WsVideoData dto) {
+        public List<string> ActualOnWsMessage(WsVideoData dto) {
+
+            List<string> messages = new List<string>();
 
             if (dto.videoId != this.videoId) {
-                return "IdError";
+                messages.Add("IdError");
+                return messages;
             }
 
-            if (dto.videoId != this.videoId) {
-                return "IdError";
+            if (lastState == WsVideoData.StateEnum.Unstarted) {
+                messages.Add("Play");
             }
 
-            string message = null;
             switch (dto.useCase) {
                 case "init":
-                    message = "Connected";
+                    messages.Add("Connected");
+                    lastState = WsVideoData.StateEnum.Unstarted;
                     break;
                 case "state":
                     OnStateChange(dto);
@@ -90,7 +94,7 @@ namespace owoMedia.videoViewer.components.pages {
 
             OnDetectTime(dto);
 
-            return message;
+            return messages;
         }
 
         SyncableStopwatch stopWatch = new SyncableStopwatch();

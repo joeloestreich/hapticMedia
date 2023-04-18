@@ -64,6 +64,7 @@
       <Private>True</Private>
     </Reference>
     <Reference Include="System.Core" />
+    <Reference Include="System.Numerics" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -101,6 +102,12 @@
     <Compile Include="genericComponents\pageDefinition\UserControlPage.Designer.cs">
       <DependentUpon>UserControlPage.cs</DependentUpon>
     </Compile>
+    <Compile Include="sensationRecorder\components\pages\SensationRecorderPage.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="sensationRecorder\components\pages\SensationRecorderPage.Designer.cs">
+      <DependentUpon>SensationRecorderPage.cs</DependentUpon>
+    </Compile>
     <Compile Include="videoViewer\components\VideoSearch.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -132,7 +139,7 @@
     <Compile Include="videoViewer\components\VideoSelectorEntry.Designer.cs">
       <DependentUpon>VideoSelectorEntry.cs</DependentUpon>
     </Compile>
-    <Compile Include="SensationPlayer\SyncableStopwatch.cs" />
+    <Compile Include="sensationPlayer\SyncableStopwatch.cs" />
     <Compile Include="videoViewer\components\pages\VideoViewerPage.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -158,6 +165,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="genericComponents\pageDefinition\UserControlPage.resx">
       <DependentUpon>UserControlPage.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="sensationRecorder\components\pages\SensationRecorderPage.resx">
+      <DependentUpon>SensationRecorderPage.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="videoViewer\components\VideoSearch.resx">
       <DependentUpon>VideoSearch.cs</DependentUpon>

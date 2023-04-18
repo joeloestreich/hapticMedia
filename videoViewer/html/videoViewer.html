@@ -5,7 +5,7 @@
     <script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
 
     <script>
-        const serverAddress = "ws://127.0.0.1:$WS_PORT$$WS_STATE_ROUTE$";
+        const serverAddress = "ws://127.0.0.1:$WS_PORT$$WS_ROUTE$";
 
         const socket = new WebSocket(serverAddress);
 
@@ -14,13 +14,34 @@
         }
 
         socket.onmessage = function (event) {
-            console.log(event.data);
+            if (player == null) {
+                sendState("state", YT.PlayerState.UNSTARTED);
+                return;
+            }
+            const message = event.data;
+            if (message == "Play") {
+                player.playVideo();
+            } else if (message == "Stop") {
+                
+            } else if (message == "Mute") {
+
+            } else if (message.startsWith("GoTo_")) {
+
+            }
         }
 
         function sendState(useCase, value) {
+
+            let videoId = '$VIDEO_ID$';
+            let timeStamp = 0;
+            if (player != null) {
+                videoId = player.getVideoData().video_id;
+                timeStamp = player.getCurrentTime();
+            }
+
             let message = {
-                videoId: player.getVideoData().video_id,
-                timeStamp: player.getCurrentTime(),
+                videoId: videoId,
+                timeStamp: timeStamp,
                 useCase: useCase,
                 value: value
             };
@@ -28,7 +49,7 @@
         }
 
         function onPlayerReady(event) {
-            event.target.playVideo();
+            player.playVideo(); 
         }
 
         function onPlayerStateChange(event) {
@@ -95,7 +116,7 @@
                 width: window.innerWidth,
                 videoId: '$VIDEO_ID$',
                 playerVars: {
-                    'playsinline': 1
+                    'autoplay': 1
                 },
                 events: {
                     'onReady': onPlayerReady,

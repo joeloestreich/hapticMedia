@@ -36,7 +36,10 @@ namespace owoMedia.websocket {
             }
 
             VideoViewerPage viewer = (VideoViewerPage)OwoMedia.Instance.CurrentPage;
-            viewer.OnWsMessage(dto);
+            List<string> messages = viewer.OnWsMessage(dto);
+            foreach (string m in messages) {
+                Send(m);
+            }
         }
 
     }

@@ -27,6 +27,7 @@
             this.btnOwoShoot = new System.Windows.Forms.Button();
             this.viewerHeader = new owoMedia.videoViewer.components.ViewerHeader();
             this.pnlInfo = new System.Windows.Forms.Panel();
+            this.btnSync = new System.Windows.Forms.Button();
             this.label7 = new System.Windows.Forms.Label();
             this.lblTimeTidy = new System.Windows.Forms.Label();
             this.label6 = new System.Windows.Forms.Label();
@@ -40,7 +41,6 @@
             this.lblTimeWs = new System.Windows.Forms.Label();
             this.lblChannel = new System.Windows.Forms.Label();
             this.lblTitle = new System.Windows.Forms.Label();
-            this.btnSync = new System.Windows.Forms.Button();
             this.pnlInfo.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -57,7 +57,7 @@
             // 
             // btnOwoShoot
             // 
-            this.btnOwoShoot.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnOwoShoot.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.btnOwoShoot.Location = new System.Drawing.Point(1143, 645);
             this.btnOwoShoot.Name = "btnOwoShoot";
             this.btnOwoShoot.Size = new System.Drawing.Size(96, 29);
@@ -102,6 +102,17 @@
             this.pnlInfo.Size = new System.Drawing.Size(886, 561);
             this.pnlInfo.TabIndex = 15;
             // 
+            // btnSync
+            // 
+            this.btnSync.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnSync.Location = new System.Drawing.Point(69, 415);
+            this.btnSync.Name = "btnSync";
+            this.btnSync.Size = new System.Drawing.Size(96, 29);
+            this.btnSync.TabIndex = 16;
+            this.btnSync.Text = "Sync";
+            this.btnSync.UseVisualStyleBackColor = true;
+            this.btnSync.Click += new System.EventHandler(this.btnSync_Click);
+            // 
             // label7
             // 
             this.label7.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
@@ -129,7 +140,7 @@
             this.label6.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.label6.AutoSize = true;
             this.label6.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label6.Location = new System.Drawing.Point(64, 478);
+            this.label6.Location = new System.Drawing.Point(64, 387);
             this.label6.Name = "label6";
             this.label6.Size = new System.Drawing.Size(44, 25);
             this.label6.TabIndex = 23;
@@ -140,7 +151,7 @@
             this.lblDiff.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.lblDiff.AutoSize = true;
             this.lblDiff.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblDiff.Location = new System.Drawing.Point(246, 478);
+            this.lblDiff.Location = new System.Drawing.Point(246, 387);
             this.lblDiff.Name = "lblDiff";
             this.lblDiff.Size = new System.Drawing.Size(59, 25);
             this.lblDiff.TabIndex = 22;
@@ -151,7 +162,7 @@
             this.label5.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.label5.AutoSize = true;
             this.label5.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label5.Location = new System.Drawing.Point(64, 442);
+            this.label5.Location = new System.Drawing.Point(64, 351);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(136, 25);
             this.label5.TabIndex = 21;
@@ -162,7 +173,7 @@
             this.lblTime.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.lblTime.AutoSize = true;
             this.lblTime.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblTime.Location = new System.Drawing.Point(246, 442);
+            this.lblTime.Location = new System.Drawing.Point(246, 351);
             this.lblTime.Name = "lblTime";
             this.lblTime.Size = new System.Drawing.Size(59, 25);
             this.lblTime.TabIndex = 20;
@@ -173,7 +184,7 @@
             this.label1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.label1.AutoSize = true;
             this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label1.Location = new System.Drawing.Point(64, 407);
+            this.label1.Location = new System.Drawing.Point(64, 316);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(99, 25);
             this.label1.TabIndex = 19;
@@ -217,7 +228,7 @@
             this.lblTimeWs.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.lblTimeWs.AutoSize = true;
             this.lblTimeWs.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblTimeWs.Location = new System.Drawing.Point(246, 407);
+            this.lblTimeWs.Location = new System.Drawing.Point(246, 316);
             this.lblTimeWs.Name = "lblTimeWs";
             this.lblTimeWs.Size = new System.Drawing.Size(59, 25);
             this.lblTimeWs.TabIndex = 15;
@@ -244,17 +255,6 @@
             this.lblTitle.Size = new System.Drawing.Size(53, 25);
             this.lblTitle.TabIndex = 13;
             this.lblTitle.Text = "Title";
-            // 
-            // btnSync
-            // 
-            this.btnSync.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnSync.Location = new System.Drawing.Point(69, 506);
-            this.btnSync.Name = "btnSync";
-            this.btnSync.Size = new System.Drawing.Size(96, 29);
-            this.btnSync.TabIndex = 16;
-            this.btnSync.Text = "Sync";
-            this.btnSync.UseVisualStyleBackColor = true;
-            this.btnSync.Click += new System.EventHandler(this.btnSync_Click);
             // 
             // VideoViewerPage
             // 

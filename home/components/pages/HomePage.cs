@@ -10,6 +10,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using owoMedia.sensationRecorder.components.pages;
 
 namespace owoMedia.home.components.pages {
     public partial class HomePage : UserControlPage {
@@ -35,7 +36,7 @@ namespace owoMedia.home.components.pages {
         }
 
         private void btnRecord_Click(object sender, EventArgs e) {
-
+            OwoMedia.Instance.NavigateTo(new SensationRecorderPage());
         }
 
         private void btnOptions_Click(object sender, EventArgs e) {
