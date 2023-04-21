@@ -49,11 +49,11 @@ namespace owoMedia.genericComponents.pageDefinition {
                 case Config.DefaultPageEnum.Home:
                     initialPage = new HomePage();
                     break;
-                case Config.DefaultPageEnum.Search:
+                case Config.DefaultPageEnum.Viewer:
                     initialPage = new VideoSelectorPage();
                     initialPage = new VideoSelectorPage();
                     break;
-                case Config.DefaultPageEnum.Edit:
+                case Config.DefaultPageEnum.Editor:
                     initialPage = new WelcomePage();
                     break;
                 default:

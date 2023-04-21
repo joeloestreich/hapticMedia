@@ -23,26 +23,26 @@
         /// the contents of this method with the code editor.
         /// </summary>
         private void InitializeComponent() {
-            this.btnView = new System.Windows.Forms.Button();
+            this.btnViewer = new System.Windows.Forms.Button();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.btnOptions = new System.Windows.Forms.Button();
-            this.btnEditVideo = new System.Windows.Forms.Button();
+            this.btnEditor = new System.Windows.Forms.Button();
             this.pictureBox2 = new System.Windows.Forms.PictureBox();
-            this.btnSensations = new System.Windows.Forms.Button();
+            this.btnLiveShare = new System.Windows.Forms.Button();
             this.btnRecord = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
             this.SuspendLayout();
             // 
-            // btnView
+            // btnViewer
             // 
-            this.btnView.Location = new System.Drawing.Point(3, 83);
-            this.btnView.Name = "btnView";
-            this.btnView.Size = new System.Drawing.Size(499, 87);
-            this.btnView.TabIndex = 0;
-            this.btnView.Text = "Browse Videos";
-            this.btnView.UseVisualStyleBackColor = true;
-            this.btnView.Click += new System.EventHandler(this.btnView_Click);
+            this.btnViewer.Location = new System.Drawing.Point(3, 83);
+            this.btnViewer.Name = "btnViewer";
+            this.btnViewer.Size = new System.Drawing.Size(499, 87);
+            this.btnViewer.TabIndex = 0;
+            this.btnViewer.Text = "Browse Videos";
+            this.btnViewer.UseVisualStyleBackColor = true;
+            this.btnViewer.Click += new System.EventHandler(this.btnViewer_Click);
             // 
             // pictureBox1
             // 
@@ -63,15 +63,15 @@
             this.btnOptions.UseVisualStyleBackColor = true;
             this.btnOptions.Click += new System.EventHandler(this.btnOptions_Click);
             // 
-            // btnEditVideo
+            // btnEditor
             // 
-            this.btnEditVideo.Location = new System.Drawing.Point(3, 237);
-            this.btnEditVideo.Name = "btnEditVideo";
-            this.btnEditVideo.Size = new System.Drawing.Size(499, 87);
-            this.btnEditVideo.TabIndex = 3;
-            this.btnEditVideo.Text = "Manage Videos";
-            this.btnEditVideo.UseVisualStyleBackColor = true;
-            this.btnEditVideo.Click += new System.EventHandler(this.btnEditVideo_Click);
+            this.btnEditor.Location = new System.Drawing.Point(3, 237);
+            this.btnEditor.Name = "btnEditor";
+            this.btnEditor.Size = new System.Drawing.Size(499, 87);
+            this.btnEditor.TabIndex = 3;
+            this.btnEditor.Text = "Manage Videos";
+            this.btnEditor.UseVisualStyleBackColor = true;
+            this.btnEditor.Click += new System.EventHandler(this.btnEditor_Click);
             // 
             // pictureBox2
             // 
@@ -82,19 +82,19 @@
             this.pictureBox2.TabIndex = 4;
             this.pictureBox2.TabStop = false;
             // 
-            // btnSensations
+            // btnLiveShare
             // 
-            this.btnSensations.Location = new System.Drawing.Point(3, 330);
-            this.btnSensations.Name = "btnSensations";
-            this.btnSensations.Size = new System.Drawing.Size(499, 87);
-            this.btnSensations.TabIndex = 5;
-            this.btnSensations.Text = "Create Sensation Templates";
-            this.btnSensations.UseVisualStyleBackColor = true;
-            this.btnSensations.Click += new System.EventHandler(this.btnSensations_Click);
+            this.btnLiveShare.Location = new System.Drawing.Point(3, 423);
+            this.btnLiveShare.Name = "btnLiveShare";
+            this.btnLiveShare.Size = new System.Drawing.Size(499, 87);
+            this.btnLiveShare.TabIndex = 5;
+            this.btnLiveShare.Text = "Sensation Live Share";
+            this.btnLiveShare.UseVisualStyleBackColor = true;
+            this.btnLiveShare.Click += new System.EventHandler(this.btnLiveShare_Click);
             // 
             // btnRecord
             // 
-            this.btnRecord.Location = new System.Drawing.Point(3, 423);
+            this.btnRecord.Location = new System.Drawing.Point(3, 330);
             this.btnRecord.Name = "btnRecord";
             this.btnRecord.Size = new System.Drawing.Size(499, 87);
             this.btnRecord.TabIndex = 6;
@@ -107,12 +107,12 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.Controls.Add(this.btnRecord);
-            this.Controls.Add(this.btnSensations);
+            this.Controls.Add(this.btnLiveShare);
             this.Controls.Add(this.pictureBox2);
-            this.Controls.Add(this.btnEditVideo);
+            this.Controls.Add(this.btnEditor);
             this.Controls.Add(this.btnOptions);
             this.Controls.Add(this.pictureBox1);
-            this.Controls.Add(this.btnView);
+            this.Controls.Add(this.btnViewer);
             this.Name = "HomePage";
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).EndInit();
@@ -122,12 +122,12 @@
 
         #endregion
 
-        private System.Windows.Forms.Button btnView;
+        private System.Windows.Forms.Button btnViewer;
         private System.Windows.Forms.PictureBox pictureBox1;
         private System.Windows.Forms.Button btnOptions;
-        private System.Windows.Forms.Button btnEditVideo;
+        private System.Windows.Forms.Button btnEditor;
         private System.Windows.Forms.PictureBox pictureBox2;
-        private System.Windows.Forms.Button btnSensations;
+        private System.Windows.Forms.Button btnLiveShare;
         private System.Windows.Forms.Button btnRecord;
     }
 }

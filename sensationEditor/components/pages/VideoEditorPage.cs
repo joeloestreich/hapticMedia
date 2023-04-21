@@ -1,42 +1,45 @@
-﻿using OWOGame;
+﻿using Google.Apis.YouTube.v3.Data;
 using owoMedia.genericComponents.pageDefinition;
 using owoMedia.Properties;
+using owoMedia.sensationPlayer;
+using owoMedia.videoViewer.data;
+using owoMedia.websocket;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
-using System.Diagnostics;
 using System.Drawing;
 using System.IO;
 using System.Linq;
-using System.Security.Cryptography;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-using owoMedia.sensationPlayer;
-using owoMedia.videoViewer.data;
-using owoMedia.websocket;
-using System.Runtime.Remoting.Messaging;
 
-namespace owoMedia.videoViewer.components.pages {
-    public partial class VideoViewerPage : UserControlPage {
+namespace owoMedia.sensationEditor.components.pages {
+    public partial class VideoEditorPage : UserControlPage {
 
-        string videoId;
+        string VideoId;
+        SensationPlayer SensationPlayer;
 
-        public VideoViewerPage(string videoId){
-            this.videoId = videoId;
+        public VideoEditorPage(string videoId) {
             InitializeComponent();
+            this.VideoId = videoId;
+            this.SensationPlayer = new SensationPlayer();
+        }
+        public VideoEditorPage(string videoId, SensationPlayer sensationPlayer) {
+            InitializeComponent();
+            this.VideoId = videoId;
+            this.SensationPlayer = sensationPlayer;
         }
 
         public override void Init() {
-            base.Init();
-            string html = Resources.videoViewer;
-            html = html.Replace("$VIDEO_ID$", videoId);
+            base.Init(); string html = Resources.videoViewer;
+            html = html.Replace("$VIDEO_ID$", VideoId);
             html = html.Replace("$WS_PORT$", OwoMedia.Instance.Config.Port.ToString());
-            html = html.Replace("$WS_ROUTE$", WsVideoViewerBehavior.Route);
+            html = html.Replace("$WS_ROUTE$", WsVideoEditorBehavior.Route);
             //this.webVideo.DocumentText = html;
 
-            string testName = "videoViewerTest.html";
+            string testName = "videoEditorTest.html";
             if (File.Exists(testName)) {
                 File.Delete(testName);
             }
@@ -47,18 +50,16 @@ namespace owoMedia.videoViewer.components.pages {
             System.Diagnostics.Process.Start(testName);
         }
 
-
-
         WsVideoData.StateEnum lastState = WsVideoData.StateEnum.Unstarted;
         public List<string> OnWsMessage(WsVideoData dto) {
-            if (this.lblState.InvokeRequired) {
-                return (List<string>)this.lblState.Invoke(
+            if (this.lblCurTime.InvokeRequired) {
+                return (List<string>)this.lblCurTime.Invoke(
                   new Func<List<string>>(() => ActualOnWsMessage(dto))
                 );
             } else {
                 return ActualOnWsMessage(dto);
             }
-            
+
         }
 
         public delegate void OnWsMessageDelegate(WsVideoData dto);
@@ -67,7 +68,7 @@ namespace owoMedia.videoViewer.components.pages {
 
             List<string> messages = new List<string>();
 
-            if (dto.videoId != this.videoId) {
+            if (dto.videoId != this.VideoId) {
                 messages.Add("IdError");
                 return messages;
             }
@@ -111,10 +112,6 @@ namespace owoMedia.videoViewer.components.pages {
                 stopWatch.SyncTime(dto.timeStamp);
             }
 
-            this.lblTimeWs.Text = dto.timeStamp.ToString();
-            this.lblTime.Text = stopWatch.GetSyncedSeconds().ToString();
-            this.lblDiff.Text = (dto.timeStamp - stopWatch.GetSyncedSeconds()).ToString();
-
             TimeSpan t = TimeSpan.FromSeconds(stopWatch.GetSyncedSeconds());
             string formatedTime;
             if (t.Hours > 0) {
@@ -122,7 +119,7 @@ namespace owoMedia.videoViewer.components.pages {
             } else {
                 formatedTime = string.Format("{0:D2}:{1:D2}", t.Minutes, t.Seconds);
             }
-            lblTimeTidy.Text = formatedTime;
+            lblCurTime.Text = formatedTime;
 
         }
 
@@ -137,20 +134,6 @@ namespace owoMedia.videoViewer.components.pages {
 
             lastState = newState;
             this.lblState.Text = lastState.ToString();
-        }
-
-        private void btnOwoShoot_Click(object sender, EventArgs e) {
-
-            MicroSensation ball = SensationsFactory.Create(100, 0.1f, 100, 0, 0, 0);
-            Sensation softBall = ball.WithMuscles(Muscle.Pectoral_R.WithIntensity(50));
-
-            OWO.Send(softBall);
-        }
-
-        public override void OnLeave() {
-            base.OnLeave();
-            // stops Sensations
-
         }
     }
 }

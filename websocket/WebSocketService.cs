@@ -28,11 +28,13 @@ namespace owoMedia.websocket {
             string wsAddress = Address + OwoMedia.Instance.Config.Port;
             server = new WebSocketServer(wsAddress);
             server.AddWebSocketService(WsVideoViewerBehavior.Route, () => new WsVideoViewerBehavior());
+            server.AddWebSocketService(WsVideoEditorBehavior.Route, () => new WsVideoEditorBehavior());
             server.Start();
 
             Console.WriteLine("WebSocketServer Started on " + wsAddress);
             Console.WriteLine("Adresses:");
             Console.WriteLine("=> " + wsAddress + WsVideoViewerBehavior.Route);
+            Console.WriteLine("=> " + wsAddress + WsVideoEditorBehavior.Route);
         }
 
         public static void StopSocketServer() {

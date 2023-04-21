@@ -11,6 +11,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using owoMedia.sensationRecorder.components.pages;
+using owoMedia.sensationEditor.components.pages;
 
 namespace owoMedia.home.components.pages {
     public partial class HomePage : UserControlPage {
@@ -23,24 +24,25 @@ namespace owoMedia.home.components.pages {
             OwoMedia.Instance.Config.DefaultPage = Config.DefaultPageEnum.Home;
         }
 
-        private void btnView_Click(object sender, EventArgs e) {
+        private void btnViewer_Click(object sender, EventArgs e) {
             OwoMedia.Instance.NavigateTo(new VideoSelectorPage());
         }
 
-        private void btnEditVideo_Click(object sender, EventArgs e) {
-
-        }
-
-        private void btnSensations_Click(object sender, EventArgs e) {
-
+        private void btnEditor_Click(object sender, EventArgs e) {
+            OwoMedia.Instance.NavigateTo(new EditorMenuPage());
         }
 
         private void btnRecord_Click(object sender, EventArgs e) {
             OwoMedia.Instance.NavigateTo(new SensationRecorderPage());
         }
 
+        private void btnLiveShare_Click(object sender, EventArgs e) {
+
+        }
+
         private void btnOptions_Click(object sender, EventArgs e) {
 
         }
+
     }
 }

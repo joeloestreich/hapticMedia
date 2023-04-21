@@ -28,7 +28,7 @@ namespace owoMedia.videoViewer.components.pages {
 
         public override void Init() {
             base.Init();
-            OwoMedia.Instance.Config.DefaultPage = Config.DefaultPageEnum.Search;
+            OwoMedia.Instance.Config.DefaultPage = Config.DefaultPageEnum.Viewer;
 
             List<string> list = new List<string>();
             list.Add("Oe043UhUTm4");

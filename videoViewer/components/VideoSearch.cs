@@ -1,6 +1,5 @@
 ﻿using owoMedia.genericComponents.pageDefinition;
 using owoMedia.videoViewer.components.pages;
-using owoMedia.videoViewer.components.pages;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -58,7 +57,7 @@ namespace owoMedia.videoViewer.components {
             OwoMedia.Instance.NavigateTo(nextPage);
         }
 
-        private string IdentifyVideoId(string url) {
+        public static string IdentifyVideoId(string url) {
             string input = url;
 
             Dictionary<string, string> parameters = new Dictionary<string, string>();

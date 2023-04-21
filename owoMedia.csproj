@@ -55,16 +55,37 @@
       <HintPath>packages\Newtonsoft.Json.13.0.3\lib\net45\Newtonsoft.Json.dll</HintPath>
     </Reference>
     <Reference Include="OWO, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>packages\OWO.2.1.0\lib\net45\OWO.dll</HintPath>
+      <HintPath>packages\OWO.2.1.1\lib\net45\OWO.dll</HintPath>
+    </Reference>
+    <Reference Include="PacketDotNet, Version=1.4.6.0, Culture=neutral, PublicKeyToken=451414c7667b2a58, processorArchitecture=MSIL">
+      <HintPath>packages\PacketDotNet.1.4.6\lib\net47\PacketDotNet.dll</HintPath>
+    </Reference>
+    <Reference Include="SharpPcap, Version=6.2.5.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>packages\SharpPcap.6.2.5\lib\netstandard2.0\SharpPcap.dll</HintPath>
     </Reference>
     <Reference Include="System" />
+    <Reference Include="System.Buffers, Version=4.0.3.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>packages\System.Buffers.4.5.1\lib\net461\System.Buffers.dll</HintPath>
+    </Reference>
     <Reference Include="System.Collections.NonGeneric, Version=4.0.2.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
       <HintPath>packages\System.Collections.NonGeneric.4.3.0\lib\net46\System.Collections.NonGeneric.dll</HintPath>
       <Private>True</Private>
       <Private>True</Private>
     </Reference>
     <Reference Include="System.Core" />
+    <Reference Include="System.Memory, Version=4.0.1.2, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>packages\System.Memory.4.5.5\lib\net461\System.Memory.dll</HintPath>
+    </Reference>
     <Reference Include="System.Numerics" />
+    <Reference Include="System.Numerics.Vectors, Version=4.1.4.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>packages\System.Numerics.Vectors.4.5.0\lib\net46\System.Numerics.Vectors.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Runtime.CompilerServices.Unsafe, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>packages\System.Runtime.CompilerServices.Unsafe.6.0.0\lib\net461\System.Runtime.CompilerServices.Unsafe.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Text.Encoding.CodePages, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>packages\System.Text.Encoding.CodePages.6.0.0\lib\net461\System.Text.Encoding.CodePages.dll</HintPath>
+    </Reference>
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -102,12 +123,30 @@
     <Compile Include="genericComponents\pageDefinition\UserControlPage.Designer.cs">
       <DependentUpon>UserControlPage.cs</DependentUpon>
     </Compile>
+    <Compile Include="sensationEditor\components\pages\EditorMenuPage.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="sensationEditor\components\pages\EditorMenuPage.Designer.cs">
+      <DependentUpon>EditorMenuPage.cs</DependentUpon>
+    </Compile>
+    <Compile Include="sensationEditor\components\pages\VideoEditorPage.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="sensationEditor\components\pages\VideoEditorPage.Designer.cs">
+      <DependentUpon>VideoEditorPage.cs</DependentUpon>
+    </Compile>
+    <Compile Include="sensationPlayer\SensationPlayer.cs" />
+    <Compile Include="sensationPlayer\sensationTemplate\SensationTemplate.cs" />
+    <Compile Include="sensationPlayer\sensationTemplate\SensationTemplateCompound.cs" />
+    <Compile Include="sensationPlayer\sensationTemplate\SensationTemplateValues.cs" />
+    <Compile Include="sensationPlayer\sensationTemplate\SensationTemplateString.cs" />
     <Compile Include="sensationRecorder\components\pages\SensationRecorderPage.cs">
       <SubType>UserControl</SubType>
     </Compile>
     <Compile Include="sensationRecorder\components\pages\SensationRecorderPage.Designer.cs">
       <DependentUpon>SensationRecorderPage.cs</DependentUpon>
     </Compile>
+    <Compile Include="sensationRecorder\data\CaptureData.cs" />
     <Compile Include="videoViewer\components\VideoSearch.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -147,6 +186,7 @@
       <DependentUpon>VideoViewerPage.cs</DependentUpon>
     </Compile>
     <Compile Include="videoViewer\data\WsVideoData.cs" />
+    <Compile Include="websocket\WsVideoEditorBehavior.cs" />
     <Compile Include="welcome\components\pages\WelcomePage.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -165,6 +205,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="genericComponents\pageDefinition\UserControlPage.resx">
       <DependentUpon>UserControlPage.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="sensationEditor\components\pages\EditorMenuPage.resx">
+      <DependentUpon>EditorMenuPage.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="sensationEditor\components\pages\VideoEditorPage.resx">
+      <DependentUpon>VideoEditorPage.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="sensationRecorder\components\pages\SensationRecorderPage.resx">
       <DependentUpon>SensationRecorderPage.cs</DependentUpon>
@@ -234,8 +280,8 @@
     </COMReference>
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="videoEditor\components\pages\" />
-    <Folder Include="videoEditor\data\" />
+    <Folder Include="genericComponents\prompt\" />
+    <Folder Include="sensationEditor\data\" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="videoViewer\html\videoViewer.html" />

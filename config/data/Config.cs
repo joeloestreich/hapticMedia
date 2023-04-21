@@ -11,8 +11,8 @@ namespace owoMedia.config.data {
         public enum DefaultPageEnum {
             Welcome,
             Home,
-            Search,
-            Edit
+            Viewer,
+            Editor
         }
 
         public int Port = 5000;
