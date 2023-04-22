@@ -22,6 +22,8 @@ using ConnectionState = OWOGame.ConnectionState;
 using Google.Apis.Util;
 using owoMedia.sensationRecorder.data;
 using static System.Windows.Forms.VisualStyles.VisualStyleElement.TaskbarClock;
+using owoMedia.applicationFrame.Service;
+using Newtonsoft.Json;
 
 namespace owoMedia.sensationRecorder.components.pages {
     public partial class SensationRecorderPage : UserControlPage {
@@ -29,9 +31,14 @@ namespace owoMedia.sensationRecorder.components.pages {
             InitializeComponent();
         }
 
+        static string FolderName = "capture";
+
+        Dictionary<long, string> CaptureContent;
+
         LibPcapLiveDevice NetworkDevice = null;
         bool DoCapture = false;
         long CaptureStart;
+
 
 
         public override void Init() {
@@ -56,31 +63,32 @@ namespace owoMedia.sensationRecorder.components.pages {
             }
         }
 
-        private void Device_OnPacketArrival(object sender, PacketCapture e) {
-            var packet = Packet.ParsePacket(e.GetPacket().LinkLayerType, e.GetPacket().Data);
-            packet.GetType();
-            UdpPacket udp = packet.Extract<UdpPacket>();
-            if (udp?.ParentPacket is IPv4Packet && udp?.PayloadData?.Length != null) {
-                string enc = Encoding.UTF8.GetString(udp.PayloadData, 0, udp.PayloadData.Length);
-                Console.WriteLine("CAPTURE => " + enc);
-                if ("192.168.178.26".Equals(((IPv4Packet)udp.ParentPacket).DestinationAddress.ToString())) {
-                    long timestamp = Convert.ToInt64((e.Header.Timeval.Seconds * 1000) + (e.Header.Timeval.MicroSeconds / 1000)) - CaptureStart;
-                    CaptureData cap = new CaptureData(timestamp, enc);
-                    this.bgwCapture.ReportProgress(0, cap);
-                }
-            }
-        }
-
         private void btnStartCapture_Click(object sender, EventArgs e) {
             if (DoCapture) {
                 return;
             }
+            CaptureContent = new Dictionary<long, string>();
             DoCapture = true;
             bgwCapture.RunWorkerAsync();
         }
 
         private void btnStopCapture_Click(object sender, EventArgs e) {
             DoCapture = false;
+
+            if (CaptureContent.Count != 0) {
+                // Save
+                string captureString = JsonConvert.SerializeObject(CaptureContent);
+
+                DateTime dateTime = new DateTime(1970, 1, 1).AddMilliseconds(CaptureStart);
+                string fileName = "SensationCapture_" + dateTime;
+                fileName = fileName.Replace(" ", "-");
+                fileName = fileName.Replace(".", "-");
+                fileName = fileName.Replace(":", "-");
+                fileName += ".txt";
+
+                OwoMediaFileService.SaveFile(captureString, FolderName, fileName);
+            }
+
         }
 
         private void bgwCapture_DoWork(object sender, DoWorkEventArgs e) {
@@ -97,12 +105,29 @@ namespace owoMedia.sensationRecorder.components.pages {
             }
         }
 
+        private void Device_OnPacketArrival(object sender, PacketCapture e) {
+            var packet = Packet.ParsePacket(e.GetPacket().LinkLayerType, e.GetPacket().Data);
+            packet.GetType();
+            UdpPacket udp = packet.Extract<UdpPacket>();
+            if (udp?.ParentPacket is IPv4Packet && udp?.PayloadData?.Length != null) {
+                string enc = Encoding.UTF8.GetString(udp.PayloadData, 0, udp.PayloadData.Length);
+                Console.WriteLine("CAPTURE => " + enc);
+                if ("192.168.178.26".Equals(((IPv4Packet)udp.ParentPacket).DestinationAddress.ToString())) {
+                    long timestamp = Convert.ToInt64((e.Header.Timeval.Seconds * 1000) + (e.Header.Timeval.MicroSeconds / 1000)) - CaptureStart;
+                    CaptureData cap = new CaptureData(timestamp, enc);
+                    this.bgwCapture.ReportProgress(0, cap);
+                }
+            }
+        }
+
         private void bgwCapture_ProgressChanged(object sender, ProgressChangedEventArgs e) {
             CaptureData cap = (CaptureData) e.UserState;
             Label lbl = new Label();
             lbl.Text = cap.TimeStamp + " - " + cap.Capture;
             lbl.Width = 1000;
             flowLayoutPanel1.Controls.Add(lbl);
+
+            CaptureContent.Add(cap.TimeStamp, cap.Capture);
         }
 
 
@@ -112,19 +137,14 @@ namespace owoMedia.sensationRecorder.components.pages {
             // Sensation parse1 = (Sensation)"100,5,90,200,300,0|0%100&100,5,90,200,300,0|0%100"; (Fail: Add "," before "|")
             Sensation parse1 = (Sensation)"100,5,90,200,300,0,|0%100&100,5,90,200,300,0,|0%100";
 
-            // 8000 * SENSATION * 180008000,1,180008000,8000,8000,8000,| 8000 % 58000
-            Sensation parse2 = (Sensation)"180008000,1,180008000,8000,8000,8000,| 8000 % 58000";
+            // 8000*SENSATION*100,1,100,0,0,0,|0%50
+            Sensation parse2 = (Sensation)"100,1,100,0,0,0,|0%50";
 
 
             MicroSensation ball = SensationsFactory.Create(100, 0.1f, 100, 0, 0, 0);
             Sensation softBall = ball.WithMuscles(Muscle.Pectoral_R.WithIntensity(50));
 
             OWO.Send(softBall);
-        }
-
-        private void button2_Click(object sender, EventArgs e) {
-            Sensation parse = (Sensation)"100,1,100,0,0,0,|0%50";
-            OWO.Send(parse);
         }
     }
 }

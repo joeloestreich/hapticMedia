@@ -26,6 +26,7 @@
             this.btnNewTrack = new System.Windows.Forms.Button();
             this.btnEditTrack = new System.Windows.Forms.Button();
             this.btnTemplates = new System.Windows.Forms.Button();
+            this.pageHeader1 = new owoMedia.genericComponents.pageHeader.PageHeader();
             this.SuspendLayout();
             // 
             // btnNewTrack
@@ -58,14 +59,24 @@
             this.btnTemplates.UseVisualStyleBackColor = true;
             this.btnTemplates.Click += new System.EventHandler(this.btnTemplates_Click);
             // 
-            // EditorMenu
+            // pageHeader1
+            // 
+            this.pageHeader1.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+            this.pageHeader1.BackColor = System.Drawing.SystemColors.ControlLightLight;
+            this.pageHeader1.Location = new System.Drawing.Point(0, 0);
+            this.pageHeader1.Name = "pageHeader1";
+            this.pageHeader1.Size = new System.Drawing.Size(1280, 100);
+            this.pageHeader1.TabIndex = 7;
+            // 
+            // EditorMenuPage
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.Controls.Add(this.pageHeader1);
             this.Controls.Add(this.btnTemplates);
             this.Controls.Add(this.btnEditTrack);
             this.Controls.Add(this.btnNewTrack);
-            this.Name = "EditorMenu";
+            this.Name = "EditorMenuPage";
             this.ResumeLayout(false);
 
         }
@@ -75,5 +86,6 @@
         private System.Windows.Forms.Button btnNewTrack;
         private System.Windows.Forms.Button btnEditTrack;
         private System.Windows.Forms.Button btnTemplates;
+        private genericComponents.pageHeader.PageHeader pageHeader1;
     }
 }

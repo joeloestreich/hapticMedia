@@ -10,7 +10,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
-namespace owoMedia.videoViewer.components.pages {
+namespace owoMedia.videoViewer.components {
     public partial class VideoSelectorEntry : UserControlOwoBase {
 
         string videoId;

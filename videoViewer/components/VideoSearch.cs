@@ -58,37 +58,40 @@ namespace owoMedia.videoViewer.components {
         }
 
         public static string IdentifyVideoId(string url) {
-            string input = url;
+
+            if (url == null) {
+                return null;
+            }
 
             Dictionary<string, string> parameters = new Dictionary<string, string>();
-            if (input.Contains("?")) {
-                foreach (string para in input.Substring(input.IndexOf("?") + 1).Split('&')) {
+            if (url.Contains("?")) {
+                foreach (string para in url.Substring(url.IndexOf("?") + 1).Split('&')) {
                     string[] pair = para.Split('=');
                     parameters.Add(pair[0], pair[1]);
                 }
             }
 
-            if (input.Contains("youtube") && parameters.ContainsKey("v")) {
+            if (url.Contains("youtube") && parameters.ContainsKey("v")) {
                 return parameters["v"];
             }
 
-            if (input.Contains("youtube") && input.Contains("/v/") && input.Contains("?")) {
-                input = input.Substring(input.IndexOf("/v/") + 3);
-                return input.Substring(0, input.IndexOf("?"));
+            if (url.Contains("youtube") && url.Contains("/v/") && url.Contains("?")) {
+                url = url.Substring(url.IndexOf("/v/") + 3);
+                return url.Substring(0, url.IndexOf("?"));
             }
 
-            if (input.Contains("youtube") && input.Contains("/v/")) {
-                return input.Substring(input.IndexOf("/v/") + 3);
+            if (url.Contains("youtube") && url.Contains("/v/")) {
+                return url.Substring(url.IndexOf("/v/") + 3);
             }
 
             string ytDotUrl = "youtu.be/";
-            if (input.Contains(ytDotUrl) && input.Contains("?")) {
-                input = input.Substring(input.IndexOf(ytDotUrl) + ytDotUrl.Length);
-                return input.Substring(0, input.IndexOf("?"));
+            if (url.Contains(ytDotUrl) && url.Contains("?")) {
+                url = url.Substring(url.IndexOf(ytDotUrl) + ytDotUrl.Length);
+                return url.Substring(0, url.IndexOf("?"));
             }
 
-            if (input.Contains(ytDotUrl)) {
-                return input.Substring(input.IndexOf(ytDotUrl) + ytDotUrl.Length);
+            if (url.Contains(ytDotUrl)) {
+                return url.Substring(url.IndexOf(ytDotUrl) + ytDotUrl.Length);
             }
 
             return null;

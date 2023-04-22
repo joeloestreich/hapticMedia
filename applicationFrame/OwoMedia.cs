@@ -13,9 +13,16 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using owoMedia.applicationFrame.Service;
+using Newtonsoft.Json;
+using owoMedia.videoViewer.data;
+using owoMedia.sensationEditor.components.pages;
+using owoMedia.genericComponents.PageHeader;
 
 namespace owoMedia.genericComponents.pageDefinition {
     public sealed partial class OwoMedia : Form {
+
+        static string configFile = "config.txt";
 
         private static OwoMedia _instance;
         public static OwoMedia Instance { 
@@ -36,9 +43,11 @@ namespace owoMedia.genericComponents.pageDefinition {
         public UserControlPage CurrentPage { get; set; }
 
         private void OwoMedia_Load(object sender, EventArgs e) {
-            Config = null; // load here
-            if (Config == null) {
+            string configString = OwoMediaFileService.LoadFile(null, configFile);
+            if (configString == null) {
                 Config = new Config();
+            } else {
+                Config = JsonConvert.DeserializeObject<Config>(configString);
             }
 
             UserControlPage initialPage;
@@ -51,10 +60,9 @@ namespace owoMedia.genericComponents.pageDefinition {
                     break;
                 case Config.DefaultPageEnum.Viewer:
                     initialPage = new VideoSelectorPage();
-                    initialPage = new VideoSelectorPage();
                     break;
                 case Config.DefaultPageEnum.Editor:
-                    initialPage = new WelcomePage();
+                    initialPage = new EditorMenuPage();
                     break;
                 default:
                     Config.DefaultPage = Config.DefaultPageEnum.Welcome;
@@ -66,12 +74,14 @@ namespace owoMedia.genericComponents.pageDefinition {
             StartUp(initialPage);
         }
         private void OwoMedia_FormClosing(object sender, FormClosingEventArgs e) {
+            string configString = JsonConvert.SerializeObject(Config);
+            OwoMediaFileService.SaveFile(configString, null, configFile);
+
             Disconnect();
         }
 
         private void StartUp(UserControlPage initialPage) {
             // Design
-            this.Size = Config.Size;
             Connect();
             NavigateTo(initialPage);
         }
@@ -81,6 +91,8 @@ namespace owoMedia.genericComponents.pageDefinition {
                 CurrentPage.OnLeave();
                 this.Controls.Remove(CurrentPage);
             }
+
+            BreadCrumNavigation.OnNavigation(CurrentPage, page);
 
             page.Init();
             CurrentPage = page;

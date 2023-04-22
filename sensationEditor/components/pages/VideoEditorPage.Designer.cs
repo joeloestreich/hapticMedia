@@ -30,6 +30,7 @@
             this.label2 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
             this.lblState = new System.Windows.Forms.Label();
+            this.pageHeader1 = new owoMedia.genericComponents.pageHeader.PageHeader();
             this.SuspendLayout();
             // 
             // panel2
@@ -46,7 +47,7 @@
             // 
             this.label1.AutoSize = true;
             this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label1.Location = new System.Drawing.Point(36, 92);
+            this.label1.Location = new System.Drawing.Point(36, 177);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(59, 25);
             this.label1.TabIndex = 2;
@@ -56,7 +57,7 @@
             // 
             this.lblCurTime.AutoSize = true;
             this.lblCurTime.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblCurTime.Location = new System.Drawing.Point(137, 92);
+            this.lblCurTime.Location = new System.Drawing.Point(137, 177);
             this.lblCurTime.Name = "lblCurTime";
             this.lblCurTime.Size = new System.Drawing.Size(66, 25);
             this.lblCurTime.TabIndex = 3;
@@ -66,7 +67,7 @@
             // 
             this.lblMaxTime.AutoSize = true;
             this.lblMaxTime.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblMaxTime.Location = new System.Drawing.Point(233, 92);
+            this.lblMaxTime.Location = new System.Drawing.Point(233, 177);
             this.lblMaxTime.Name = "lblMaxTime";
             this.lblMaxTime.Size = new System.Drawing.Size(66, 25);
             this.lblMaxTime.TabIndex = 4;
@@ -76,7 +77,7 @@
             // 
             this.label2.AutoSize = true;
             this.label2.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label2.Location = new System.Drawing.Point(209, 92);
+            this.label2.Location = new System.Drawing.Point(209, 177);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(18, 25);
             this.label2.TabIndex = 5;
@@ -86,7 +87,7 @@
             // 
             this.label3.AutoSize = true;
             this.label3.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label3.Location = new System.Drawing.Point(36, 46);
+            this.label3.Location = new System.Drawing.Point(36, 131);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(62, 25);
             this.label3.TabIndex = 6;
@@ -96,16 +97,26 @@
             // 
             this.lblState.AutoSize = true;
             this.lblState.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblState.Location = new System.Drawing.Point(137, 46);
+            this.lblState.Location = new System.Drawing.Point(137, 131);
             this.lblState.Name = "lblState";
             this.lblState.Size = new System.Drawing.Size(62, 25);
             this.lblState.TabIndex = 7;
             this.lblState.Text = "State";
             // 
+            // pageHeader1
+            // 
+            this.pageHeader1.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+            this.pageHeader1.BackColor = System.Drawing.SystemColors.ControlLightLight;
+            this.pageHeader1.Location = new System.Drawing.Point(0, 0);
+            this.pageHeader1.Name = "pageHeader1";
+            this.pageHeader1.Size = new System.Drawing.Size(1280, 100);
+            this.pageHeader1.TabIndex = 8;
+            // 
             // VideoEditorPage
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.Controls.Add(this.pageHeader1);
             this.Controls.Add(this.lblState);
             this.Controls.Add(this.label3);
             this.Controls.Add(this.label2);
@@ -128,5 +139,6 @@
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Label lblState;
+        private genericComponents.pageHeader.PageHeader pageHeader1;
     }
 }

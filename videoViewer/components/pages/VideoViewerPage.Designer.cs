@@ -25,7 +25,6 @@
         private void InitializeComponent() {
             this.lblState = new System.Windows.Forms.Label();
             this.btnOwoShoot = new System.Windows.Forms.Button();
-            this.viewerHeader = new owoMedia.videoViewer.components.ViewerHeader();
             this.pnlInfo = new System.Windows.Forms.Panel();
             this.btnSync = new System.Windows.Forms.Button();
             this.label7 = new System.Windows.Forms.Label();
@@ -41,6 +40,7 @@
             this.lblTimeWs = new System.Windows.Forms.Label();
             this.lblChannel = new System.Windows.Forms.Label();
             this.lblTitle = new System.Windows.Forms.Label();
+            this.viewerHeader1 = new owoMedia.videoViewer.components.ViewerHeader();
             this.pnlInfo.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -65,17 +65,6 @@
             this.btnOwoShoot.Text = "OWO Test";
             this.btnOwoShoot.UseVisualStyleBackColor = true;
             this.btnOwoShoot.Click += new System.EventHandler(this.btnOwoShoot_Click);
-            // 
-            // viewerHeader
-            // 
-            this.viewerHeader.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.viewerHeader.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
-            this.viewerHeader.BackColor = System.Drawing.SystemColors.ControlLightLight;
-            this.viewerHeader.Location = new System.Drawing.Point(0, 0);
-            this.viewerHeader.Name = "viewerHeader";
-            this.viewerHeader.Size = new System.Drawing.Size(1280, 100);
-            this.viewerHeader.TabIndex = 14;
             // 
             // pnlInfo
             // 
@@ -256,11 +245,20 @@
             this.lblTitle.TabIndex = 13;
             this.lblTitle.Text = "Title";
             // 
+            // viewerHeader1
+            // 
+            this.viewerHeader1.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+            this.viewerHeader1.BackColor = System.Drawing.SystemColors.ControlLightLight;
+            this.viewerHeader1.Location = new System.Drawing.Point(0, 0);
+            this.viewerHeader1.Name = "viewerHeader1";
+            this.viewerHeader1.Size = new System.Drawing.Size(1280, 100);
+            this.viewerHeader1.TabIndex = 16;
+            // 
             // VideoViewerPage
             // 
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Inherit;
+            this.Controls.Add(this.viewerHeader1);
             this.Controls.Add(this.pnlInfo);
-            this.Controls.Add(this.viewerHeader);
             this.Controls.Add(this.btnOwoShoot);
             this.Name = "VideoViewerPage";
             this.pnlInfo.ResumeLayout(false);
@@ -272,7 +270,6 @@
         #endregion
         private System.Windows.Forms.Label lblState;
         private System.Windows.Forms.Button btnOwoShoot;
-        private components.ViewerHeader viewerHeader;
         private System.Windows.Forms.Panel pnlInfo;
         private System.Windows.Forms.Label lblChannel;
         private System.Windows.Forms.Label lblTitle;
@@ -288,5 +285,6 @@
         private System.Windows.Forms.Label lblDiff;
         private System.Windows.Forms.Label label7;
         private System.Windows.Forms.Label lblTimeTidy;
+        private ViewerHeader viewerHeader1;
     }
 }

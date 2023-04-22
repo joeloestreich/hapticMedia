@@ -16,7 +16,6 @@ namespace owoMedia.config.data {
         }
 
         public int Port = 5000;
-        public Size Size = new Size(1280, 720);
         public DefaultPageEnum DefaultPage = DefaultPageEnum.Welcome;
         public string OwoIp = null;
         public bool LightTheme = true;

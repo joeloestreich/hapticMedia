@@ -17,9 +17,13 @@ using owoMedia.sensationPlayer;
 using owoMedia.videoViewer.data;
 using owoMedia.websocket;
 using System.Runtime.Remoting.Messaging;
+using owoMedia.applicationFrame.Service;
 
 namespace owoMedia.videoViewer.components.pages {
     public partial class VideoViewerPage : UserControlPage {
+
+        static string FolderName = "viewer";
+        string FileName = "videoViewer.html";
 
         string videoId;
 
@@ -34,17 +38,9 @@ namespace owoMedia.videoViewer.components.pages {
             html = html.Replace("$VIDEO_ID$", videoId);
             html = html.Replace("$WS_PORT$", OwoMedia.Instance.Config.Port.ToString());
             html = html.Replace("$WS_ROUTE$", WsVideoViewerBehavior.Route);
-            //this.webVideo.DocumentText = html;
 
-            string testName = "videoViewerTest.html";
-            if (File.Exists(testName)) {
-                File.Delete(testName);
-            }
-            using (FileStream fs = File.Create(testName)) {
-                Byte[] title = new UTF8Encoding(true).GetBytes(html);
-                fs.Write(title, 0, title.Length);
-            }
-            System.Diagnostics.Process.Start(testName);
+            OwoMediaFileService.SaveFile(html, FolderName, FileName);
+            OwoMediaFileService.OpenFile(FolderName, FileName);
         }
 
 

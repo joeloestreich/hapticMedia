@@ -20,7 +20,7 @@ namespace owoMedia.sensationPlayer.sensationTemplate {
                 if (compound == null) {
                     compound = sensation;
                 } else {
-                    compound.Append(sensation);
+                    compound = compound.Append(sensation);
                 }
             }
             return compound;

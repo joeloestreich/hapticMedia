@@ -1,5 +1,4 @@
-﻿using owoMedia.genericComponents.pageDefinition;
-using owoMedia.genericComponents.pageHeader;
+﻿using owoMedia.genericComponents;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -10,9 +9,9 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
-namespace owoMedia.videoViewer.components {
-    public partial class ViewerHeader : PageHeader {
-        public ViewerHeader() {
+namespace owoMedia.home.components {
+    public partial class OptionInfo : InfoAreaBase {
+        public OptionInfo() {
             InitializeComponent();
         }
     }

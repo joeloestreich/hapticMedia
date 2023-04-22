@@ -100,6 +100,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="applicationFrame\Service\OwoMediaFileService.cs" />
     <Compile Include="config\theme\ThemeBase.cs" />
     <Compile Include="config\theme\ThemeDark.cs" />
     <Compile Include="config\theme\ThemeLight.cs" />
@@ -110,6 +111,24 @@
     </Compile>
     <Compile Include="applicationFrame\OwoMedia.Designer.cs">
       <DependentUpon>OwoMedia.cs</DependentUpon>
+    </Compile>
+    <Compile Include="genericComponents\InfoAreaBase.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="genericComponents\InfoAreaBase.Designer.cs">
+      <DependentUpon>InfoAreaBase.cs</DependentUpon>
+    </Compile>
+    <Compile Include="genericComponents\PageHeader\BreadCrumNavigation.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="genericComponents\PageHeader\BreadCrumNavigation.Designer.cs">
+      <DependentUpon>BreadCrumNavigation.cs</DependentUpon>
+    </Compile>
+    <Compile Include="genericComponents\PageHeader\PageHeader.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="genericComponents\PageHeader\PageHeader.Designer.cs">
+      <DependentUpon>PageHeader.cs</DependentUpon>
     </Compile>
     <Compile Include="genericComponents\pageDefinition\UserControlOwoBase.cs">
       <SubType>UserControl</SubType>
@@ -122,6 +141,36 @@
     </Compile>
     <Compile Include="genericComponents\pageDefinition\UserControlPage.Designer.cs">
       <DependentUpon>UserControlPage.cs</DependentUpon>
+    </Compile>
+    <Compile Include="home\components\BrowseVideoInfo.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="home\components\BrowseVideoInfo.Designer.cs">
+      <DependentUpon>BrowseVideoInfo.cs</DependentUpon>
+    </Compile>
+    <Compile Include="home\components\OptionInfo.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="home\components\OptionInfo.Designer.cs">
+      <DependentUpon>OptionInfo.cs</DependentUpon>
+    </Compile>
+    <Compile Include="home\components\LiveShareInfo.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="home\components\LiveShareInfo.Designer.cs">
+      <DependentUpon>LiveShareInfo.cs</DependentUpon>
+    </Compile>
+    <Compile Include="home\components\SensationRecorderInfo.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="home\components\SensationRecorderInfo.Designer.cs">
+      <DependentUpon>SensationRecorderInfo.cs</DependentUpon>
+    </Compile>
+    <Compile Include="home\components\ManageVideoInfo.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="home\components\ManageVideoInfo.Designer.cs">
+      <DependentUpon>ManageVideoInfo.cs</DependentUpon>
     </Compile>
     <Compile Include="sensationEditor\components\pages\EditorMenuPage.cs">
       <SubType>UserControl</SubType>
@@ -153,17 +202,17 @@
     <Compile Include="videoViewer\components\VideoSearch.Designer.cs">
       <DependentUpon>VideoSearch.cs</DependentUpon>
     </Compile>
-    <Compile Include="videoViewer\components\ViewerHeader.cs">
-      <SubType>UserControl</SubType>
-    </Compile>
-    <Compile Include="videoViewer\components\ViewerHeader.Designer.cs">
-      <DependentUpon>ViewerHeader.cs</DependentUpon>
-    </Compile>
     <Compile Include="home\components\pages\HomePage.cs">
       <SubType>UserControl</SubType>
     </Compile>
     <Compile Include="home\components\pages\HomePage.Designer.cs">
       <DependentUpon>HomePage.cs</DependentUpon>
+    </Compile>
+    <Compile Include="videoViewer\components\ViewerHeader.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="videoViewer\components\ViewerHeader.Designer.cs">
+      <DependentUpon>ViewerHeader.cs</DependentUpon>
     </Compile>
     <Compile Include="videoViewer\data\SelectorData.cs" />
     <Compile Include="videoViewer\components\pages\VideoSelectorPage.cs">
@@ -200,11 +249,35 @@
     <EmbeddedResource Include="applicationFrame\OwoMedia.resx">
       <DependentUpon>OwoMedia.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="genericComponents\InfoAreaBase.resx">
+      <DependentUpon>InfoAreaBase.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="genericComponents\PageHeader\BreadCrumNavigation.resx">
+      <DependentUpon>BreadCrumNavigation.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="genericComponents\PageHeader\PageHeader.resx">
+      <DependentUpon>PageHeader.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="genericComponents\pageDefinition\UserControlOwoBase.resx">
       <DependentUpon>UserControlOwoBase.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="genericComponents\pageDefinition\UserControlPage.resx">
       <DependentUpon>UserControlPage.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="home\components\BrowseVideoInfo.resx">
+      <DependentUpon>BrowseVideoInfo.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="home\components\OptionInfo.resx">
+      <DependentUpon>OptionInfo.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="home\components\LiveShareInfo.resx">
+      <DependentUpon>LiveShareInfo.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="home\components\SensationRecorderInfo.resx">
+      <DependentUpon>SensationRecorderInfo.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="home\components\ManageVideoInfo.resx">
+      <DependentUpon>ManageVideoInfo.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="sensationEditor\components\pages\EditorMenuPage.resx">
       <DependentUpon>EditorMenuPage.cs</DependentUpon>
@@ -218,9 +291,6 @@
     <EmbeddedResource Include="videoViewer\components\VideoSearch.resx">
       <DependentUpon>VideoSearch.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="videoViewer\components\ViewerHeader.resx">
-      <DependentUpon>ViewerHeader.cs</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="home\components\pages\HomePage.resx">
       <DependentUpon>HomePage.cs</DependentUpon>
     </EmbeddedResource>
@@ -232,6 +302,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="videoViewer\components\pages\VideoViewerPage.resx">
       <DependentUpon>VideoViewerPage.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="videoViewer\components\ViewerHeader.resx">
+      <DependentUpon>ViewerHeader.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="welcome\components\pages\WelcomePage.resx">
       <DependentUpon>WelcomePage.cs</DependentUpon>
@@ -280,7 +353,6 @@
     </COMReference>
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="genericComponents\prompt\" />
     <Folder Include="sensationEditor\data\" />
   </ItemGroup>
   <ItemGroup>

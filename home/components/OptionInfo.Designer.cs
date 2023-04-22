@@ -1,5 +1,5 @@
-﻿namespace owoMedia.videoViewer.components {
-    partial class ViewerHeader {
+﻿namespace owoMedia.home.components {
+    partial class OptionInfo {
         /// <summary> 
         /// Required designer variable.
         /// </summary>
@@ -23,31 +23,32 @@
         /// the contents of this method with the code editor.
         /// </summary>
         private void InitializeComponent() {
-            this.videoSearch1 = new owoMedia.videoViewer.components.VideoSearch();
+            this.label1 = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
-            // videoSearch1
+            // label1
             // 
-            this.videoSearch1.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
-            this.videoSearch1.BackColor = System.Drawing.SystemColors.ControlLightLight;
-            this.videoSearch1.Location = new System.Drawing.Point(314, 27);
-            this.videoSearch1.Name = "videoSearch1";
-            this.videoSearch1.Size = new System.Drawing.Size(650, 24);
-            this.videoSearch1.TabIndex = 1;
+            this.label1.AutoSize = true;
+            this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label1.Location = new System.Drawing.Point(-3, 0);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(93, 25);
+            this.label1.TabIndex = 0;
+            this.label1.Text = "Options";
             // 
-            // ViewerHeader
+            // OptionInfo
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.Controls.Add(this.videoSearch1);
-            this.Name = "ViewerHeader";
-            this.Controls.SetChildIndex(this.videoSearch1, 0);
+            this.Controls.Add(this.label1);
+            this.Name = "OptionInfo";
             this.ResumeLayout(false);
+            this.PerformLayout();
 
         }
 
         #endregion
 
-        private VideoSearch videoSearch1;
+        private System.Windows.Forms.Label label1;
     }
 }

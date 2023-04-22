@@ -1,5 +1,5 @@
-﻿namespace owoMedia.videoViewer.components {
-    partial class ViewerHeader {
+﻿namespace owoMedia.genericComponents.PageHeader {
+    partial class BreadCrumNavigation {
         /// <summary> 
         /// Required designer variable.
         /// </summary>
@@ -23,31 +23,31 @@
         /// the contents of this method with the code editor.
         /// </summary>
         private void InitializeComponent() {
-            this.videoSearch1 = new owoMedia.videoViewer.components.VideoSearch();
+            this.flowLayoutPanel1 = new System.Windows.Forms.FlowLayoutPanel();
             this.SuspendLayout();
             // 
-            // videoSearch1
+            // flowLayoutPanel1
             // 
-            this.videoSearch1.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
-            this.videoSearch1.BackColor = System.Drawing.SystemColors.ControlLightLight;
-            this.videoSearch1.Location = new System.Drawing.Point(314, 27);
-            this.videoSearch1.Name = "videoSearch1";
-            this.videoSearch1.Size = new System.Drawing.Size(650, 24);
-            this.videoSearch1.TabIndex = 1;
+            this.flowLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.flowLayoutPanel1.Location = new System.Drawing.Point(0, 0);
+            this.flowLayoutPanel1.Name = "flowLayoutPanel1";
+            this.flowLayoutPanel1.Size = new System.Drawing.Size(707, 21);
+            this.flowLayoutPanel1.TabIndex = 0;
             // 
-            // ViewerHeader
+            // BreadCrumNavigation
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.Controls.Add(this.videoSearch1);
-            this.Name = "ViewerHeader";
-            this.Controls.SetChildIndex(this.videoSearch1, 0);
+            this.Controls.Add(this.flowLayoutPanel1);
+            this.Name = "BreadCrumNavigation";
+            this.Size = new System.Drawing.Size(707, 21);
+            this.Load += new System.EventHandler(this.BreadCrumNavigation_Load);
             this.ResumeLayout(false);
 
         }
 
         #endregion
 
-        private VideoSearch videoSearch1;
+        private System.Windows.Forms.FlowLayoutPanel flowLayoutPanel1;
     }
 }

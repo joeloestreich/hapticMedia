@@ -30,6 +30,8 @@
             this.pictureBox2 = new System.Windows.Forms.PictureBox();
             this.btnLiveShare = new System.Windows.Forms.Button();
             this.btnRecord = new System.Windows.Forms.Button();
+            this.button1 = new System.Windows.Forms.Button();
+            this.pnlInfobox = new System.Windows.Forms.Panel();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
             this.SuspendLayout();
@@ -43,6 +45,7 @@
             this.btnViewer.Text = "Browse Videos";
             this.btnViewer.UseVisualStyleBackColor = true;
             this.btnViewer.Click += new System.EventHandler(this.btnViewer_Click);
+            this.btnViewer.MouseEnter += new System.EventHandler(this.btnViewer_MouseEnter);
             // 
             // pictureBox1
             // 
@@ -62,21 +65,23 @@
             this.btnOptions.Text = "Options";
             this.btnOptions.UseVisualStyleBackColor = true;
             this.btnOptions.Click += new System.EventHandler(this.btnOptions_Click);
+            this.btnOptions.MouseEnter += new System.EventHandler(this.btnOptions_MouseEnter);
             // 
             // btnEditor
             // 
-            this.btnEditor.Location = new System.Drawing.Point(3, 237);
+            this.btnEditor.Location = new System.Drawing.Point(3, 421);
             this.btnEditor.Name = "btnEditor";
             this.btnEditor.Size = new System.Drawing.Size(499, 87);
             this.btnEditor.TabIndex = 3;
             this.btnEditor.Text = "Manage Videos";
             this.btnEditor.UseVisualStyleBackColor = true;
             this.btnEditor.Click += new System.EventHandler(this.btnEditor_Click);
+            this.btnEditor.MouseEnter += new System.EventHandler(this.btnEditor_MouseEnter);
             // 
             // pictureBox2
             // 
             this.pictureBox2.BackColor = System.Drawing.SystemColors.ActiveCaption;
-            this.pictureBox2.Location = new System.Drawing.Point(1195, 258);
+            this.pictureBox2.Location = new System.Drawing.Point(1188, 231);
             this.pictureBox2.Name = "pictureBox2";
             this.pictureBox2.Size = new System.Drawing.Size(68, 66);
             this.pictureBox2.TabIndex = 4;
@@ -84,28 +89,49 @@
             // 
             // btnLiveShare
             // 
-            this.btnLiveShare.Location = new System.Drawing.Point(3, 423);
+            this.btnLiveShare.Location = new System.Drawing.Point(3, 176);
             this.btnLiveShare.Name = "btnLiveShare";
             this.btnLiveShare.Size = new System.Drawing.Size(499, 87);
             this.btnLiveShare.TabIndex = 5;
             this.btnLiveShare.Text = "Sensation Live Share";
             this.btnLiveShare.UseVisualStyleBackColor = true;
             this.btnLiveShare.Click += new System.EventHandler(this.btnLiveShare_Click);
+            this.btnLiveShare.MouseEnter += new System.EventHandler(this.btnLiveShare_MouseEnter);
             // 
             // btnRecord
             // 
-            this.btnRecord.Location = new System.Drawing.Point(3, 330);
+            this.btnRecord.Location = new System.Drawing.Point(3, 328);
             this.btnRecord.Name = "btnRecord";
             this.btnRecord.Size = new System.Drawing.Size(499, 87);
             this.btnRecord.TabIndex = 6;
             this.btnRecord.Text = "Sensation Recorder";
             this.btnRecord.UseVisualStyleBackColor = true;
             this.btnRecord.Click += new System.EventHandler(this.btnRecord_Click);
+            this.btnRecord.MouseEnter += new System.EventHandler(this.btnRecord_MouseEnter);
+            // 
+            // button1
+            // 
+            this.button1.Location = new System.Drawing.Point(607, 98);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(75, 56);
+            this.button1.TabIndex = 7;
+            this.button1.Text = "Welcome test";
+            this.button1.UseVisualStyleBackColor = true;
+            this.button1.Click += new System.EventHandler(this.button1_Click);
+            // 
+            // pnlInfobox
+            // 
+            this.pnlInfobox.Location = new System.Drawing.Point(677, 328);
+            this.pnlInfobox.Name = "pnlInfobox";
+            this.pnlInfobox.Size = new System.Drawing.Size(550, 250);
+            this.pnlInfobox.TabIndex = 8;
             // 
             // HomePage
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.Controls.Add(this.pnlInfobox);
+            this.Controls.Add(this.button1);
             this.Controls.Add(this.btnRecord);
             this.Controls.Add(this.btnLiveShare);
             this.Controls.Add(this.pictureBox2);
@@ -129,5 +155,7 @@
         private System.Windows.Forms.PictureBox pictureBox2;
         private System.Windows.Forms.Button btnLiveShare;
         private System.Windows.Forms.Button btnRecord;
+        private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.Panel pnlInfobox;
     }
 }

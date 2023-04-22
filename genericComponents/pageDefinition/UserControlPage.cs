@@ -18,7 +18,7 @@ namespace owoMedia.genericComponents.pageDefinition {
         public override void Init() {
             base.Init();
             this.Dock = DockStyle.Fill;
-            this.Size = OwoMedia.Instance.Config.Size;
+            this.Size = OwoMedia.Instance.Size;
         }
 
     }

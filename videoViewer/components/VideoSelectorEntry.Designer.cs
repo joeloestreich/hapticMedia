@@ -1,4 +1,4 @@
-﻿namespace owoMedia.videoViewer.components.pages {
+﻿namespace owoMedia.videoViewer.components {
     partial class VideoSelectorEntry {
         /// <summary> 
         /// Required designer variable.
