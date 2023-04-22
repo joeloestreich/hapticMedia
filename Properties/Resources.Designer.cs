@@ -61,14 +61,15 @@ namespace owoMedia.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to &lt;html&gt;
+        ///   Looks up a localized string similar to &lt;!DOCTYPE html&gt;
+        ///&lt;html&gt;
         ///&lt;head&gt;
         ///    &lt;meta content=&apos;IE=Edge&apos; http-equiv=&apos;X-UA-Compatible&apos; /&gt;
         ///
         ///    &lt;script src=&quot;https://code.jquery.com/jquery-3.1.1.min.js&quot;&gt;&lt;/script&gt;
         ///
         ///    &lt;script&gt;
-        ///        const serverAddress = &quot;ws://127.0.0.1:$WS_PORT$$WS_STATE_ROUTE$&quot;;
+        ///        const serverAddress = &quot;ws://127.0.0.1:$WS_PORT$$WS_ROUTE$&quot;;
         ///
         ///        const socket = new WebSocket(serverAddress);
         ///
@@ -77,10 +78,8 @@ namespace owoMedia.Properties {
         ///        }
         ///
         ///        socket.onmessage = function (event) {
-        ///            console.log(event.data);
-        ///        }
-        ///
-        ///        function send [rest of string was truncated]&quot;;.
+        ///            if (player == null) {
+        ///                sendState( [rest of string was truncated]&quot;;.
         /// </summary>
         internal static string videoViewer {
             get {

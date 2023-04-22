@@ -1,6 +1,10 @@
 ﻿using Google.Apis.YouTube.v3.Data;
+using Newtonsoft.Json;
+using owoMedia.applicationFrame.Service;
+using owoMedia.genericComponents;
 using owoMedia.genericComponents.pageDefinition;
 using owoMedia.Properties;
+using owoMedia.sensationEditor.data;
 using owoMedia.sensationPlayer;
 using owoMedia.videoViewer.data;
 using owoMedia.websocket;
@@ -12,32 +16,38 @@ using System.Drawing;
 using System.IO;
 using System.Linq;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace owoMedia.sensationEditor.components.pages {
     public partial class VideoEditorPage : UserControlPage {
 
-        string VideoId;
-        SensationPlayer SensationPlayer;
+        const string FolderName = "VideoEditor";
+
+        SensationEditorTrack Editor;
+        SensationPlayerEditor SensationPlayer = new SensationPlayerEditor();
+
+        public VideoEditorPage() {
+            Editor = new SensationEditorTrack();
+            // for Designer
+            InitializeComponent();
+        }
 
         public VideoEditorPage(string videoId) {
             InitializeComponent();
-            this.VideoId = videoId;
-            this.SensationPlayer = new SensationPlayer();
+            this.Editor = new SensationEditorTrack(videoId);
         }
-        public VideoEditorPage(string videoId, SensationPlayer sensationPlayer) {
+        public VideoEditorPage(SensationEditorTrack track) {
             InitializeComponent();
-            this.VideoId = videoId;
-            this.SensationPlayer = sensationPlayer;
+            this.Editor = track;
         }
 
         public override void Init() {
             base.Init(); string html = Resources.videoViewer;
-            html = html.Replace("$VIDEO_ID$", VideoId);
+            html = html.Replace("$VIDEO_ID$", Editor.VideoId);
             html = html.Replace("$WS_PORT$", OwoMedia.Instance.Config.Port.ToString());
             html = html.Replace("$WS_ROUTE$", WsVideoEditorBehavior.Route);
-            //this.webVideo.DocumentText = html;
 
             string testName = "videoEditorTest.html";
             if (File.Exists(testName)) {
@@ -48,12 +58,24 @@ namespace owoMedia.sensationEditor.components.pages {
                 fs.Write(title, 0, title.Length);
             }
             System.Diagnostics.Process.Start(testName);
+
+            bgwTime.RunWorkerAsync();
+        }
+
+        private void btnSave_Click(object sender, EventArgs e) {
+            Editor.Title = txtTitle.Text;
+            string EditorString = JsonConvert.SerializeObject(Editor);
+            OwoMediaFileService.SaveFile(EditorString, FolderName, Editor.VideoId);
+        }
+
+        private void ckbPlayOwo_CheckedChanged(object sender, EventArgs e) {
+            SensationPlayer.MuteSensation = !ckbPlayOwo.Checked;
         }
 
         WsVideoData.StateEnum lastState = WsVideoData.StateEnum.Unstarted;
         public List<string> OnWsMessage(WsVideoData dto) {
-            if (this.lblCurTime.InvokeRequired) {
-                return (List<string>)this.lblCurTime.Invoke(
+            if (this.lblState.InvokeRequired) {
+                return (List<string>)this.lblState.Invoke(
                   new Func<List<string>>(() => ActualOnWsMessage(dto))
                 );
             } else {
@@ -68,13 +90,9 @@ namespace owoMedia.sensationEditor.components.pages {
 
             List<string> messages = new List<string>();
 
-            if (dto.videoId != this.VideoId) {
+            if (dto.videoId != Editor.VideoId) {
                 messages.Add("IdError");
                 return messages;
-            }
-
-            if (lastState == WsVideoData.StateEnum.Unstarted) {
-                messages.Add("Play");
             }
 
             switch (dto.useCase) {
@@ -86,54 +104,47 @@ namespace owoMedia.sensationEditor.components.pages {
                     OnStateChange(dto);
                     break;
                 case "time":
-                    // general Check;
+                    SensationPlayer.TimeCheck(dto.timeStamp);
                     break;
                 default:
                     Console.WriteLine("Unknown Usecase: " + dto.useCase);
                     break;
             }
 
-            OnDetectTime(dto);
-
             return messages;
         }
 
-        SyncableStopwatch stopWatch = new SyncableStopwatch();
-
-
-        bool sync = false;
-        private void btnSync_Click(object sender, EventArgs e) {
-            sync = true;
-        }
-
-        private void OnDetectTime(WsVideoData dto) {
-            if (sync) {
-                sync = false;
-                stopWatch.SyncTime(dto.timeStamp);
-            }
-
-            TimeSpan t = TimeSpan.FromSeconds(stopWatch.GetSyncedSeconds());
-            string formatedTime;
-            if (t.Hours > 0) {
-                formatedTime = string.Format("{0:D2}:{1:D2}:{2:D2}", t.Hours, t.Minutes, t.Seconds);
-            } else {
-                formatedTime = string.Format("{0:D2}:{1:D2}", t.Minutes, t.Seconds);
-            }
-            lblCurTime.Text = formatedTime;
-
-        }
 
         private void OnStateChange(WsVideoData dto) {
             WsVideoData.StateEnum newState = (WsVideoData.StateEnum)Int16.Parse(dto.value);
 
             if (lastState != WsVideoData.StateEnum.Playing && newState == WsVideoData.StateEnum.Playing) {
-                stopWatch.Start();
+                SensationPlayer.Start();
             } else if (lastState == WsVideoData.StateEnum.Playing && newState != WsVideoData.StateEnum.Playing) {
-                stopWatch.Stop();
+                SensationPlayer.Stop();
             }
 
             lastState = newState;
             this.lblState.Text = lastState.ToString();
+
+            SensationPlayer.Sync(dto.timeStamp);
+        }
+
+
+        public override void OnLeave() {
+            base.OnLeave();
+            bgwTime.CancelAsync();
+        }
+
+        private void bgwTime_DoWork(object sender, DoWorkEventArgs e) {
+            while (!bgwTime.CancellationPending) {
+                bgwTime.ReportProgress(0);
+                Thread.Sleep(100);
+            }
+        }
+
+        private void bgwTime_ProgressChanged(object sender, ProgressChangedEventArgs e) {
+            LabelService.SetFormatedTime(lblCurTime, SensationPlayer.GetTime());
         }
     }
 }

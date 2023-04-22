@@ -27,7 +27,7 @@ namespace owoMedia.videoViewer.components {
         private void VideoSearch_Load(object sender, EventArgs e) {
         }
 
-        string UserEntry = "";
+        static string UserEntry = "";
 
         private void txtSearchBar_Enter(object sender, EventArgs e) {
             if (UserEntry.Trim().Equals("")) {
@@ -46,13 +46,12 @@ namespace owoMedia.videoViewer.components {
 
         private void btnSearch_Click(object sender, EventArgs e) {
             UserControlPage nextPage;
-            string search = txtSearchBar.Text;
 
-            string videoId = IdentifyVideoId(search);
+            string videoId = IdentifyVideoId(UserEntry);
             if (videoId != null) {
                 nextPage = new VideoViewerPage(videoId);
             } else {
-                nextPage = new VideoSelectorPage(search);
+                nextPage = new VideoSelectorPage(UserEntry);
             }
             OwoMedia.Instance.NavigateTo(nextPage);
         }

@@ -1,5 +1,7 @@
 ﻿using owoMedia.config.data;
+using owoMedia.genericComponents;
 using owoMedia.genericComponents.pageDefinition;
+using owoMedia.home.components;
 using owoMedia.videoViewer.components;
 using System;
 using System.Collections.Generic;
@@ -23,21 +25,28 @@ namespace owoMedia.sensationEditor.components.pages {
         }
 
         private void btnNewTrack_Click(object sender, EventArgs e) {
-            //string promptValue = Prompt.ShowDialog("Select a Video you want to add Sensations to (URL)", "Select Video");
-            string videoId = VideoSearch.IdentifyVideoId(null);
-            if (videoId != null) {
-                OwoMedia.Instance.NavigateTo(new VideoEditorPage(videoId));
-            } else {
-
-            }
+            CreateVideoInfobox info = new CreateVideoInfobox();
+            info.Location = new Point(0, 100);
+            ChangeInfo(info);
         }
 
         private void btnEditTrack_Click(object sender, EventArgs e) {
-
+            ChangeInfo(null);
         }
 
         private void btnTemplates_Click(object sender, EventArgs e) {
+            ChangeInfo(null);
+        }
 
+        private void btnRelease_Click(object sender, EventArgs e) {
+            ChangeInfo(null);
+        }
+
+        private void ChangeInfo(InfoAreaBase info) {
+            this.pnlInfobox.Controls.Clear();
+            if (info != null) {
+                this.pnlInfobox.Controls.Add(info);
+            }
         }
     }
 }

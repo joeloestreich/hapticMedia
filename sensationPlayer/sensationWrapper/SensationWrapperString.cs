@@ -5,12 +5,12 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace owoMedia.sensationPlayer.sensationTemplate {
-    internal class SensationTemplateString : SensationTemplate {
+namespace owoMedia.sensationPlayer.sensationWrapper {
+    internal class SensationWrapperString : SensationWrapper {
 
         String sensationString;
 
-        public SensationTemplateString(string sensationString) {
+        public SensationWrapperString(string sensationString) {
             this.sensationString = sensationString;
         }
 

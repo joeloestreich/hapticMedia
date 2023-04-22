@@ -6,7 +6,7 @@ using System.Text;
 using System.Threading.Tasks;
 
 namespace owoMedia.sensationPlayer {
-    internal class SyncableStopwatch : Stopwatch {
+    public class SyncableStopwatch : Stopwatch {
 
         private double timestamp = 0;
         private double asTime = 0;

@@ -27,6 +27,8 @@
             this.btnEditTrack = new System.Windows.Forms.Button();
             this.btnTemplates = new System.Windows.Forms.Button();
             this.pageHeader1 = new owoMedia.genericComponents.pageHeader.PageHeader();
+            this.pnlInfobox = new System.Windows.Forms.Panel();
+            this.btnRelease = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // btnNewTrack
@@ -51,7 +53,7 @@
             // 
             // btnTemplates
             // 
-            this.btnTemplates.Location = new System.Drawing.Point(3, 456);
+            this.btnTemplates.Location = new System.Drawing.Point(3, 396);
             this.btnTemplates.Name = "btnTemplates";
             this.btnTemplates.Size = new System.Drawing.Size(499, 87);
             this.btnTemplates.TabIndex = 6;
@@ -68,10 +70,29 @@
             this.pageHeader1.Size = new System.Drawing.Size(1280, 100);
             this.pageHeader1.TabIndex = 7;
             // 
+            // pnlInfobox
+            // 
+            this.pnlInfobox.Location = new System.Drawing.Point(632, 148);
+            this.pnlInfobox.Name = "pnlInfobox";
+            this.pnlInfobox.Size = new System.Drawing.Size(550, 545);
+            this.pnlInfobox.TabIndex = 9;
+            // 
+            // btnRelease
+            // 
+            this.btnRelease.Location = new System.Drawing.Point(3, 547);
+            this.btnRelease.Name = "btnRelease";
+            this.btnRelease.Size = new System.Drawing.Size(499, 87);
+            this.btnRelease.TabIndex = 10;
+            this.btnRelease.Text = "Manage Releases";
+            this.btnRelease.UseVisualStyleBackColor = true;
+            this.btnRelease.Click += new System.EventHandler(this.btnRelease_Click);
+            // 
             // EditorMenuPage
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.Controls.Add(this.btnRelease);
+            this.Controls.Add(this.pnlInfobox);
             this.Controls.Add(this.pageHeader1);
             this.Controls.Add(this.btnTemplates);
             this.Controls.Add(this.btnEditTrack);
@@ -87,5 +108,7 @@
         private System.Windows.Forms.Button btnEditTrack;
         private System.Windows.Forms.Button btnTemplates;
         private genericComponents.pageHeader.PageHeader pageHeader1;
+        private System.Windows.Forms.Panel pnlInfobox;
+        private System.Windows.Forms.Button btnRelease;
     }
 }

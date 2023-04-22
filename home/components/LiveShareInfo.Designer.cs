@@ -54,9 +54,9 @@
             this.label3.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label3.Location = new System.Drawing.Point(3, 70);
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(414, 20);
+            this.label3.Size = new System.Drawing.Size(539, 20);
             this.label3.TabIndex = 3;
-            this.label3.Text = "You can also join in and experience what others feel here.";
+            this.label3.Text = "Or be the one who joins in and experience the Sensations of someone else.";
             // 
             // LiveShareInfo
             // 

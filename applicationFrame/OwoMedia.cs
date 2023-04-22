@@ -83,6 +83,7 @@ namespace owoMedia.genericComponents.pageDefinition {
         private void StartUp(UserControlPage initialPage) {
             // Design
             Connect();
+            this.Size = new Size(1280, 720);
             NavigateTo(initialPage);
         }
 

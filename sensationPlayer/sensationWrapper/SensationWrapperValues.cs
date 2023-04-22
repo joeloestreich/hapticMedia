@@ -5,8 +5,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace owoMedia.sensationPlayer.sensationTemplate {
-    internal class SensationTemplateValues : SensationTemplate {
+namespace owoMedia.sensationPlayer.sensationWrapper {
+    internal class SensationWrapperValues : SensationWrapper {
 
         int frequency;
         float durationSeconds;
@@ -16,7 +16,7 @@ namespace owoMedia.sensationPlayer.sensationTemplate {
         float ExitDelaySeconds;
         Muscle[] muscles;
 
-        public SensationTemplateValues(int frequency, float durationSeconds, int intensityPercentage, float RampUpMillies, float RampDownMillies, float ExitDelaySeconds, Muscle[] muscles) {
+        public SensationWrapperValues(int frequency, float durationSeconds, int intensityPercentage, float RampUpMillies, float RampDownMillies, float ExitDelaySeconds, Muscle[] muscles) {
             this.frequency = frequency;
             this.durationSeconds = durationSeconds;
             this.intensityPercentage = intensityPercentage;

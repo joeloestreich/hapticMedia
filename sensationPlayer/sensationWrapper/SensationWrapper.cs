@@ -5,12 +5,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace owoMedia.sensationPlayer.sensationTemplate {
-    public abstract class SensationTemplate {
-
-        public void PlaySensation() {
-            OWO.Send(GetSensation());
-        }
+namespace owoMedia.sensationPlayer.sensationWrapper {
+    public abstract class SensationWrapper {
 
         internal abstract Sensation GetSensation();
 
