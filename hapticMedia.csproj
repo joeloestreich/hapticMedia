@@ -101,17 +101,17 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="applicationFrame\Service\LabelService.cs" />
-    <Compile Include="applicationFrame\Service\OwoMediaFileService.cs" />
+    <Compile Include="applicationFrame\Service\HapticMediaFileService.cs" />
     <Compile Include="config\theme\ThemeBase.cs" />
     <Compile Include="config\theme\ThemeDark.cs" />
     <Compile Include="config\theme\ThemeLight.cs" />
     <Compile Include="config\theme\ThemeManager.cs" />
     <Compile Include="config\data\Config.cs" />
-    <Compile Include="applicationFrame\OwoMedia.cs">
+    <Compile Include="applicationFrame\HapticMedia.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="applicationFrame\OwoMedia.Designer.cs">
-      <DependentUpon>OwoMedia.cs</DependentUpon>
+    <Compile Include="applicationFrame\HapticMedia.Designer.cs">
+      <DependentUpon>HapticMedia.cs</DependentUpon>
     </Compile>
     <Compile Include="genericComponents\InfoAreaBase.cs">
       <SubType>UserControl</SubType>
@@ -131,11 +131,11 @@
     <Compile Include="genericComponents\PageHeader\PageHeader.Designer.cs">
       <DependentUpon>PageHeader.cs</DependentUpon>
     </Compile>
-    <Compile Include="genericComponents\pageDefinition\UserControlOwoBase.cs">
+    <Compile Include="genericComponents\pageDefinition\UserControlBase.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="genericComponents\pageDefinition\UserControlOwoBase.Designer.cs">
-      <DependentUpon>UserControlOwoBase.cs</DependentUpon>
+    <Compile Include="genericComponents\pageDefinition\UserControlBase.Designer.cs">
+      <DependentUpon>UserControlBase.cs</DependentUpon>
     </Compile>
     <Compile Include="genericComponents\pageDefinition\UserControlPage.cs">
       <SubType>UserControl</SubType>
@@ -193,6 +193,8 @@
     </Compile>
     <Compile Include="sensationEditor\data\SensationEditorTrack.cs" />
     <Compile Include="sensationEditor\data\SensationTemplate\SensationTemplateData.cs" />
+    <Compile Include="sensationEditor\data\SensationTemplate\SensationTemplateMuscleProvider.cs" />
+    <Compile Include="sensationEditor\data\SensationTemplate\SensationTemplateValueProvider.cs" />
     <Compile Include="sensationPlayer\SensationPlayer.cs" />
     <Compile Include="sensationPlayer\SensationPlayerEditor.cs" />
     <Compile Include="sensationPlayer\sensationWrapper\SensationWrapper.cs" />
@@ -256,8 +258,8 @@
     <Compile Include="websocket\WsVideoViewerBehavior.cs" />
     <Compile Include="websocket\WebSocketService.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <EmbeddedResource Include="applicationFrame\OwoMedia.resx">
-      <DependentUpon>OwoMedia.cs</DependentUpon>
+    <EmbeddedResource Include="applicationFrame\HapticMedia.resx">
+      <DependentUpon>HapticMedia.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="genericComponents\InfoAreaBase.resx">
       <DependentUpon>InfoAreaBase.cs</DependentUpon>
@@ -268,8 +270,8 @@
     <EmbeddedResource Include="genericComponents\PageHeader\PageHeader.resx">
       <DependentUpon>PageHeader.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="genericComponents\pageDefinition\UserControlOwoBase.resx">
-      <DependentUpon>UserControlOwoBase.cs</DependentUpon>
+    <EmbeddedResource Include="genericComponents\pageDefinition\UserControlBase.resx">
+      <DependentUpon>UserControlBase.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="genericComponents\pageDefinition\UserControlPage.resx">
       <DependentUpon>UserControlPage.cs</DependentUpon>

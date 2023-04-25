@@ -1,6 +1,6 @@
 ﻿using OWOGame;
-using owoMedia.genericComponents.pageDefinition;
-using owoMedia.Properties;
+using hapticMedia.genericComponents.pageDefinition;
+using hapticMedia.Properties;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -13,13 +13,13 @@ using System.Security.Cryptography;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-using owoMedia.sensationPlayer;
-using owoMedia.videoViewer.data;
-using owoMedia.websocket;
+using hapticMedia.sensationPlayer;
+using hapticMedia.videoViewer.data;
+using hapticMedia.websocket;
 using System.Runtime.Remoting.Messaging;
-using owoMedia.applicationFrame.Service;
+using hapticMedia.applicationFrame.Service;
 
-namespace owoMedia.videoViewer.components.pages {
+namespace hapticMedia.videoViewer.components.pages {
     public partial class VideoViewerPage : UserControlPage {
 
         static string FolderName = "viewer";
@@ -36,11 +36,11 @@ namespace owoMedia.videoViewer.components.pages {
             base.Init();
             string html = Resources.videoViewer;
             html = html.Replace("$VIDEO_ID$", videoId);
-            html = html.Replace("$WS_PORT$", OwoMedia.Instance.Config.Port.ToString());
+            html = html.Replace("$WS_PORT$", HapticMedia.Instance.Config.Port.ToString());
             html = html.Replace("$WS_ROUTE$", WsVideoViewerBehavior.Route);
 
-            OwoMediaFileService.SaveFile(html, FolderName, FileName);
-            OwoMediaFileService.OpenFile(FolderName, FileName);
+            HapticMediaFileService.SaveFile(html, FolderName, FileName);
+            HapticMediaFileService.OpenFile(FolderName, FileName);
         }
 
 

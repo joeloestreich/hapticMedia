@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace owoMedia.sensationPlayer.sensationWrapper {
+namespace hapticMedia.sensationPlayer.sensationWrapper {
     internal class SensationWrapperValues : SensationWrapper {
 
         int frequency;
@@ -14,9 +14,13 @@ namespace owoMedia.sensationPlayer.sensationWrapper {
         float RampUpMillies;
         float RampDownMillies;
         float ExitDelaySeconds;
-        Muscle[] muscles;
 
-        public SensationWrapperValues(int frequency, float durationSeconds, int intensityPercentage, float RampUpMillies, float RampDownMillies, float ExitDelaySeconds, Muscle[] muscles) {
+        Muscle[] muscles;
+        string Name;
+
+        public SensationWrapperValues(int frequency, float durationSeconds, int intensityPercentage, 
+                float RampUpMillies, float RampDownMillies, float ExitDelaySeconds, 
+                Muscle[] muscles, string name) {
             this.frequency = frequency;
             this.durationSeconds = durationSeconds;
             this.intensityPercentage = intensityPercentage;
@@ -24,10 +28,12 @@ namespace owoMedia.sensationPlayer.sensationWrapper {
             this.RampDownMillies = RampDownMillies;
             this.ExitDelaySeconds = ExitDelaySeconds;
             this.muscles = muscles;
+            this.Name = name;
         }
 
         internal override Sensation GetSensation() {
             MicroSensation micro = SensationsFactory.Create(frequency, durationSeconds, intensityPercentage, RampUpMillies, RampDownMillies, ExitDelaySeconds);
+            micro.WithName(Name);
             return micro.WithMuscles(muscles);
         }
     }

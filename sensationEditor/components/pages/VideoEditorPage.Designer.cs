@@ -1,4 +1,4 @@
-﻿namespace owoMedia.sensationEditor.components.pages {
+﻿namespace hapticMedia.sensationEditor.components.pages {
     partial class VideoEditorPage {
         /// <summary> 
         /// Required designer variable.
@@ -27,18 +27,29 @@
             this.label1 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
             this.lblState = new System.Windows.Forms.Label();
-            this.pageHeader1 = new owoMedia.genericComponents.pageHeader.PageHeader();
+            this.pageHeader1 = new hapticMedia.genericComponents.pageHeader.PageHeader();
             this.lblCurTime = new System.Windows.Forms.Label();
             this.lblMaxTime = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
-            this.pnlDetailView = new System.Windows.Forms.Panel();
             this.bgwTime = new System.ComponentModel.BackgroundWorker();
             this.panel1 = new System.Windows.Forms.Panel();
             this.panel3 = new System.Windows.Forms.Panel();
+            this.btnAddSensation = new System.Windows.Forms.Button();
             this.txtTitle = new System.Windows.Forms.TextBox();
             this.btnSave = new System.Windows.Forms.Button();
-            this.label4 = new System.Windows.Forms.Label();
             this.ckbPlayOwo = new System.Windows.Forms.CheckBox();
+            this.tabControl1 = new System.Windows.Forms.TabControl();
+            this.tabPage1 = new System.Windows.Forms.TabPage();
+            this.tabPage2 = new System.Windows.Forms.TabPage();
+            this.tabPage3 = new System.Windows.Forms.TabPage();
+            this.listRecordings = new System.Windows.Forms.ListBox();
+            this.listSensationTemplates = new System.Windows.Forms.ListBox();
+            this.listBasicSensation = new System.Windows.Forms.ListBox();
+            this.panel3.SuspendLayout();
+            this.tabControl1.SuspendLayout();
+            this.tabPage1.SuspendLayout();
+            this.tabPage2.SuspendLayout();
+            this.tabPage3.SuspendLayout();
             this.SuspendLayout();
             // 
             // pnlOverview
@@ -46,9 +57,9 @@
             this.pnlOverview.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.pnlOverview.BackColor = System.Drawing.SystemColors.ControlLight;
-            this.pnlOverview.Location = new System.Drawing.Point(0, 205);
+            this.pnlOverview.Location = new System.Drawing.Point(8, 205);
             this.pnlOverview.Name = "pnlOverview";
-            this.pnlOverview.Size = new System.Drawing.Size(1280, 51);
+            this.pnlOverview.Size = new System.Drawing.Size(1267, 53);
             this.pnlOverview.TabIndex = 1;
             // 
             // label1
@@ -120,16 +131,6 @@
             this.label2.TabIndex = 11;
             this.label2.Text = "/";
             // 
-            // pnlDetailView
-            // 
-            this.pnlDetailView.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.pnlDetailView.BackColor = System.Drawing.SystemColors.ControlLight;
-            this.pnlDetailView.Location = new System.Drawing.Point(0, 258);
-            this.pnlDetailView.Name = "pnlDetailView";
-            this.pnlDetailView.Size = new System.Drawing.Size(1280, 51);
-            this.pnlDetailView.TabIndex = 2;
-            // 
             // bgwTime
             // 
             this.bgwTime.WorkerReportsProgress = true;
@@ -146,10 +147,22 @@
             // 
             // panel3
             // 
+            this.panel3.Controls.Add(this.btnAddSensation);
             this.panel3.Location = new System.Drawing.Point(855, 315);
             this.panel3.Name = "panel3";
             this.panel3.Size = new System.Drawing.Size(420, 402);
             this.panel3.TabIndex = 14;
+            // 
+            // btnAddSensation
+            // 
+            this.btnAddSensation.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnAddSensation.Location = new System.Drawing.Point(4, 364);
+            this.btnAddSensation.Name = "btnAddSensation";
+            this.btnAddSensation.Size = new System.Drawing.Size(397, 25);
+            this.btnAddSensation.TabIndex = 19;
+            this.btnAddSensation.Text = "Add Sensation at Current Position";
+            this.btnAddSensation.UseVisualStyleBackColor = true;
+            this.btnAddSensation.Click += new System.EventHandler(this.btnAddSensation_Click);
             // 
             // txtTitle
             // 
@@ -171,16 +184,6 @@
             this.btnSave.UseVisualStyleBackColor = true;
             this.btnSave.Click += new System.EventHandler(this.btnSave_Click);
             // 
-            // label4
-            // 
-            this.label4.AutoSize = true;
-            this.label4.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label4.Location = new System.Drawing.Point(406, 156);
-            this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(173, 25);
-            this.label4.TabIndex = 17;
-            this.label4.Text = "Sensations Valid";
-            // 
             // ckbPlayOwo
             // 
             this.ckbPlayOwo.AutoSize = true;
@@ -193,17 +196,87 @@
             this.ckbPlayOwo.UseVisualStyleBackColor = true;
             this.ckbPlayOwo.CheckedChanged += new System.EventHandler(this.ckbPlayOwo_CheckedChanged);
             // 
+            // tabControl1
+            // 
+            this.tabControl1.Controls.Add(this.tabPage1);
+            this.tabControl1.Controls.Add(this.tabPage2);
+            this.tabControl1.Controls.Add(this.tabPage3);
+            this.tabControl1.Location = new System.Drawing.Point(855, 315);
+            this.tabControl1.Name = "tabControl1";
+            this.tabControl1.SelectedIndex = 0;
+            this.tabControl1.Size = new System.Drawing.Size(405, 357);
+            this.tabControl1.TabIndex = 0;
+            // 
+            // tabPage1
+            // 
+            this.tabPage1.Controls.Add(this.listBasicSensation);
+            this.tabPage1.Location = new System.Drawing.Point(4, 22);
+            this.tabPage1.Name = "tabPage1";
+            this.tabPage1.Padding = new System.Windows.Forms.Padding(3);
+            this.tabPage1.Size = new System.Drawing.Size(397, 331);
+            this.tabPage1.TabIndex = 0;
+            this.tabPage1.Text = "Base Sensations";
+            this.tabPage1.UseVisualStyleBackColor = true;
+            // 
+            // tabPage2
+            // 
+            this.tabPage2.Controls.Add(this.listSensationTemplates);
+            this.tabPage2.Location = new System.Drawing.Point(4, 22);
+            this.tabPage2.Name = "tabPage2";
+            this.tabPage2.Padding = new System.Windows.Forms.Padding(3);
+            this.tabPage2.Size = new System.Drawing.Size(397, 331);
+            this.tabPage2.TabIndex = 1;
+            this.tabPage2.Text = "Sensation Templates";
+            this.tabPage2.UseVisualStyleBackColor = true;
+            // 
+            // tabPage3
+            // 
+            this.tabPage3.Controls.Add(this.listRecordings);
+            this.tabPage3.Location = new System.Drawing.Point(4, 22);
+            this.tabPage3.Name = "tabPage3";
+            this.tabPage3.Padding = new System.Windows.Forms.Padding(3);
+            this.tabPage3.Size = new System.Drawing.Size(397, 331);
+            this.tabPage3.TabIndex = 2;
+            this.tabPage3.Text = "Recordings";
+            this.tabPage3.UseVisualStyleBackColor = true;
+            // 
+            // listRecordings
+            // 
+            this.listRecordings.FormattingEnabled = true;
+            this.listRecordings.Location = new System.Drawing.Point(0, 0);
+            this.listRecordings.Name = "listRecordings";
+            this.listRecordings.Size = new System.Drawing.Size(397, 329);
+            this.listRecordings.TabIndex = 0;
+            this.listRecordings.MouseDoubleClick += new System.Windows.Forms.MouseEventHandler(this.listRecordings_MouseDoubleClick);
+            // 
+            // listSensationTemplates
+            // 
+            this.listSensationTemplates.FormattingEnabled = true;
+            this.listSensationTemplates.Location = new System.Drawing.Point(0, 1);
+            this.listSensationTemplates.Name = "listSensationTemplates";
+            this.listSensationTemplates.Size = new System.Drawing.Size(397, 329);
+            this.listSensationTemplates.TabIndex = 1;
+            this.listSensationTemplates.MouseDoubleClick += new System.Windows.Forms.MouseEventHandler(this.listSensationTemplates_MouseDoubleClick);
+            // 
+            // listBasicSensation
+            // 
+            this.listBasicSensation.FormattingEnabled = true;
+            this.listBasicSensation.Location = new System.Drawing.Point(0, 1);
+            this.listBasicSensation.Name = "listBasicSensation";
+            this.listBasicSensation.Size = new System.Drawing.Size(397, 329);
+            this.listBasicSensation.TabIndex = 2;
+            this.listBasicSensation.MouseDoubleClick += new System.Windows.Forms.MouseEventHandler(this.listBasicSensation_MouseDoubleClick);
+            // 
             // VideoEditorPage
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.Controls.Add(this.tabControl1);
             this.Controls.Add(this.ckbPlayOwo);
-            this.Controls.Add(this.label4);
             this.Controls.Add(this.btnSave);
             this.Controls.Add(this.txtTitle);
             this.Controls.Add(this.panel3);
             this.Controls.Add(this.panel1);
-            this.Controls.Add(this.pnlDetailView);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.lblMaxTime);
             this.Controls.Add(this.lblCurTime);
@@ -213,6 +286,11 @@
             this.Controls.Add(this.label1);
             this.Controls.Add(this.pnlOverview);
             this.Name = "VideoEditorPage";
+            this.panel3.ResumeLayout(false);
+            this.tabControl1.ResumeLayout(false);
+            this.tabPage1.ResumeLayout(false);
+            this.tabPage2.ResumeLayout(false);
+            this.tabPage3.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -228,13 +306,19 @@
         private System.Windows.Forms.Label lblCurTime;
         private System.Windows.Forms.Label lblMaxTime;
         private System.Windows.Forms.Label label2;
-        private System.Windows.Forms.Panel pnlDetailView;
         private System.ComponentModel.BackgroundWorker bgwTime;
         private System.Windows.Forms.Panel panel1;
         private System.Windows.Forms.Panel panel3;
         private System.Windows.Forms.TextBox txtTitle;
         private System.Windows.Forms.Button btnSave;
-        private System.Windows.Forms.Label label4;
         private System.Windows.Forms.CheckBox ckbPlayOwo;
+        private System.Windows.Forms.TabControl tabControl1;
+        private System.Windows.Forms.TabPage tabPage1;
+        private System.Windows.Forms.TabPage tabPage2;
+        private System.Windows.Forms.TabPage tabPage3;
+        private System.Windows.Forms.Button btnAddSensation;
+        private System.Windows.Forms.ListBox listRecordings;
+        private System.Windows.Forms.ListBox listSensationTemplates;
+        private System.Windows.Forms.ListBox listBasicSensation;
     }
 }

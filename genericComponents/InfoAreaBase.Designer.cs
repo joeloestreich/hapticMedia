@@ -1,4 +1,4 @@
-﻿namespace owoMedia.genericComponents {
+﻿namespace hapticMedia.genericComponents {
     partial class InfoAreaBase {
         /// <summary> 
         /// Required designer variable.

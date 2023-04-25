@@ -1,6 +1,6 @@
 ﻿using Newtonsoft.Json;
-using owoMedia.genericComponents.pageDefinition;
-using owoMedia.videoViewer.components.pages;
+using hapticMedia.genericComponents.pageDefinition;
+using hapticMedia.videoViewer.components.pages;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,9 +9,9 @@ using System.Threading.Tasks;
 using WebSocketSharp.Server;
 using WebSocketSharp;
 using System.Threading;
-using owoMedia.videoViewer.data;
+using hapticMedia.videoViewer.data;
 
-namespace owoMedia.websocket {
+namespace hapticMedia.websocket {
     public class WsVideoViewerBehavior : WebSocketBehavior {
 
         public const string Route = "/videoViewer";
@@ -30,12 +30,12 @@ namespace owoMedia.websocket {
                 Console.WriteLine("dto is null");
                 return;
             }
-            if (!(OwoMedia.Instance.CurrentPage is VideoViewerPage)) {
+            if (!(HapticMedia.Instance.CurrentPage is VideoViewerPage)) {
                 Console.WriteLine("view is not video View");
                 return;
             }
 
-            VideoViewerPage viewer = (VideoViewerPage)OwoMedia.Instance.CurrentPage;
+            VideoViewerPage viewer = (VideoViewerPage)HapticMedia.Instance.CurrentPage;
             List<string> messages = viewer.OnWsMessage(dto);
             foreach (string m in messages) {
                 Send(m);

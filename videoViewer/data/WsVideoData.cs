@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace owoMedia.videoViewer.data {
+namespace hapticMedia.videoViewer.data {
     public class WsVideoData {
 
         public enum StateEnum : int {

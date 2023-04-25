@@ -1,6 +1,6 @@
-﻿using owoMedia.genericComponents.pageDefinition;
-using owoMedia.config.data;
-using owoMedia.home.components.pages;
+﻿using hapticMedia.genericComponents.pageDefinition;
+using hapticMedia.config.data;
+using hapticMedia.home.components.pages;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -11,7 +11,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
-namespace owoMedia.welcome.components.pages {
+namespace hapticMedia.welcome.components.pages {
     public partial class WelcomePage : UserControlPage {
         public WelcomePage() {
             InitializeComponent();
@@ -19,11 +19,11 @@ namespace owoMedia.welcome.components.pages {
 
         public override void Init() {
             base.Init();
-            OwoMedia.Instance.Config.DefaultPage = Config.DefaultPageEnum.Welcome;
+            HapticMedia.Instance.Config.DefaultPage = Config.DefaultPageEnum.Welcome;
         }
 
         private void button1_Click(object sender, EventArgs e) {
-            OwoMedia.Instance.NavigateTo(new HomePage());
+            HapticMedia.Instance.NavigateTo(new HomePage());
         }
     }
 }

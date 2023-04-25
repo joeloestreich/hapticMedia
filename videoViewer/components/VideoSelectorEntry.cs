@@ -1,5 +1,5 @@
-﻿using owoMedia.genericComponents.pageDefinition;
-using owoMedia.videoViewer.components.pages;
+﻿using hapticMedia.genericComponents.pageDefinition;
+using hapticMedia.videoViewer.components.pages;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -10,8 +10,8 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
-namespace owoMedia.videoViewer.components {
-    public partial class VideoSelectorEntry : UserControlOwoBase {
+namespace hapticMedia.videoViewer.components {
+    public partial class VideoSelectorEntry : UserControlBase {
 
         string videoId;
 
@@ -34,7 +34,7 @@ namespace owoMedia.videoViewer.components {
 
         private void VideoSelectorEntry_Click(object sender, EventArgs e) {
 
-            OwoMedia.Instance.NavigateTo(new VideoViewerPage(videoId));
+            HapticMedia.Instance.NavigateTo(new VideoViewerPage(videoId));
         }
     }
 }

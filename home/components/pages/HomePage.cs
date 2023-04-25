@@ -1,6 +1,6 @@
-﻿using owoMedia.genericComponents.pageDefinition;
-using owoMedia.config.data;
-using owoMedia.videoViewer.components.pages;
+﻿using hapticMedia.genericComponents.pageDefinition;
+using hapticMedia.config.data;
+using hapticMedia.videoViewer.components.pages;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -10,12 +10,12 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-using owoMedia.sensationRecorder.components.pages;
-using owoMedia.sensationEditor.components.pages;
-using owoMedia.welcome.components.pages;
-using owoMedia.genericComponents;
+using hapticMedia.sensationRecorder.components.pages;
+using hapticMedia.sensationEditor.components.pages;
+using hapticMedia.welcome.components.pages;
+using hapticMedia.genericComponents;
 
-namespace owoMedia.home.components.pages {
+namespace hapticMedia.home.components.pages {
     public partial class HomePage : UserControlPage {
         public HomePage() {
             InitializeComponent();
@@ -23,16 +23,16 @@ namespace owoMedia.home.components.pages {
 
         private void button1_Click(object sender, EventArgs e) {
             // WELCOME TEST
-            OwoMedia.Instance.NavigateTo(new WelcomePage());
+            HapticMedia.Instance.NavigateTo(new WelcomePage());
         }
 
         public override void Init() {
             base.Init();
-            OwoMedia.Instance.Config.DefaultPage = Config.DefaultPageEnum.Home;
+            HapticMedia.Instance.Config.DefaultPage = Config.DefaultPageEnum.Home;
         }
 
         private void btnViewer_Click(object sender, EventArgs e) {
-            OwoMedia.Instance.NavigateTo(new VideoSelectorPage());
+            HapticMedia.Instance.NavigateTo(new VideoSelectorPage());
         }
 
         private void btnLiveShare_Click(object sender, EventArgs e) {
@@ -40,11 +40,11 @@ namespace owoMedia.home.components.pages {
         }
 
         private void btnRecord_Click(object sender, EventArgs e) {
-            OwoMedia.Instance.NavigateTo(new SensationRecorderPage());
+            HapticMedia.Instance.NavigateTo(new SensationRecorderPage());
         }
 
         private void btnEditor_Click(object sender, EventArgs e) {
-            OwoMedia.Instance.NavigateTo(new EditorMenuPage());
+            HapticMedia.Instance.NavigateTo(new EditorMenuPage());
         }
 
         private void btnOptions_Click(object sender, EventArgs e) {

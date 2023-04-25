@@ -1,8 +1,8 @@
-﻿using owoMedia.config.data;
-using owoMedia.genericComponents;
-using owoMedia.genericComponents.pageDefinition;
-using owoMedia.home.components;
-using owoMedia.videoViewer.components;
+﻿using hapticMedia.config.data;
+using hapticMedia.genericComponents;
+using hapticMedia.genericComponents.pageDefinition;
+using hapticMedia.home.components;
+using hapticMedia.videoViewer.components;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -13,7 +13,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
-namespace owoMedia.sensationEditor.components.pages {
+namespace hapticMedia.sensationEditor.components.pages {
     public partial class EditorMenuPage : UserControlPage {
         public EditorMenuPage() {
             InitializeComponent();
@@ -21,7 +21,7 @@ namespace owoMedia.sensationEditor.components.pages {
 
         public override void Init() {
             base.Init();
-            OwoMedia.Instance.Config.DefaultPage = Config.DefaultPageEnum.Editor;
+            HapticMedia.Instance.Config.DefaultPage = Config.DefaultPageEnum.Editor;
         }
 
         private void btnNewTrack_Click(object sender, EventArgs e) {

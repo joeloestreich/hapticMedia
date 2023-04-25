@@ -1,7 +1,7 @@
-﻿using owoMedia.genericComponents;
-using owoMedia.genericComponents.pageDefinition;
-using owoMedia.sensationEditor.components.pages;
-using owoMedia.videoViewer.components;
+﻿using hapticMedia.genericComponents;
+using hapticMedia.genericComponents.pageDefinition;
+using hapticMedia.sensationEditor.components.pages;
+using hapticMedia.videoViewer.components;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -12,7 +12,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
-namespace owoMedia.sensationEditor.components {
+namespace hapticMedia.sensationEditor.components {
     public partial class CreateVideoInfobox : InfoAreaBase {
         public CreateVideoInfobox() {
             InitializeComponent();
@@ -26,7 +26,7 @@ namespace owoMedia.sensationEditor.components {
                 lblError.Text = "The URL is Invalid";
                 pnlErrors.Controls.Add(lblError);
             } else {
-                OwoMedia.Instance.NavigateTo(new VideoEditorPage(videoId));
+                HapticMedia.Instance.NavigateTo(new VideoEditorPage(videoId));
             }
         }
     }

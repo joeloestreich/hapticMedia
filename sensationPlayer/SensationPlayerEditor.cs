@@ -1,5 +1,5 @@
 ﻿using OWOGame;
-using owoMedia.sensationPlayer.sensationWrapper;
+using hapticMedia.sensationPlayer.sensationWrapper;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -7,7 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace owoMedia.sensationPlayer {
+namespace hapticMedia.sensationPlayer {
     internal class SensationPlayerEditor : SensationPlayer {
 
         public bool MuteSensation = false;

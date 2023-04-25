@@ -1,13 +1,16 @@
 ﻿using Google.Apis.YouTube.v3.Data;
 using Newtonsoft.Json;
-using owoMedia.applicationFrame.Service;
-using owoMedia.genericComponents;
-using owoMedia.genericComponents.pageDefinition;
-using owoMedia.Properties;
-using owoMedia.sensationEditor.data;
-using owoMedia.sensationPlayer;
-using owoMedia.videoViewer.data;
-using owoMedia.websocket;
+using hapticMedia.applicationFrame.Service;
+using hapticMedia.genericComponents;
+using hapticMedia.genericComponents.pageDefinition;
+using hapticMedia.Properties;
+using hapticMedia.sensationEditor.data;
+using hapticMedia.sensationEditor.data.SensationTemplate;
+using hapticMedia.sensationPlayer;
+using hapticMedia.sensationRecorder.components.pages;
+using hapticMedia.sensationRecorder.data;
+using hapticMedia.videoViewer.data;
+using hapticMedia.websocket;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -16,11 +19,12 @@ using System.Drawing;
 using System.IO;
 using System.Linq;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
-namespace owoMedia.sensationEditor.components.pages {
+namespace hapticMedia.sensationEditor.components.pages {
     public partial class VideoEditorPage : UserControlPage {
 
         const string FolderName = "VideoEditor";
@@ -46,7 +50,7 @@ namespace owoMedia.sensationEditor.components.pages {
         public override void Init() {
             base.Init(); string html = Resources.videoViewer;
             html = html.Replace("$VIDEO_ID$", Editor.VideoId);
-            html = html.Replace("$WS_PORT$", OwoMedia.Instance.Config.Port.ToString());
+            html = html.Replace("$WS_PORT$", HapticMedia.Instance.Config.Port.ToString());
             html = html.Replace("$WS_ROUTE$", WsVideoEditorBehavior.Route);
 
             string testName = "videoEditorTest.html";
@@ -58,14 +62,91 @@ namespace owoMedia.sensationEditor.components.pages {
                 fs.Write(title, 0, title.Length);
             }
             System.Diagnostics.Process.Start(testName);
-
             bgwTime.RunWorkerAsync();
+
+            initSensationsBase();
+            initSensationTemplates();
+            initSensationsRecordings();
+        }
+
+        private void initSensationsBase() {
+
+        }
+
+        private void initSensationTemplates() {
+
+        }
+
+        private void initSensationsRecordings() {
+            Dictionary<string, string> recordings = HapticMediaFileService.GetFilesInDir(SensationRecorderPage.FolderName);
+
+            if (recordings.Count == 0) {
+                return;
+            }
+
+            listRecordings.DataSource = new BindingSource(recordings, null);
+            listRecordings.DisplayMember = "Key";
+            listRecordings.ValueMember = "Value";
+
+            //List<CaptureData> CaptureContent ;
+        }
+        private void btnAddSensation_Click(object sender, EventArgs e) {
+            if (tabControl1.SelectedIndex == 0) {
+                AddBasicSensation();
+            } else if (tabControl1.SelectedIndex == 1) {
+                AddSensationTemplate();
+            } else if (tabControl1.SelectedIndex == 2) {
+                AddCapture();
+            }
+        }
+
+        private void listBasicSensation_MouseDoubleClick(object sender, MouseEventArgs e) {
+            int index = this.listBasicSensation.IndexFromPoint(e.Location);
+            if (index != System.Windows.Forms.ListBox.NoMatches) {
+                AddBasicSensation();
+            }
+        }
+
+        private void listSensationTemplates_MouseDoubleClick(object sender, MouseEventArgs e) {
+            int index = this.listSensationTemplates.IndexFromPoint(e.Location);
+            if (index != System.Windows.Forms.ListBox.NoMatches) {
+                AddSensationTemplate();
+            }
+        }
+
+        private void listRecordings_MouseDoubleClick(object sender, MouseEventArgs e) {
+            int index = this.listRecordings.IndexFromPoint(e.Location);
+            if (index != System.Windows.Forms.ListBox.NoMatches) {
+                AddCapture();
+            }
+        }
+
+        private void AddBasicSensation() {
+
+        }
+
+        private void AddSensationTemplate() {
+
+        }
+
+        private void AddCapture() {
+            string captureString = HapticMediaFileService.LoadFileByPath(listRecordings.SelectedValue.ToString());
+            List<CaptureData> capture = JsonConvert.DeserializeObject<List<CaptureData>>(captureString);
+
+            SensationTemplateData[] sensations = new SensationTemplateData[capture.Count];
+            foreach (CaptureData captureData in capture) {
+                SensationTemplateData template = new SensationTemplateData(SensationTemplateData.TemplateType.TemplateParse, "Timestamp_" + captureData.TimeStamp, captureData.Capture);
+                sensations[capture.IndexOf(captureData)] = template;
+            }
+            SensationTemplateData compound = new SensationTemplateData(SensationTemplateData.TemplateType.TemplateParse, listRecordings.DisplayMember, sensations);
+
+            MessageBox.Show(captureString);
         }
 
         private void btnSave_Click(object sender, EventArgs e) {
             Editor.Title = txtTitle.Text;
             string EditorString = JsonConvert.SerializeObject(Editor);
-            OwoMediaFileService.SaveFile(EditorString, FolderName, Editor.VideoId);
+            HapticMediaFileService.SaveFile(EditorString, FolderName, Editor.VideoId);
         }
 
         private void ckbPlayOwo_CheckedChanged(object sender, EventArgs e) {

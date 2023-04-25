@@ -8,11 +8,11 @@ using System.Net.Sockets;
 using WebSocketSharp;
 using System.Net;
 using Newtonsoft.Json;
-using owoMedia.genericComponents.pageDefinition;
-using owoMedia.videoViewer.components.pages;
+using hapticMedia.genericComponents.pageDefinition;
+using hapticMedia.videoViewer.components.pages;
 using System.Windows.Forms;
 
-namespace owoMedia.websocket {
+namespace hapticMedia.websocket {
     internal class WebSocketService {
 
         const string Address = "ws://127.0.0.1:";
@@ -25,7 +25,7 @@ namespace owoMedia.websocket {
         public static void StartSocketServer() {
             StopSocketServer();
 
-            string wsAddress = Address + OwoMedia.Instance.Config.Port;
+            string wsAddress = Address + HapticMedia.Instance.Config.Port;
             server = new WebSocketServer(wsAddress);
             server.AddWebSocketService(WsVideoViewerBehavior.Route, () => new WsVideoViewerBehavior());
             server.AddWebSocketService(WsVideoEditorBehavior.Route, () => new WsVideoEditorBehavior());

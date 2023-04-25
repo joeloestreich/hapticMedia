@@ -1,4 +1,4 @@
-﻿namespace owoMedia.videoViewer.components {
+﻿namespace hapticMedia.videoViewer.components {
     partial class VideoSearch {
         /// <summary> 
         /// Required designer variable.

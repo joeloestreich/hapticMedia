@@ -1,4 +1,4 @@
-﻿namespace owoMedia.genericComponents.pageHeader {
+﻿namespace hapticMedia.genericComponents.pageHeader {
     partial class PageHeader {
         /// <summary> 
         /// Required designer variable.
@@ -24,7 +24,7 @@
         /// </summary>
         private void InitializeComponent() {
             this.picLogo = new System.Windows.Forms.PictureBox();
-            this.breadCrumNavigation1 = new owoMedia.genericComponents.PageHeader.BreadCrumNavigation();
+            this.breadCrumNavigation1 = new hapticMedia.genericComponents.PageHeader.BreadCrumNavigation();
             ((System.ComponentModel.ISupportInitialize)(this.picLogo)).BeginInit();
             this.SuspendLayout();
             // 

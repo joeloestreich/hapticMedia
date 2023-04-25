@@ -1,4 +1,4 @@
-﻿namespace owoMedia.videoViewer.components.pages {
+﻿namespace hapticMedia.videoViewer.components.pages {
     partial class VideoSelectorPage {
         /// <summary> 
         /// Required designer variable.
@@ -24,7 +24,7 @@
         /// </summary>
         private void InitializeComponent() {
             this.flowVideoList = new System.Windows.Forms.FlowLayoutPanel();
-            this.viewerHeader1 = new owoMedia.videoViewer.components.ViewerHeader();
+            this.viewerHeader1 = new hapticMedia.videoViewer.components.ViewerHeader();
             this.SuspendLayout();
             // 
             // flowVideoList

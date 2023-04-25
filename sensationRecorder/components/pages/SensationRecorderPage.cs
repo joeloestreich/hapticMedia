@@ -1,7 +1,7 @@
 ﻿using Google.Apis.YouTube.v3.Data;
 using OWOGame;
-using owoMedia.genericComponents.pageDefinition;
-using owoMedia.videoViewer.components.pages;
+using hapticMedia.genericComponents.pageDefinition;
+using hapticMedia.videoViewer.components.pages;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -13,27 +13,27 @@ using System.Net;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-using owoMedia.videoViewer.data;
+using hapticMedia.videoViewer.data;
 using SharpPcap;
 using SharpPcap.LibPcap;
 using System.Threading;
 using PacketDotNet;
 using ConnectionState = OWOGame.ConnectionState;
 using Google.Apis.Util;
-using owoMedia.sensationRecorder.data;
+using hapticMedia.sensationRecorder.data;
 using static System.Windows.Forms.VisualStyles.VisualStyleElement.TaskbarClock;
-using owoMedia.applicationFrame.Service;
+using hapticMedia.applicationFrame.Service;
 using Newtonsoft.Json;
 
-namespace owoMedia.sensationRecorder.components.pages {
+namespace hapticMedia.sensationRecorder.components.pages {
     public partial class SensationRecorderPage : UserControlPage {
         public SensationRecorderPage() {
             InitializeComponent();
         }
 
-        static string FolderName = "capture";
+        public static string FolderName = "capture";
 
-        Dictionary<long, string> CaptureContent;
+        List<CaptureData> CaptureContent;
 
         LibPcapLiveDevice NetworkDevice = null;
         bool DoCapture = false;
@@ -67,7 +67,7 @@ namespace owoMedia.sensationRecorder.components.pages {
             if (DoCapture) {
                 return;
             }
-            CaptureContent = new Dictionary<long, string>();
+            CaptureContent = new List<CaptureData>();
             DoCapture = true;
             bgwCapture.RunWorkerAsync();
         }
@@ -86,7 +86,7 @@ namespace owoMedia.sensationRecorder.components.pages {
                 fileName = fileName.Replace(":", "-");
                 fileName += ".txt";
 
-                OwoMediaFileService.SaveFile(captureString, FolderName, fileName);
+                HapticMediaFileService.SaveFile(captureString, FolderName, fileName);
             }
 
         }
@@ -127,7 +127,7 @@ namespace owoMedia.sensationRecorder.components.pages {
             lbl.Width = 1000;
             flowLayoutPanel1.Controls.Add(lbl);
 
-            CaptureContent.Add(cap.TimeStamp, cap.Capture);
+            CaptureContent.Add(cap);
         }
 
 

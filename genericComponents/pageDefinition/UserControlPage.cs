@@ -8,8 +8,8 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
-namespace owoMedia.genericComponents.pageDefinition {
-    public partial class UserControlPage : UserControlOwoBase {
+namespace hapticMedia.genericComponents.pageDefinition {
+    public partial class UserControlPage : UserControlBase {
         
         public UserControlPage() {
             InitializeComponent();
@@ -18,7 +18,7 @@ namespace owoMedia.genericComponents.pageDefinition {
         public override void Init() {
             base.Init();
             this.Dock = DockStyle.Fill;
-            this.Size = OwoMedia.Instance.Size;
+            this.Size = HapticMedia.Instance.Size;
         }
 
     }

@@ -1,9 +1,9 @@
 ﻿using OWOGame;
-using owoMedia.config.data;
-using owoMedia.home.components.pages;
-using owoMedia.videoViewer.components.pages;
-using owoMedia.welcome.components.pages;
-using owoMedia.websocket;
+using hapticMedia.config.data;
+using hapticMedia.home.components.pages;
+using hapticMedia.videoViewer.components.pages;
+using hapticMedia.welcome.components.pages;
+using hapticMedia.websocket;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -13,28 +13,28 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-using owoMedia.applicationFrame.Service;
+using hapticMedia.applicationFrame.Service;
 using Newtonsoft.Json;
-using owoMedia.videoViewer.data;
-using owoMedia.sensationEditor.components.pages;
-using owoMedia.genericComponents.PageHeader;
+using hapticMedia.videoViewer.data;
+using hapticMedia.sensationEditor.components.pages;
+using hapticMedia.genericComponents.PageHeader;
 
-namespace owoMedia.genericComponents.pageDefinition {
-    public sealed partial class OwoMedia : Form {
+namespace hapticMedia.genericComponents.pageDefinition {
+    public sealed partial class HapticMedia : Form {
 
         static string configFile = "config.txt";
 
-        private static OwoMedia _instance;
-        public static OwoMedia Instance { 
+        private static HapticMedia _instance;
+        public static HapticMedia Instance { 
             get { 
                 if (_instance == null) {
-                    _instance = new OwoMedia();
+                    _instance = new HapticMedia();
                 }
                 return _instance;
             }
         }
 
-        private OwoMedia() {
+        private HapticMedia() {
             InitializeComponent();
         }
 
@@ -42,8 +42,8 @@ namespace owoMedia.genericComponents.pageDefinition {
         public Config Config;
         public UserControlPage CurrentPage { get; set; }
 
-        private void OwoMedia_Load(object sender, EventArgs e) {
-            string configString = OwoMediaFileService.LoadFile(null, configFile);
+        private void HapticMedia_Load(object sender, EventArgs e) {
+            string configString = HapticMediaFileService.LoadFile(null, configFile);
             if (configString == null) {
                 Config = new Config();
             } else {
@@ -73,9 +73,9 @@ namespace owoMedia.genericComponents.pageDefinition {
 
             StartUp(initialPage);
         }
-        private void OwoMedia_FormClosing(object sender, FormClosingEventArgs e) {
+        private void HapticMedia_FormClosing(object sender, FormClosingEventArgs e) {
             string configString = JsonConvert.SerializeObject(Config);
-            OwoMediaFileService.SaveFile(configString, null, configFile);
+            HapticMediaFileService.SaveFile(configString, null, configFile);
 
             Disconnect();
         }
@@ -83,7 +83,11 @@ namespace owoMedia.genericComponents.pageDefinition {
         private void StartUp(UserControlPage initialPage) {
             // Design
             Connect();
-            this.Size = new Size(1280, 720);
+
+            Rectangle screenRectangle = this.RectangleToScreen(this.ClientRectangle);
+            int titleHeight = screenRectangle.Top - this.Top;
+            this.Size = new Size(1280, 720 + titleHeight);
+
             NavigateTo(initialPage);
         }
 

@@ -1,4 +1,4 @@
-﻿namespace owoMedia.videoViewer.components {
+﻿namespace hapticMedia.videoViewer.components {
     partial class ViewerHeader {
         /// <summary> 
         /// Required designer variable.
@@ -23,7 +23,7 @@
         /// the contents of this method with the code editor.
         /// </summary>
         private void InitializeComponent() {
-            this.videoSearch1 = new owoMedia.videoViewer.components.VideoSearch();
+            this.videoSearch1 = new hapticMedia.videoViewer.components.VideoSearch();
             this.SuspendLayout();
             // 
             // videoSearch1

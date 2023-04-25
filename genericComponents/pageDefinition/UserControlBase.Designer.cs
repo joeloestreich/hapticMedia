@@ -1,5 +1,5 @@
-﻿namespace owoMedia.genericComponents.pageDefinition {
-    partial class UserControlOwoBase {
+﻿namespace hapticMedia.genericComponents.pageDefinition {
+    partial class UserControlBase {
         /// <summary> 
         /// Required designer variable.
         /// </summary>
@@ -25,13 +25,13 @@
         private void InitializeComponent() {
             this.SuspendLayout();
             // 
-            // UserControlOwoBase
+            // UserControlBase
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
             this.BackColor = System.Drawing.SystemColors.ControlLightLight;
-            this.Name = "UserControlOwoBase";
+            this.Name = "UserControlBase";
             this.Size = new System.Drawing.Size(1280, 720);
             this.ResumeLayout(false);
 

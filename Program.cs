@@ -1,11 +1,11 @@
-﻿using owoMedia.genericComponents.pageDefinition;
+﻿using hapticMedia.genericComponents.pageDefinition;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
-namespace owoMedia
+namespace hapticMedia
 {
     internal static class Program
     {
@@ -17,7 +17,7 @@ namespace owoMedia
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(OwoMedia.Instance);
+            Application.Run(HapticMedia.Instance);
         }
     }
 }

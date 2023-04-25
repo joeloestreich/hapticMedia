@@ -1,4 +1,4 @@
-﻿namespace owoMedia.sensationEditor.components.pages {
+﻿namespace hapticMedia.sensationEditor.components.pages {
     partial class EditorMenuPage {
         /// <summary> 
         /// Required designer variable.
@@ -26,7 +26,7 @@
             this.btnNewTrack = new System.Windows.Forms.Button();
             this.btnEditTrack = new System.Windows.Forms.Button();
             this.btnTemplates = new System.Windows.Forms.Button();
-            this.pageHeader1 = new owoMedia.genericComponents.pageHeader.PageHeader();
+            this.pageHeader1 = new hapticMedia.genericComponents.pageHeader.PageHeader();
             this.pnlInfobox = new System.Windows.Forms.Panel();
             this.btnRelease = new System.Windows.Forms.Button();
             this.SuspendLayout();

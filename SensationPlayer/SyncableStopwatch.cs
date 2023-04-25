@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace owoMedia.sensationPlayer {
+namespace hapticMedia.sensationPlayer {
     public class SyncableStopwatch : Stopwatch {
 
         private double timestamp = 0;

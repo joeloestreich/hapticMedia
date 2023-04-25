@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace owoMedia.sensationPlayer.sensationWrapper {
+namespace hapticMedia.sensationPlayer.sensationWrapper {
     public abstract class SensationWrapper {
 
         internal abstract Sensation GetSensation();

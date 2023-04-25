@@ -6,7 +6,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
-namespace owoMedia.applicationFrame.Service {
+namespace hapticMedia.applicationFrame.Service {
     public class LabelService {
 
         private LabelService() {

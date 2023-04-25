@@ -1,5 +1,5 @@
-﻿namespace owoMedia.genericComponents.pageDefinition {
-    partial class OwoMedia {
+﻿namespace hapticMedia.genericComponents.pageDefinition {
+    partial class HapticMedia {
         /// <summary>
         /// Required designer variable.
         /// </summary>
@@ -25,17 +25,17 @@
         private void InitializeComponent() {
             this.SuspendLayout();
             // 
-            // OwoMedia
+            // HapticMedia
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.Control;
             this.ClientSize = new System.Drawing.Size(1264, 681);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
-            this.Name = "OwoMedia";
-            this.Text = "OwoMedia";
-            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.OwoMedia_FormClosing);
-            this.Load += new System.EventHandler(this.OwoMedia_Load);
+            this.Name = "HapticMedia";
+            this.Text = "HapticMedia";
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.HapticMedia_FormClosing);
+            this.Load += new System.EventHandler(this.HapticMedia_Load);
             this.ResumeLayout(false);
 
         }

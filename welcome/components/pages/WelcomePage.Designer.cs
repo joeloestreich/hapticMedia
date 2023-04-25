@@ -1,4 +1,4 @@
-﻿namespace owoMedia.welcome.components.pages {
+﻿namespace hapticMedia.welcome.components.pages {
     partial class WelcomePage {
         /// <summary> 
         /// Required designer variable.

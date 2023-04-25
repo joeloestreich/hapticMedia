@@ -1,4 +1,4 @@
-﻿namespace owoMedia.genericComponents.PageHeader {
+﻿namespace hapticMedia.genericComponents.PageHeader {
     partial class BreadCrumNavigation {
         /// <summary> 
         /// Required designer variable.

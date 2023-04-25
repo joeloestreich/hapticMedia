@@ -1,8 +1,8 @@
-﻿using owoMedia.genericComponents.pageDefinition;
-using owoMedia.home.components.pages;
-using owoMedia.sensationEditor.components.pages;
-using owoMedia.sensationRecorder.components.pages;
-using owoMedia.videoViewer.components.pages;
+﻿using hapticMedia.genericComponents.pageDefinition;
+using hapticMedia.home.components.pages;
+using hapticMedia.sensationEditor.components.pages;
+using hapticMedia.sensationRecorder.components.pages;
+using hapticMedia.videoViewer.components.pages;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -13,8 +13,8 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
-namespace owoMedia.genericComponents.PageHeader {
-    public partial class BreadCrumNavigation : UserControlOwoBase {
+namespace hapticMedia.genericComponents.PageHeader {
+    public partial class BreadCrumNavigation : UserControlBase {
 
         private static Dictionary<Type, List<Type>> ChildPages = new Dictionary<Type, List<Type>>() {
             { typeof(VideoSelectorPage), new List<Type>(){ typeof(VideoViewerPage) } },
@@ -64,7 +64,7 @@ namespace owoMedia.genericComponents.PageHeader {
 
         private void LblCrum_Click(object sender, EventArgs e) {
             Label crum = (Label) sender;
-            OwoMedia.Instance.NavigateTo(NavHelper[crum.Text]);
+            HapticMedia.Instance.NavigateTo(NavHelper[crum.Text]);
         }
 
 

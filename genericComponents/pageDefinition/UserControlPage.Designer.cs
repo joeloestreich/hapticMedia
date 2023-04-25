@@ -1,4 +1,4 @@
-﻿namespace owoMedia.genericComponents.pageDefinition {
+﻿namespace hapticMedia.genericComponents.pageDefinition {
     partial class UserControlPage {
         /// <summary> 
         /// Required designer variable.

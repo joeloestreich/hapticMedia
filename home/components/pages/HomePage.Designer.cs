@@ -1,4 +1,4 @@
-﻿namespace owoMedia.home.components.pages {
+﻿namespace hapticMedia.home.components.pages {
     partial class HomePage {
         /// <summary> 
         /// Required designer variable.

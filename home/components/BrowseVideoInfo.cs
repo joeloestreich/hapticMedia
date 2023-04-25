@@ -1,4 +1,4 @@
-﻿using owoMedia.genericComponents;
+﻿using hapticMedia.genericComponents;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -9,7 +9,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
-namespace owoMedia.home.components {
+namespace hapticMedia.home.components {
     public partial class BrowseVideoInfo : InfoAreaBase {
         public BrowseVideoInfo() {
             InitializeComponent();

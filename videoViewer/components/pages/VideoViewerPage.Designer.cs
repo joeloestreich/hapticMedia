@@ -1,4 +1,4 @@
-﻿namespace owoMedia.videoViewer.components.pages {
+﻿namespace hapticMedia.videoViewer.components.pages {
     partial class VideoViewerPage {
         /// <summary> 
         /// Required designer variable.
@@ -40,7 +40,7 @@
             this.lblTimeWs = new System.Windows.Forms.Label();
             this.lblChannel = new System.Windows.Forms.Label();
             this.lblTitle = new System.Windows.Forms.Label();
-            this.viewerHeader1 = new owoMedia.videoViewer.components.ViewerHeader();
+            this.viewerHeader1 = new hapticMedia.videoViewer.components.ViewerHeader();
             this.pnlInfo.SuspendLayout();
             this.SuspendLayout();
             // 

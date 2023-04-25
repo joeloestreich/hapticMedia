@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace owoMedia.sensationRecorder.data {
+namespace hapticMedia.sensationRecorder.data {
     internal class CaptureData {
 
         public long TimeStamp;

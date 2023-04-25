@@ -1,6 +1,6 @@
-﻿using owoMedia.genericComponents.pageDefinition;
-using owoMedia.config.data;
-using owoMedia.videoViewer.components.pages;
+﻿using hapticMedia.genericComponents.pageDefinition;
+using hapticMedia.config.data;
+using hapticMedia.videoViewer.components.pages;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -12,7 +12,7 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using WebSocketSharp.Server;
 
-namespace owoMedia.videoViewer.components.pages {
+namespace hapticMedia.videoViewer.components.pages {
     public partial class VideoSelectorPage : UserControlPage {
 
         string UserSearch = null;
@@ -28,7 +28,7 @@ namespace owoMedia.videoViewer.components.pages {
 
         public override void Init() {
             base.Init();
-            OwoMedia.Instance.Config.DefaultPage = Config.DefaultPageEnum.Viewer;
+            HapticMedia.Instance.Config.DefaultPage = Config.DefaultPageEnum.Viewer;
 
             List<string> list = new List<string>();
             list.Add("Oe043UhUTm4");

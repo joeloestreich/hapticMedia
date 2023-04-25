@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace owoMedia.Properties
+namespace hapticMedia.Properties
 {
 
 

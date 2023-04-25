@@ -1,4 +1,4 @@
-﻿namespace owoMedia.sensationRecorder.components.pages {
+﻿namespace hapticMedia.sensationRecorder.components.pages {
     partial class SensationRecorderPage {
         /// <summary> 
         /// Required designer variable.
@@ -28,7 +28,7 @@
             this.btnStartCapture = new System.Windows.Forms.Button();
             this.button1 = new System.Windows.Forms.Button();
             this.flowLayoutPanel1 = new System.Windows.Forms.FlowLayoutPanel();
-            this.pageHeader1 = new owoMedia.genericComponents.pageHeader.PageHeader();
+            this.pageHeader1 = new hapticMedia.genericComponents.pageHeader.PageHeader();
             this.SuspendLayout();
             // 
             // bgwCapture

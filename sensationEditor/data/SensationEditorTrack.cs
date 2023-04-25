@@ -1,12 +1,12 @@
 ﻿
-using owoMedia.sensationEditor.data.SensationTemplate;
+using hapticMedia.sensationEditor.data.SensationTemplate;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace owoMedia.sensationEditor.data {
+namespace hapticMedia.sensationEditor.data {
     public class SensationEditorTrack {
 
         public string VideoId;

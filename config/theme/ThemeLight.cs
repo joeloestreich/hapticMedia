@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace owoMedia.config.theme {
+namespace hapticMedia.config.theme {
     internal class ThemeLight : ThemeBase {
         public override Color BaseBackground() {
             throw new NotImplementedException();

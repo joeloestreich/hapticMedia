@@ -1,4 +1,4 @@
-﻿namespace owoMedia.home.components {
+﻿namespace hapticMedia.home.components {
     partial class SensationRecorderInfo {
         /// <summary> 
         /// Required designer variable.

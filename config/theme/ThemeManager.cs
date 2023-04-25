@@ -5,7 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
-namespace owoMedia.config.theme {
+namespace hapticMedia.config.theme {
     internal class ThemeManager {
 
         internal static void applyTheme(Control.ControlCollection controls) {

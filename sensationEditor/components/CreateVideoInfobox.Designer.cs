@@ -1,4 +1,4 @@
-﻿namespace owoMedia.sensationEditor.components {
+﻿namespace hapticMedia.sensationEditor.components {
     partial class CreateVideoInfobox {
         /// <summary> 
         /// Required designer variable.

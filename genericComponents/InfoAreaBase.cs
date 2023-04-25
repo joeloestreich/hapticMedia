@@ -8,7 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
-namespace owoMedia.genericComponents {
+namespace hapticMedia.genericComponents {
     public partial class InfoAreaBase : UserControl {
         public InfoAreaBase() {
             InitializeComponent();

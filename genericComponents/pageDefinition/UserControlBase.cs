@@ -1,4 +1,4 @@
-﻿using owoMedia.config.theme;
+﻿using hapticMedia.config.theme;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -9,10 +9,10 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
-namespace owoMedia.genericComponents.pageDefinition {
-    public partial class UserControlOwoBase : UserControl {
+namespace hapticMedia.genericComponents.pageDefinition {
+    public partial class UserControlBase : UserControl {
         
-        public UserControlOwoBase() {
+        public UserControlBase() {
             InitializeComponent();
         }
 

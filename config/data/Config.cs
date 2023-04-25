@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace owoMedia.config.data {
+namespace hapticMedia.config.data {
     public class Config {
 
         public enum DefaultPageEnum {

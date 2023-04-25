@@ -7,17 +7,17 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
-namespace owoMedia.applicationFrame.Service {
-    public class OwoMediaFileService {
+namespace hapticMedia.applicationFrame.Service {
+    public class HapticMediaFileService {
 
-        private OwoMediaFileService() {
+        private HapticMediaFileService() {
             // service
         }
 
-        private static string OwoMediaFolder = "owoMedia";
+        private static string HapticMediaFolder = "HapticMedia";
 
         private static string GetPath(string folder, string fileName) {
-            string path = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), OwoMediaFolder);
+            string path = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), HapticMediaFolder);
             if (folder != null) {
                 path = Path.Combine(path, folder);
             }
@@ -55,7 +55,7 @@ namespace owoMedia.applicationFrame.Service {
             string[] filePaths = Directory.GetFiles(dirPath);
 
             foreach(string filePath in filePaths) {
-                files.Add(Path.GetFileName(filePath), File.ReadAllText(filePath));
+                files.Add(Path.GetFileName(filePath), filePath);
             }
 
             return files;
