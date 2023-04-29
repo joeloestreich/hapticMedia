@@ -123,7 +123,7 @@ namespace hapticMedia.sensationRecorder.components.pages {
         private void bgwCapture_ProgressChanged(object sender, ProgressChangedEventArgs e) {
             CaptureData cap = (CaptureData) e.UserState;
             Label lbl = new Label();
-            lbl.Text = cap.TimeStamp + " - " + cap.Capture;
+            lbl.Text = cap.TimeStamp + " / " + cap.TimestampSeconds() + " - " + cap.Capture;
             lbl.Width = 1000;
             flowLayoutPanel1.Controls.Add(lbl);
 

@@ -28,7 +28,7 @@ namespace hapticMedia.videoViewer.components.pages {
 
         public override void Init() {
             base.Init();
-            HapticMedia.Instance.Config.DefaultPage = Config.DefaultPageEnum.Viewer;
+            genericComponents.pageDefinition.HapticMedia.Instance.Config.DefaultPage = Config.DefaultPageEnum.Viewer;
 
             List<string> list = new List<string>();
             list.Add("Oe043UhUTm4");

@@ -30,12 +30,12 @@ namespace hapticMedia.websocket {
                 Console.WriteLine("dto is null");
                 return;
             }
-            if (!(HapticMedia.Instance.CurrentPage is VideoViewerPage)) {
+            if (!(genericComponents.pageDefinition.HapticMedia.Instance.CurrentPage is VideoViewerPage)) {
                 Console.WriteLine("view is not video View");
                 return;
             }
 
-            VideoViewerPage viewer = (VideoViewerPage)HapticMedia.Instance.CurrentPage;
+            VideoViewerPage viewer = (VideoViewerPage)genericComponents.pageDefinition.HapticMedia.Instance.CurrentPage;
             List<string> messages = viewer.OnWsMessage(dto);
             foreach (string m in messages) {
                 Send(m);

@@ -23,6 +23,9 @@ using System.Text.RegularExpressions;
 using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using OWOGame;
+using System.Runtime.Remoting.Messaging;
+using static hapticMedia.videoViewer.data.WsVideoData;
 
 namespace hapticMedia.sensationEditor.components.pages {
     public partial class VideoEditorPage : UserControlPage {
@@ -31,6 +34,8 @@ namespace hapticMedia.sensationEditor.components.pages {
 
         SensationEditorTrack Editor;
         SensationPlayerEditor SensationPlayer = new SensationPlayerEditor();
+
+        double VideoLength = 60.0 * 10;
 
         public VideoEditorPage() {
             Editor = new SensationEditorTrack();
@@ -48,9 +53,22 @@ namespace hapticMedia.sensationEditor.components.pages {
         }
 
         public override void Init() {
-            base.Init(); string html = Resources.videoViewer;
+            base.Init();
+
+            OpenVideoViewer();
+
+            bgwTime.RunWorkerAsync();
+            LabelService.SetFormatedTime(lblMaxTime, VideoLength);
+
+            initSensationsBase();
+            initSensationTemplates();
+            initSensationsRecordings();
+        }
+
+        private void OpenVideoViewer() {
+            string html = Resources.videoViewer;
             html = html.Replace("$VIDEO_ID$", Editor.VideoId);
-            html = html.Replace("$WS_PORT$", HapticMedia.Instance.Config.Port.ToString());
+            html = html.Replace("$WS_PORT$", genericComponents.pageDefinition.HapticMedia.Instance.Config.Port.ToString());
             html = html.Replace("$WS_ROUTE$", WsVideoEditorBehavior.Route);
 
             string testName = "videoEditorTest.html";
@@ -62,15 +80,24 @@ namespace hapticMedia.sensationEditor.components.pages {
                 fs.Write(title, 0, title.Length);
             }
             System.Diagnostics.Process.Start(testName);
-            bgwTime.RunWorkerAsync();
-
-            initSensationsBase();
-            initSensationTemplates();
-            initSensationsRecordings();
         }
 
         private void initSensationsBase() {
+            Dictionary<string, SensationTemplateData> baseTemplates = new Dictionary<string, SensationTemplateData>();
 
+            SensationTemplateData ball = BaseSensationConstants.Ball();
+            SensationTemplateData dagger = BaseSensationConstants.Dagger();
+            SensationTemplateData hug = BaseSensationConstants.Hug();
+            SensationTemplateData shotWithExit = BaseSensationConstants.ShotWithExit();
+
+            baseTemplates.Add(ball.Name, ball);
+            baseTemplates.Add(dagger.Name, dagger);
+            baseTemplates.Add(hug.Name, hug);
+            baseTemplates.Add(shotWithExit.Name, shotWithExit);
+
+            listBasicSensation.DataSource = new BindingSource(baseTemplates, null);
+            listBasicSensation.DisplayMember = "Key";
+            listBasicSensation.ValueMember = "Value";
         }
 
         private void initSensationTemplates() {
@@ -87,8 +114,6 @@ namespace hapticMedia.sensationEditor.components.pages {
             listRecordings.DataSource = new BindingSource(recordings, null);
             listRecordings.DisplayMember = "Key";
             listRecordings.ValueMember = "Value";
-
-            //List<CaptureData> CaptureContent ;
         }
         private void btnAddSensation_Click(object sender, EventArgs e) {
             if (tabControl1.SelectedIndex == 0) {
@@ -130,17 +155,26 @@ namespace hapticMedia.sensationEditor.components.pages {
         }
 
         private void AddCapture() {
+            double curTime = SensationPlayer.GetCurTime();
+
             string captureString = HapticMediaFileService.LoadFileByPath(listRecordings.SelectedValue.ToString());
             List<CaptureData> capture = JsonConvert.DeserializeObject<List<CaptureData>>(captureString);
-
             SensationTemplateData[] sensations = new SensationTemplateData[capture.Count];
             foreach (CaptureData captureData in capture) {
-                SensationTemplateData template = new SensationTemplateData(SensationTemplateData.TemplateType.TemplateParse, "Timestamp_" + captureData.TimeStamp, captureData.Capture);
+                SensationTemplateData template = new SensationTemplateDataString(SensationTemplateData.TemplateType.TemplateCapture, "Timestamp_" + captureData.TimeStamp, captureData.TimestampSeconds(), captureData.Capture);
                 sensations[capture.IndexOf(captureData)] = template;
             }
-            SensationTemplateData compound = new SensationTemplateData(SensationTemplateData.TemplateType.TemplateParse, listRecordings.DisplayMember, sensations);
-
+            SensationTemplateData compound = new SensationTemplateDataCapture(listRecordings.DisplayMember, curTime, sensations);
+            AddToTimeline(compound);
             MessageBox.Show(captureString);
+        }
+
+        private void AddToTimeline(SensationTemplateData template) {
+            double length = template.GetSensationWrapper().GetLength();
+
+            Editor.Track[template.Timestamp] = template;
+            SensationPlayer.SensationSequence[template.Timestamp] = template.GetSensationWrapper();
+            SensationPlayer.Sync();
         }
 
         private void btnSave_Click(object sender, EventArgs e) {
@@ -153,7 +187,7 @@ namespace hapticMedia.sensationEditor.components.pages {
             SensationPlayer.MuteSensation = !ckbPlayOwo.Checked;
         }
 
-        WsVideoData.StateEnum lastState = WsVideoData.StateEnum.Unstarted;
+        StateEnum lastState = StateEnum.Unstarted;
         public List<string> OnWsMessage(WsVideoData dto) {
             if (this.lblState.InvokeRequired) {
                 return (List<string>)this.lblState.Invoke(
@@ -179,10 +213,10 @@ namespace hapticMedia.sensationEditor.components.pages {
             switch (dto.useCase) {
                 case "init":
                     messages.Add("Connected");
-                    lastState = WsVideoData.StateEnum.Unstarted;
+                    lastState = StateEnum.Unstarted;
                     break;
                 case "state":
-                    OnStateChange(dto);
+                    OnStateChange(dto, messages);
                     break;
                 case "time":
                     SensationPlayer.TimeCheck(dto.timeStamp);
@@ -196,12 +230,17 @@ namespace hapticMedia.sensationEditor.components.pages {
         }
 
 
-        private void OnStateChange(WsVideoData dto) {
-            WsVideoData.StateEnum newState = (WsVideoData.StateEnum)Int16.Parse(dto.value);
+        private void OnStateChange(WsVideoData dto, List<string> messages) {
+            StateEnum newState = (StateEnum)Int16.Parse(dto.value);
 
-            if (lastState != WsVideoData.StateEnum.Playing && newState == WsVideoData.StateEnum.Playing) {
+
+            if (lastState == StateEnum.Unstarted && !SensationPlayer.GetCurTime().Equals(0)) {
+                messages.Add("GoTo_" + SensationPlayer.GetCurTime());
+            }
+
+            if (lastState != StateEnum.Playing && newState == StateEnum.Playing) {
                 SensationPlayer.Start();
-            } else if (lastState == WsVideoData.StateEnum.Playing && newState != WsVideoData.StateEnum.Playing) {
+            } else if (lastState == StateEnum.Playing && newState != StateEnum.Playing) {
                 SensationPlayer.Stop();
             }
 
@@ -225,7 +264,15 @@ namespace hapticMedia.sensationEditor.components.pages {
         }
 
         private void bgwTime_ProgressChanged(object sender, ProgressChangedEventArgs e) {
-            LabelService.SetFormatedTime(lblCurTime, SensationPlayer.GetTime());
+            LabelService.SetFormatedTime(lblCurTime, SensationPlayer.GetCurTime());
+        }
+
+        private void pnlTimeline_Click(object sender, EventArgs e) {
+
+        }
+
+        private void btnOpenViewer_Click(object sender, EventArgs e) {
+            OpenVideoViewer();
         }
     }
 }

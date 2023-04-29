@@ -23,7 +23,7 @@
         /// the contents of this method with the code editor.
         /// </summary>
         private void InitializeComponent() {
-            this.pnlOverview = new System.Windows.Forms.Panel();
+            this.pnlTimeline = new System.Windows.Forms.Panel();
             this.label1 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
             this.lblState = new System.Windows.Forms.Label();
@@ -40,11 +40,12 @@
             this.ckbPlayOwo = new System.Windows.Forms.CheckBox();
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.tabPage1 = new System.Windows.Forms.TabPage();
+            this.listBasicSensation = new System.Windows.Forms.ListBox();
             this.tabPage2 = new System.Windows.Forms.TabPage();
+            this.listSensationTemplates = new System.Windows.Forms.ListBox();
             this.tabPage3 = new System.Windows.Forms.TabPage();
             this.listRecordings = new System.Windows.Forms.ListBox();
-            this.listSensationTemplates = new System.Windows.Forms.ListBox();
-            this.listBasicSensation = new System.Windows.Forms.ListBox();
+            this.btnOpenViewer = new System.Windows.Forms.Button();
             this.panel3.SuspendLayout();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
@@ -52,15 +53,16 @@
             this.tabPage3.SuspendLayout();
             this.SuspendLayout();
             // 
-            // pnlOverview
+            // pnlTimeline
             // 
-            this.pnlOverview.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            this.pnlTimeline.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.pnlOverview.BackColor = System.Drawing.SystemColors.ControlLight;
-            this.pnlOverview.Location = new System.Drawing.Point(8, 205);
-            this.pnlOverview.Name = "pnlOverview";
-            this.pnlOverview.Size = new System.Drawing.Size(1267, 53);
-            this.pnlOverview.TabIndex = 1;
+            this.pnlTimeline.BackColor = System.Drawing.SystemColors.ControlLight;
+            this.pnlTimeline.Location = new System.Drawing.Point(8, 205);
+            this.pnlTimeline.Name = "pnlTimeline";
+            this.pnlTimeline.Size = new System.Drawing.Size(1267, 53);
+            this.pnlTimeline.TabIndex = 1;
+            this.pnlTimeline.Click += new System.EventHandler(this.pnlTimeline_Click);
             // 
             // label1
             // 
@@ -218,6 +220,15 @@
             this.tabPage1.Text = "Base Sensations";
             this.tabPage1.UseVisualStyleBackColor = true;
             // 
+            // listBasicSensation
+            // 
+            this.listBasicSensation.FormattingEnabled = true;
+            this.listBasicSensation.Location = new System.Drawing.Point(0, 1);
+            this.listBasicSensation.Name = "listBasicSensation";
+            this.listBasicSensation.Size = new System.Drawing.Size(397, 329);
+            this.listBasicSensation.TabIndex = 2;
+            this.listBasicSensation.MouseDoubleClick += new System.Windows.Forms.MouseEventHandler(this.listBasicSensation_MouseDoubleClick);
+            // 
             // tabPage2
             // 
             this.tabPage2.Controls.Add(this.listSensationTemplates);
@@ -228,6 +239,15 @@
             this.tabPage2.TabIndex = 1;
             this.tabPage2.Text = "Sensation Templates";
             this.tabPage2.UseVisualStyleBackColor = true;
+            // 
+            // listSensationTemplates
+            // 
+            this.listSensationTemplates.FormattingEnabled = true;
+            this.listSensationTemplates.Location = new System.Drawing.Point(0, 1);
+            this.listSensationTemplates.Name = "listSensationTemplates";
+            this.listSensationTemplates.Size = new System.Drawing.Size(397, 329);
+            this.listSensationTemplates.TabIndex = 1;
+            this.listSensationTemplates.MouseDoubleClick += new System.Windows.Forms.MouseEventHandler(this.listSensationTemplates_MouseDoubleClick);
             // 
             // tabPage3
             // 
@@ -249,28 +269,22 @@
             this.listRecordings.TabIndex = 0;
             this.listRecordings.MouseDoubleClick += new System.Windows.Forms.MouseEventHandler(this.listRecordings_MouseDoubleClick);
             // 
-            // listSensationTemplates
+            // btnOpenViewer
             // 
-            this.listSensationTemplates.FormattingEnabled = true;
-            this.listSensationTemplates.Location = new System.Drawing.Point(0, 1);
-            this.listSensationTemplates.Name = "listSensationTemplates";
-            this.listSensationTemplates.Size = new System.Drawing.Size(397, 329);
-            this.listSensationTemplates.TabIndex = 1;
-            this.listSensationTemplates.MouseDoubleClick += new System.Windows.Forms.MouseEventHandler(this.listSensationTemplates_MouseDoubleClick);
-            // 
-            // listBasicSensation
-            // 
-            this.listBasicSensation.FormattingEnabled = true;
-            this.listBasicSensation.Location = new System.Drawing.Point(0, 1);
-            this.listBasicSensation.Name = "listBasicSensation";
-            this.listBasicSensation.Size = new System.Drawing.Size(397, 329);
-            this.listBasicSensation.TabIndex = 2;
-            this.listBasicSensation.MouseDoubleClick += new System.Windows.Forms.MouseEventHandler(this.listBasicSensation_MouseDoubleClick);
+            this.btnOpenViewer.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnOpenViewer.Location = new System.Drawing.Point(411, 156);
+            this.btnOpenViewer.Name = "btnOpenViewer";
+            this.btnOpenViewer.Size = new System.Drawing.Size(132, 25);
+            this.btnOpenViewer.TabIndex = 19;
+            this.btnOpenViewer.Text = "Open Viewer";
+            this.btnOpenViewer.UseVisualStyleBackColor = true;
+            this.btnOpenViewer.Click += new System.EventHandler(this.btnOpenViewer_Click);
             // 
             // VideoEditorPage
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.Controls.Add(this.btnOpenViewer);
             this.Controls.Add(this.tabControl1);
             this.Controls.Add(this.ckbPlayOwo);
             this.Controls.Add(this.btnSave);
@@ -284,7 +298,7 @@
             this.Controls.Add(this.lblState);
             this.Controls.Add(this.label3);
             this.Controls.Add(this.label1);
-            this.Controls.Add(this.pnlOverview);
+            this.Controls.Add(this.pnlTimeline);
             this.Name = "VideoEditorPage";
             this.panel3.ResumeLayout(false);
             this.tabControl1.ResumeLayout(false);
@@ -298,7 +312,7 @@
 
         #endregion
 
-        private System.Windows.Forms.Panel pnlOverview;
+        private System.Windows.Forms.Panel pnlTimeline;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Label lblState;
@@ -320,5 +334,6 @@
         private System.Windows.Forms.ListBox listRecordings;
         private System.Windows.Forms.ListBox listSensationTemplates;
         private System.Windows.Forms.ListBox listBasicSensation;
+        private System.Windows.Forms.Button btnOpenViewer;
     }
 }

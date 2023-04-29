@@ -19,11 +19,11 @@ namespace hapticMedia.welcome.components.pages {
 
         public override void Init() {
             base.Init();
-            HapticMedia.Instance.Config.DefaultPage = Config.DefaultPageEnum.Welcome;
+            genericComponents.pageDefinition.HapticMedia.Instance.Config.DefaultPage = Config.DefaultPageEnum.Welcome;
         }
 
         private void button1_Click(object sender, EventArgs e) {
-            HapticMedia.Instance.NavigateTo(new HomePage());
+            genericComponents.pageDefinition.HapticMedia.Instance.NavigateTo(new HomePage());
         }
     }
 }

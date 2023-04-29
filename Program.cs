@@ -17,7 +17,7 @@ namespace hapticMedia
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(HapticMedia.Instance);
+            Application.Run(genericComponents.pageDefinition.HapticMedia.Instance);
         }
     }
 }

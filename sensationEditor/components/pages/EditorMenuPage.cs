@@ -21,7 +21,7 @@ namespace hapticMedia.sensationEditor.components.pages {
 
         public override void Init() {
             base.Init();
-            HapticMedia.Instance.Config.DefaultPage = Config.DefaultPageEnum.Editor;
+            genericComponents.pageDefinition.HapticMedia.Instance.Config.DefaultPage = Config.DefaultPageEnum.Editor;
         }
 
         private void btnNewTrack_Click(object sender, EventArgs e) {

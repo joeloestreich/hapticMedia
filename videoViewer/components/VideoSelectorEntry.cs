@@ -34,7 +34,7 @@ namespace hapticMedia.videoViewer.components {
 
         private void VideoSelectorEntry_Click(object sender, EventArgs e) {
 
-            HapticMedia.Instance.NavigateTo(new VideoViewerPage(videoId));
+            genericComponents.pageDefinition.HapticMedia.Instance.NavigateTo(new VideoViewerPage(videoId));
         }
     }
 }

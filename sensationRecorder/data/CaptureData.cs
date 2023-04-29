@@ -14,5 +14,9 @@ namespace hapticMedia.sensationRecorder.data {
             this.TimeStamp = timeStamp;
             this.Capture = capture;
         }
+
+        public double TimestampSeconds() {
+            return Convert.ToDouble(TimeStamp) / 1000;
+        }
     }
 }

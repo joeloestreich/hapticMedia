@@ -10,7 +10,7 @@ using System.Threading.Tasks;
 namespace hapticMedia.sensationPlayer {
     public class SensationPlayer {
 
-        Dictionary<double, SensationWrapper> SensationSequence;
+        public Dictionary<double, SensationWrapper> SensationSequence;
         BackgroundWorker BGWorker;
         SyncableStopwatch Timer;
 
@@ -57,27 +57,33 @@ namespace hapticMedia.sensationPlayer {
             }
         }
 
-        public void Sync(double time) {
-            Timer.SyncTime(time);
-
+        public void Sync() {
             // Reset Upcomming Keys in case we go back
             upcomingSensationKeys = new List<double>(SensationSequence.Keys);
-            // Only Keys in future
-            upcomingSensationKeys = upcomingSensationKeys.FindAll(x => x > LastCheckedTime);
+
+            // Only Keys that end in future
+            upcomingSensationKeys = upcomingSensationKeys.FindAll(x => x + SensationSequence[x].GetLength() > LastCheckedTime);
+
             // Order
             upcomingSensationKeys = upcomingSensationKeys.OrderBy(x => x).ToList();
         }
 
-        public double GetTime() {
+        public void Sync(double time) {
+            Timer.SyncTime(time);
+            LastCheckedTime = time;
+            Sync();
+        }
+
+        public double GetCurTime() {
             return Timer.GetSyncedSeconds();
         }
 
         private void BGWorker_DoWork(object sender, DoWorkEventArgs e) {
             while (Play) {
-                if (upcomingSensationKeys.Any() && LastCheckedTime > upcomingSensationKeys[0]) {
-                    SensationWrapper wrapper = SensationSequence[upcomingSensationKeys[0]];
-                    PlaySensation(wrapper.GetSensation());
+                if (upcomingSensationKeys.Any() && LastCheckedTime >= upcomingSensationKeys[0]) {
+                     SensationWrapper wrapper = SensationSequence[upcomingSensationKeys[0]];
                     upcomingSensationKeys.RemoveAt(0);
+                    PlaySensation(wrapper.GetSensation());
                 }
                 LastCheckedTime = Timer.GetSyncedSeconds();
             }

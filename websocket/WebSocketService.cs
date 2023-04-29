@@ -25,7 +25,7 @@ namespace hapticMedia.websocket {
         public static void StartSocketServer() {
             StopSocketServer();
 
-            string wsAddress = Address + HapticMedia.Instance.Config.Port;
+            string wsAddress = Address + genericComponents.pageDefinition.HapticMedia.Instance.Config.Port;
             server = new WebSocketServer(wsAddress);
             server.AddWebSocketService(WsVideoViewerBehavior.Route, () => new WsVideoViewerBehavior());
             server.AddWebSocketService(WsVideoEditorBehavior.Route, () => new WsVideoEditorBehavior());

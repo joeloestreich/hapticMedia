@@ -36,7 +36,7 @@ namespace hapticMedia.videoViewer.components.pages {
             base.Init();
             string html = Resources.videoViewer;
             html = html.Replace("$VIDEO_ID$", videoId);
-            html = html.Replace("$WS_PORT$", HapticMedia.Instance.Config.Port.ToString());
+            html = html.Replace("$WS_PORT$", genericComponents.pageDefinition.HapticMedia.Instance.Config.Port.ToString());
             html = html.Replace("$WS_ROUTE$", WsVideoViewerBehavior.Route);
 
             HapticMediaFileService.SaveFile(html, FolderName, FileName);

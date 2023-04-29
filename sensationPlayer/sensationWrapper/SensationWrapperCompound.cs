@@ -10,11 +10,11 @@ namespace hapticMedia.sensationPlayer.sensationWrapper {
 
         Sensation[] sensations;
 
-        public SensationWrapperCompound(Sensation[] sensations) {
+        public SensationWrapperCompound(double timestamp, Sensation[] sensations) : base (timestamp) {
             this.sensations = sensations;
         }
 
-        internal override Sensation GetSensation() {
+        public override Sensation GetSensation() {
             Sensation compound = null;
             foreach (var sensation in sensations) {
                 if (compound == null) {

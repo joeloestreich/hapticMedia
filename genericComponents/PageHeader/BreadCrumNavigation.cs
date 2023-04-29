@@ -64,7 +64,7 @@ namespace hapticMedia.genericComponents.PageHeader {
 
         private void LblCrum_Click(object sender, EventArgs e) {
             Label crum = (Label) sender;
-            HapticMedia.Instance.NavigateTo(NavHelper[crum.Text]);
+            pageDefinition.HapticMedia.Instance.NavigateTo(NavHelper[crum.Text]);
         }
 
 

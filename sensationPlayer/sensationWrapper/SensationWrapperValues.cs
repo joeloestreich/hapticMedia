@@ -18,9 +18,9 @@ namespace hapticMedia.sensationPlayer.sensationWrapper {
         Muscle[] muscles;
         string Name;
 
-        public SensationWrapperValues(int frequency, float durationSeconds, int intensityPercentage, 
+        public SensationWrapperValues(double timestamp, int frequency, float durationSeconds, int intensityPercentage, 
                 float RampUpMillies, float RampDownMillies, float ExitDelaySeconds, 
-                Muscle[] muscles, string name) {
+                Muscle[] muscles, string name) : base (timestamp) {
             this.frequency = frequency;
             this.durationSeconds = durationSeconds;
             this.intensityPercentage = intensityPercentage;
@@ -31,7 +31,7 @@ namespace hapticMedia.sensationPlayer.sensationWrapper {
             this.Name = name;
         }
 
-        internal override Sensation GetSensation() {
+        public override Sensation GetSensation() {
             MicroSensation micro = SensationsFactory.Create(frequency, durationSeconds, intensityPercentage, RampUpMillies, RampDownMillies, ExitDelaySeconds);
             micro.WithName(Name);
             return micro.WithMuscles(muscles);

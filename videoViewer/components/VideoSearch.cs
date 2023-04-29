@@ -53,7 +53,7 @@ namespace hapticMedia.videoViewer.components {
             } else {
                 nextPage = new VideoSelectorPage(UserEntry);
             }
-            HapticMedia.Instance.NavigateTo(nextPage);
+            genericComponents.pageDefinition.HapticMedia.Instance.NavigateTo(nextPage);
         }
 
         public static string IdentifyVideoId(string url) {

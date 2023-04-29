@@ -26,7 +26,7 @@ namespace hapticMedia.sensationEditor.components {
                 lblError.Text = "The URL is Invalid";
                 pnlErrors.Controls.Add(lblError);
             } else {
-                HapticMedia.Instance.NavigateTo(new VideoEditorPage(videoId));
+                genericComponents.pageDefinition.HapticMedia.Instance.NavigateTo(new VideoEditorPage(videoId));
             }
         }
     }

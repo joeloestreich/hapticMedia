@@ -18,7 +18,7 @@ namespace hapticMedia.genericComponents.pageHeader {
         }
 
         private void picLogo_Click(object sender, EventArgs e) {
-            HapticMedia.Instance.NavigateTo(new HomePage());
+            pageDefinition.HapticMedia.Instance.NavigateTo(new HomePage());
         }
 
     }

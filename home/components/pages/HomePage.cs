@@ -23,16 +23,16 @@ namespace hapticMedia.home.components.pages {
 
         private void button1_Click(object sender, EventArgs e) {
             // WELCOME TEST
-            HapticMedia.Instance.NavigateTo(new WelcomePage());
+            genericComponents.pageDefinition.HapticMedia.Instance.NavigateTo(new WelcomePage());
         }
 
         public override void Init() {
             base.Init();
-            HapticMedia.Instance.Config.DefaultPage = Config.DefaultPageEnum.Home;
+            genericComponents.pageDefinition.HapticMedia.Instance.Config.DefaultPage = Config.DefaultPageEnum.Home;
         }
 
         private void btnViewer_Click(object sender, EventArgs e) {
-            HapticMedia.Instance.NavigateTo(new VideoSelectorPage());
+            genericComponents.pageDefinition.HapticMedia.Instance.NavigateTo(new VideoSelectorPage());
         }
 
         private void btnLiveShare_Click(object sender, EventArgs e) {
@@ -40,11 +40,11 @@ namespace hapticMedia.home.components.pages {
         }
 
         private void btnRecord_Click(object sender, EventArgs e) {
-            HapticMedia.Instance.NavigateTo(new SensationRecorderPage());
+            genericComponents.pageDefinition.HapticMedia.Instance.NavigateTo(new SensationRecorderPage());
         }
 
         private void btnEditor_Click(object sender, EventArgs e) {
-            HapticMedia.Instance.NavigateTo(new EditorMenuPage());
+            genericComponents.pageDefinition.HapticMedia.Instance.NavigateTo(new EditorMenuPage());
         }
 
         private void btnOptions_Click(object sender, EventArgs e) {
