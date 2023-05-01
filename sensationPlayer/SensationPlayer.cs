@@ -48,7 +48,7 @@ namespace hapticMedia.sensationPlayer {
             Play = false;
         }
 
-        public void TimeCheck(double externalTime) {
+        public bool TimeCheck(double externalTime) {
             double localTime = Timer.GetSyncedSeconds();
 
             double difference = localTime - externalTime;
@@ -57,6 +57,8 @@ namespace hapticMedia.sensationPlayer {
             if (sync) {
                 Sync(externalTime);
             }
+
+            return sync;
         }
 
         public void Sync() {

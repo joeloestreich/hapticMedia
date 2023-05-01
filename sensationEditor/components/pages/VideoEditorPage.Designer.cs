@@ -23,7 +23,6 @@
         /// the contents of this method with the code editor.
         /// </summary>
         private void InitializeComponent() {
-            this.pnlTimeline = new System.Windows.Forms.Panel();
             this.label1 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
             this.lblState = new System.Windows.Forms.Label();
@@ -32,7 +31,7 @@
             this.lblMaxTime = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.bgwTime = new System.ComponentModel.BackgroundWorker();
-            this.panel1 = new System.Windows.Forms.Panel();
+            this.pnlSensationConfig = new System.Windows.Forms.Panel();
             this.panel3 = new System.Windows.Forms.Panel();
             this.btnPreviewFeel = new System.Windows.Forms.Button();
             this.btnAddSensation = new System.Windows.Forms.Button();
@@ -48,7 +47,12 @@
             this.listRecordings = new System.Windows.Forms.ListBox();
             this.btnOpenViewer = new System.Windows.Forms.Button();
             this.pnlDetailTimeWrapper = new System.Windows.Forms.Panel();
-            this.pnlDetailTimeline = new System.Windows.Forms.Panel();
+            this.pnlTimelineDetail = new hapticMedia.sensationEditor.components.TimelinePanel();
+            this.pnlTimelineFull = new hapticMedia.sensationEditor.components.TimelinePanel();
+            this.btnNavFirst = new System.Windows.Forms.Button();
+            this.btnNavBack = new System.Windows.Forms.Button();
+            this.btnNavLast = new System.Windows.Forms.Button();
+            this.btnNavForward = new System.Windows.Forms.Button();
             this.panel3.SuspendLayout();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
@@ -56,18 +60,6 @@
             this.tabPage3.SuspendLayout();
             this.pnlDetailTimeWrapper.SuspendLayout();
             this.SuspendLayout();
-            // 
-            // pnlTimeline
-            // 
-            this.pnlTimeline.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.pnlTimeline.BackColor = System.Drawing.SystemColors.ControlLight;
-            this.pnlTimeline.Location = new System.Drawing.Point(8, 205);
-            this.pnlTimeline.Name = "pnlTimeline";
-            this.pnlTimeline.Size = new System.Drawing.Size(1267, 30);
-            this.pnlTimeline.TabIndex = 1;
-            this.pnlTimeline.Click += new System.EventHandler(this.pnlTimeline_Click);
-            this.pnlTimeline.Paint += new System.Windows.Forms.PaintEventHandler(this.pnlTimeline_Paint);
             // 
             // label1
             // 
@@ -145,12 +137,12 @@
             this.bgwTime.DoWork += new System.ComponentModel.DoWorkEventHandler(this.bgwTime_DoWork);
             this.bgwTime.ProgressChanged += new System.ComponentModel.ProgressChangedEventHandler(this.bgwTime_ProgressChanged);
             // 
-            // panel1
+            // pnlSensationConfig
             // 
-            this.panel1.Location = new System.Drawing.Point(3, 315);
-            this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(846, 402);
-            this.panel1.TabIndex = 13;
+            this.pnlSensationConfig.Location = new System.Drawing.Point(3, 337);
+            this.pnlSensationConfig.Name = "pnlSensationConfig";
+            this.pnlSensationConfig.Size = new System.Drawing.Size(846, 380);
+            this.pnlSensationConfig.TabIndex = 13;
             // 
             // panel3
             // 
@@ -301,27 +293,93 @@
             // 
             this.pnlDetailTimeWrapper.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
+            this.pnlDetailTimeWrapper.AutoScroll = true;
             this.pnlDetailTimeWrapper.BackColor = System.Drawing.SystemColors.ControlLight;
-            this.pnlDetailTimeWrapper.Controls.Add(this.pnlDetailTimeline);
+            this.pnlDetailTimeWrapper.Controls.Add(this.pnlTimelineDetail);
             this.pnlDetailTimeWrapper.Location = new System.Drawing.Point(8, 236);
             this.pnlDetailTimeWrapper.Name = "pnlDetailTimeWrapper";
             this.pnlDetailTimeWrapper.Size = new System.Drawing.Size(1267, 53);
             this.pnlDetailTimeWrapper.TabIndex = 20;
             // 
-            // pnlDetailTimeline
+            // pnlTimelineDetail
             // 
-            this.pnlDetailTimeline.BackColor = System.Drawing.SystemColors.ControlLight;
-            this.pnlDetailTimeline.Location = new System.Drawing.Point(0, 2);
-            this.pnlDetailTimeline.Name = "pnlDetailTimeline";
-            this.pnlDetailTimeline.Size = new System.Drawing.Size(1267, 39);
-            this.pnlDetailTimeline.TabIndex = 21;
-            this.pnlDetailTimeline.Click += new System.EventHandler(this.pnlDetailTimeline_Click);
-            this.pnlDetailTimeline.Paint += new System.Windows.Forms.PaintEventHandler(this.pnlDetailTimeline_Paint);
+            this.pnlTimelineDetail.BackColor = System.Drawing.SystemColors.ControlLight;
+            this.pnlTimelineDetail.Location = new System.Drawing.Point(0, 2);
+            this.pnlTimelineDetail.Name = "pnlTimelineDetail";
+            this.pnlTimelineDetail.Size = new System.Drawing.Size(1267, 39);
+            this.pnlTimelineDetail.TabIndex = 22;
+            this.pnlTimelineDetail.Click += new System.EventHandler(this.pnlTimelineDetail_Click);
+            this.pnlTimelineDetail.Paint += new System.Windows.Forms.PaintEventHandler(this.pnlTimelineDetail_Paint);
+            // 
+            // pnlTimelineFull
+            // 
+            this.pnlTimelineFull.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.pnlTimelineFull.BackColor = System.Drawing.SystemColors.ControlLight;
+            this.pnlTimelineFull.Location = new System.Drawing.Point(8, 205);
+            this.pnlTimelineFull.Name = "pnlTimelineFull";
+            this.pnlTimelineFull.Size = new System.Drawing.Size(1267, 30);
+            this.pnlTimelineFull.TabIndex = 21;
+            this.pnlTimelineFull.Click += new System.EventHandler(this.pnlTimelineFull_Click);
+            this.pnlTimelineFull.Paint += new System.Windows.Forms.PaintEventHandler(this.pnlTimelineFull_Paint);
+            // 
+            // btnNavFirst
+            // 
+            this.btnNavFirst.Enabled = false;
+            this.btnNavFirst.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnNavFirst.Location = new System.Drawing.Point(8, 306);
+            this.btnNavFirst.Name = "btnNavFirst";
+            this.btnNavFirst.Size = new System.Drawing.Size(38, 25);
+            this.btnNavFirst.TabIndex = 22;
+            this.btnNavFirst.Text = "<<";
+            this.btnNavFirst.UseVisualStyleBackColor = true;
+            this.btnNavFirst.Click += new System.EventHandler(this.btnNavFirst_Click);
+            // 
+            // btnNavBack
+            // 
+            this.btnNavBack.Enabled = false;
+            this.btnNavBack.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnNavBack.Location = new System.Drawing.Point(52, 306);
+            this.btnNavBack.Name = "btnNavBack";
+            this.btnNavBack.Size = new System.Drawing.Size(38, 25);
+            this.btnNavBack.TabIndex = 23;
+            this.btnNavBack.Text = "<";
+            this.btnNavBack.UseVisualStyleBackColor = true;
+            this.btnNavBack.Click += new System.EventHandler(this.btnNavBack_Click);
+            // 
+            // btnNavLast
+            // 
+            this.btnNavLast.Enabled = false;
+            this.btnNavLast.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnNavLast.Location = new System.Drawing.Point(140, 306);
+            this.btnNavLast.Name = "btnNavLast";
+            this.btnNavLast.Size = new System.Drawing.Size(38, 25);
+            this.btnNavLast.TabIndex = 25;
+            this.btnNavLast.Text = ">>";
+            this.btnNavLast.UseVisualStyleBackColor = true;
+            this.btnNavLast.Click += new System.EventHandler(this.btnNavLast_Click);
+            // 
+            // btnNavForward
+            // 
+            this.btnNavForward.Enabled = false;
+            this.btnNavForward.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnNavForward.Location = new System.Drawing.Point(96, 306);
+            this.btnNavForward.Name = "btnNavForward";
+            this.btnNavForward.Size = new System.Drawing.Size(38, 25);
+            this.btnNavForward.TabIndex = 24;
+            this.btnNavForward.Text = ">";
+            this.btnNavForward.UseVisualStyleBackColor = true;
+            this.btnNavForward.Click += new System.EventHandler(this.btnNavForward_Click);
             // 
             // VideoEditorPage
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.Controls.Add(this.btnNavLast);
+            this.Controls.Add(this.btnNavForward);
+            this.Controls.Add(this.btnNavBack);
+            this.Controls.Add(this.btnNavFirst);
+            this.Controls.Add(this.pnlTimelineFull);
             this.Controls.Add(this.pnlDetailTimeWrapper);
             this.Controls.Add(this.btnOpenViewer);
             this.Controls.Add(this.tabControl1);
@@ -329,7 +387,7 @@
             this.Controls.Add(this.btnSave);
             this.Controls.Add(this.txtTitle);
             this.Controls.Add(this.panel3);
-            this.Controls.Add(this.panel1);
+            this.Controls.Add(this.pnlSensationConfig);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.lblMaxTime);
             this.Controls.Add(this.lblCurTime);
@@ -337,7 +395,6 @@
             this.Controls.Add(this.lblState);
             this.Controls.Add(this.label3);
             this.Controls.Add(this.label1);
-            this.Controls.Add(this.pnlTimeline);
             this.Name = "VideoEditorPage";
             this.panel3.ResumeLayout(false);
             this.tabControl1.ResumeLayout(false);
@@ -351,8 +408,6 @@
         }
 
         #endregion
-
-        private System.Windows.Forms.Panel pnlTimeline;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Label lblState;
@@ -361,7 +416,7 @@
         private System.Windows.Forms.Label lblMaxTime;
         private System.Windows.Forms.Label label2;
         private System.ComponentModel.BackgroundWorker bgwTime;
-        private System.Windows.Forms.Panel panel1;
+        private System.Windows.Forms.Panel pnlSensationConfig;
         private System.Windows.Forms.Panel panel3;
         private System.Windows.Forms.TextBox txtTitle;
         private System.Windows.Forms.Button btnSave;
@@ -376,7 +431,12 @@
         private System.Windows.Forms.ListBox listBasicSensation;
         private System.Windows.Forms.Button btnOpenViewer;
         private System.Windows.Forms.Panel pnlDetailTimeWrapper;
-        private System.Windows.Forms.Panel pnlDetailTimeline;
         private System.Windows.Forms.Button btnPreviewFeel;
+        private TimelinePanel pnlTimelineFull;
+        private TimelinePanel pnlTimelineDetail;
+        private System.Windows.Forms.Button btnNavFirst;
+        private System.Windows.Forms.Button btnNavBack;
+        private System.Windows.Forms.Button btnNavLast;
+        private System.Windows.Forms.Button btnNavForward;
     }
 }

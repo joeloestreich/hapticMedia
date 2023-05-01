@@ -206,6 +206,12 @@
     <Compile Include="sensationEditor\components\pages\VideoEditorPage.Designer.cs">
       <DependentUpon>VideoEditorPage.cs</DependentUpon>
     </Compile>
+    <Compile Include="sensationEditor\components\TimelinePanel.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="sensationEditor\components\TimelinePanel.Designer.cs">
+      <DependentUpon>TimelinePanel.cs</DependentUpon>
+    </Compile>
     <Compile Include="sensationEditor\data\SensationEditorTrack.cs" />
     <Compile Include="sensationEditor\data\SensationTemplate\SensationTemplateDataCapture.cs" />
     <Compile Include="sensationEditor\data\SensationTemplate\SensationTemplateDataCompound.cs" />

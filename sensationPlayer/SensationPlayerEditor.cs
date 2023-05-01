@@ -10,7 +10,7 @@ using System.Threading.Tasks;
 namespace hapticMedia.sensationPlayer {
     internal class SensationPlayerEditor : SensationPlayer {
 
-        public bool MuteSensation = false;
+        public bool MuteSensation = true;
 
         public SensationPlayerEditor() : base() {
 
