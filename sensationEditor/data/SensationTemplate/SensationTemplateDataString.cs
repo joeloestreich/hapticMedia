@@ -12,15 +12,15 @@ namespace hapticMedia.sensationEditor.data.SensationTemplate {
 
         string Parameter;
 
-        public SensationTemplateDataString(TemplateType type, string name, double timestamp, string parameter) : base(type, name, timestamp) {
+        public SensationTemplateDataString(TemplateType type, string name, string parameter) : base(type, name) {
             this.Parameter = parameter;
         }
 
         public override SensationWrapper GetSensationWrapper() {
             if (Type == TemplateType.TemplateCapture) {
-                return new SensationWrapperString(Timestamp, ParseCapture(Parameter));
+                return new SensationWrapperString(ParseCapture(Parameter));
             } else if (Type == TemplateType.TemplateParse) {
-                return new SensationWrapperString(Timestamp, Parameter);
+                return new SensationWrapperString(Parameter);
             }
             return null;
         }

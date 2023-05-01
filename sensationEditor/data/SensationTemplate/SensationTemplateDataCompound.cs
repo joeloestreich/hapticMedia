@@ -12,17 +12,16 @@ namespace hapticMedia.sensationEditor.data.SensationTemplate {
 
         SensationTemplateData[] Sensations;
 
-        public SensationTemplateDataCompound(string name, double timestamp,
-                    params SensationTemplateData[] sensations) : base(TemplateType.TemplateCompound, name, timestamp) {
+        public SensationTemplateDataCompound(string name, params SensationTemplateData[] sensations) : base(TemplateType.TemplateCompound, name) {
             this.Sensations = sensations;
         }
 
         public override SensationWrapper GetSensationWrapper() {
             Sensation[] sensArray = new Sensation[Sensations.Length];
-            for (int i = 0; i <= Sensations.Length + 1; i++) {
+            for (int i = 0; i < Sensations.Length; i++) {
                 sensArray[i] = Sensations[i].GetSensationWrapper().GetSensation();
             }
-            return new SensationWrapperCompound(Timestamp, sensArray);
+            return new SensationWrapperCompound(sensArray);
         }
 
     }

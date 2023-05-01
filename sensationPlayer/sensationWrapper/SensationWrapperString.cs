@@ -10,7 +10,7 @@ namespace hapticMedia.sensationPlayer.sensationWrapper {
 
         String sensationString;
 
-        public SensationWrapperString(double timestamp, string sensationString) : base(timestamp) {
+        public SensationWrapperString(string sensationString) {
             this.sensationString = sensationString;
         }
 

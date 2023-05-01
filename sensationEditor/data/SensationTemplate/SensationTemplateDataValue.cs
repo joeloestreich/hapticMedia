@@ -20,14 +20,14 @@ namespace hapticMedia.sensationEditor.data.SensationTemplate {
         public SensationTemplateMuscleProvider Muscles;
 
         public SensationTemplateDataValue(
-                    string name, double timestamp,
+                    string name,
                     SensationTemplateValueProvider<int> frequency,
                     SensationTemplateValueProvider<float> durationSeconds,
                     SensationTemplateValueProvider<int> intensityPercentage, 
                     SensationTemplateValueProvider<float> rampUpMillies,
                     SensationTemplateValueProvider<float> rampDownMillies, 
                     SensationTemplateValueProvider<float> exitDelaySeconds, 
-                    SensationTemplateMuscleProvider muscles) :base(TemplateType.TemplateValue, name, timestamp) {
+                    SensationTemplateMuscleProvider muscles) :base(TemplateType.TemplateValue, name) {
             this.Frequency = frequency;
             this.DurationSeconds = durationSeconds;
             this.IntensityPercentage = intensityPercentage;
@@ -38,8 +38,8 @@ namespace hapticMedia.sensationEditor.data.SensationTemplate {
         }
 
         public override SensationWrapper GetSensationWrapper() {
-            return new SensationWrapperValues(Timestamp, 
-                    Frequency.Cur, DurationSeconds.Cur, IntensityPercentage.Cur, RampUpMillies.Cur, RampDownMillies.Cur, ExitDelaySeconds.Cur, Muscles.GetMuscles(), Name);
+            return new SensationWrapperValues(Frequency.Cur, DurationSeconds.Cur, IntensityPercentage.Cur, 
+                RampUpMillies.Cur, RampDownMillies.Cur, ExitDelaySeconds.Cur, Muscles.GetMuscles(), Name);
         }
 
     }

@@ -22,7 +22,7 @@ namespace hapticMedia.sensationPlayer {
 
         internal override void PlaySensation(Sensation sensation) {
             if (!MuteSensation) {
-                PlaySensation(sensation);
+                base.PlaySensation(sensation);
             }
         }
 

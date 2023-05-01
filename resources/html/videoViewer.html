@@ -29,7 +29,7 @@
             } else if (message == "Unmute") {
                 player.unMute();
             } else if (message.startsWith("GoTo_")) {
-                player.seekTo(message.substring(message.indexOf("_") + 1), true);
+                player.seekTo(parseFloat(message.substring(message.indexOf("_") + 1)), true);
             }
         }
 

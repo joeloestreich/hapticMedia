@@ -26,6 +26,8 @@ using System.Windows.Forms;
 using OWOGame;
 using System.Runtime.Remoting.Messaging;
 using static hapticMedia.videoViewer.data.WsVideoData;
+using static System.Windows.Forms.VisualStyles.VisualStyleElement.TextBox;
+using WebSocketSharp.Server;
 
 namespace hapticMedia.sensationEditor.components.pages {
     public partial class VideoEditorPage : UserControlPage {
@@ -35,7 +37,14 @@ namespace hapticMedia.sensationEditor.components.pages {
         SensationEditorTrack Editor;
         SensationPlayerEditor SensationPlayer = new SensationPlayerEditor();
 
-        double VideoLength = 60.0 * 10;
+
+        public delegate void OnWsMessageDelegate(WsVideoData dto);
+        public OnWsMessageDelegate wsMessageDelegate;
+        StateEnum lastState = StateEnum.Unstarted;
+
+        bool HasCollision = false;
+
+        double VideoLength = 2 * 60 + 41;
 
         public VideoEditorPage() {
             Editor = new SensationEditorTrack();
@@ -57,6 +66,14 @@ namespace hapticMedia.sensationEditor.components.pages {
 
             OpenVideoViewer();
 
+            pnlDetailTimeWrapper.AutoScroll = false;
+            pnlDetailTimeWrapper.VerticalScroll.Enabled = false;
+            pnlDetailTimeWrapper.VerticalScroll.Visible = false;
+            pnlDetailTimeWrapper.VerticalScroll.Maximum = 0;
+            pnlDetailTimeWrapper.AutoScroll = true;
+            pnlDetailTimeline.Bounds = new Rectangle(new Point(0, 0), new Size((int)(VideoLength * 30), 40));
+
+
             bgwTime.RunWorkerAsync();
             LabelService.SetFormatedTime(lblMaxTime, VideoLength);
 
@@ -64,6 +81,7 @@ namespace hapticMedia.sensationEditor.components.pages {
             initSensationTemplates();
             initSensationsRecordings();
         }
+
 
         private void OpenVideoViewer() {
             string html = Resources.videoViewer;
@@ -147,61 +165,165 @@ namespace hapticMedia.sensationEditor.components.pages {
         }
 
         private void AddBasicSensation() {
-
+            AddToTimeline((SensationTemplateData)listBasicSensation.SelectedValue);
         }
 
         private void AddSensationTemplate() {
-
+            AddToTimeline((SensationTemplateData)listSensationTemplates.SelectedValue);
         }
 
         private void AddCapture() {
-            double curTime = SensationPlayer.GetCurTime();
-
             string captureString = HapticMediaFileService.LoadFileByPath(listRecordings.SelectedValue.ToString());
             List<CaptureData> capture = JsonConvert.DeserializeObject<List<CaptureData>>(captureString);
-            SensationTemplateData[] sensations = new SensationTemplateData[capture.Count];
+            Dictionary<double, SensationTemplateData> sensations = new Dictionary<double, SensationTemplateData>();
             foreach (CaptureData captureData in capture) {
-                SensationTemplateData template = new SensationTemplateDataString(SensationTemplateData.TemplateType.TemplateCapture, "Timestamp_" + captureData.TimeStamp, captureData.TimestampSeconds(), captureData.Capture);
-                sensations[capture.IndexOf(captureData)] = template;
+                SensationTemplateData template = new SensationTemplateDataString(SensationTemplateData.TemplateType.TemplateCapture, "Timestamp_" + captureData.TimeStamp, captureData.Capture);
+                sensations[captureData.TimestampSeconds()] = template;
             }
-            SensationTemplateData compound = new SensationTemplateDataCapture(listRecordings.DisplayMember, curTime, sensations);
+            SensationTemplateData compound = new SensationTemplateDataCapture(listRecordings.DisplayMember, sensations, SensationPlayer.GetCurTime());
             AddToTimeline(compound);
-            MessageBox.Show(captureString);
         }
 
         private void AddToTimeline(SensationTemplateData template) {
-            double length = template.GetSensationWrapper().GetLength();
+            if (lastState == StateEnum.Playing) {
+                MessageBox.Show("Cant add while video is playing");
+                return;
+            }
 
-            Editor.Track[template.Timestamp] = template;
-            SensationPlayer.SensationSequence[template.Timestamp] = template.GetSensationWrapper();
+            double curTime = SensationPlayer.GetCurTime();
+
+            Editor.Track[curTime] = template;
+            SensationPlayer.SensationSequence[curTime] = template.GetSensationWrapper();
             SensationPlayer.Sync();
+
+            UpdateTimeline();
+        }
+
+        private void UpdateTimeline() {
+            pnlTimeline.Controls.Clear();
+
+            double lastSensationFinish = -1;
+            HasCollision = false;
+
+            List<double> timestamps = new List<double>(Editor.Track.Keys).OrderBy(x => x).ToList();
+
+            foreach (double timeStamp in timestamps) {
+                SensationTemplateData template = Editor.Track[timeStamp];
+
+                bool collision = timeStamp < lastSensationFinish;
+                HasCollision |= collision;
+
+                AddTimelineSensation(timeStamp, template, pnlTimeline, collision);
+                AddTimelineSensation(timeStamp, template, pnlDetailTimeline, collision);
+
+                double curSensationFinish = timeStamp + template.GetSensationWrapper().GetLengthInSeconds();
+                if (curSensationFinish > lastSensationFinish) {
+                    lastSensationFinish = curSensationFinish;
+                }
+            }
+
+
+        }
+
+        private void AddTimelineSensation(double timeStamp, SensationTemplateData template, Panel parent, bool collision) {
+            UserControlBase sensationBox = new UserControlBase();
+            sensationBox.BorderStyle = BorderStyle.FixedSingle;
+
+            if (collision) {
+                sensationBox.Location = new Point((int)(timeStamp / VideoLength * parent.Width), 5);
+                sensationBox.Size = new Size(Math.Max((int)(template.GetSensationWrapper().GetLengthInSeconds() / VideoLength * parent.Width), 5), 20);
+                sensationBox.BackColor = Color.Red;
+            } else {
+                sensationBox.Location = new Point((int)(timeStamp / VideoLength * parent.Width), 10);
+                sensationBox.Size = new Size(Math.Max((int)(template.GetSensationWrapper().GetLengthInSeconds() / VideoLength * parent.Width), 2), 20);
+                sensationBox.BackColor = Color.DeepSkyBlue;
+            }
+
+            sensationBox.Click += (sender, e) => { openSensationTemplate(template); };
+
+            parent.Controls.Add(sensationBox);
+        }
+
+        private void openSensationTemplate(SensationTemplateData template) {
+
+            MessageBox.Show(template.Name);
+        }
+
+        private void btnPreviewFeel_Click(object sender, EventArgs e) {
+            SensationTemplateData template;
+            if (tabControl1.SelectedIndex == 0) {
+                template = (SensationTemplateData) listBasicSensation.SelectedValue;
+            } else if (tabControl1.SelectedIndex == 1) {
+                template = (SensationTemplateData) listSensationTemplates.SelectedValue;
+            } else {
+                // not a feature
+                return;
+            }
+
+            OWO.Send(template.GetSensationWrapper().GetSensation());
         }
 
         private void btnSave_Click(object sender, EventArgs e) {
             Editor.Title = txtTitle.Text;
             string EditorString = JsonConvert.SerializeObject(Editor);
             HapticMediaFileService.SaveFile(EditorString, FolderName, Editor.VideoId);
+
+            if (HasCollision) {
+                MessageBox.Show("There are Collsions in your Sensations. You wont be able to upload this.");
+            }
+        }
+
+        private void pnlTimeline_Click(object sender, EventArgs e) {
+            GoToTime(pnlTimeline, e as MouseEventArgs);
+        }
+
+        private void pnlDetailTimeline_Click(object sender, EventArgs e) {
+            GoToTime(pnlDetailTimeline, e as MouseEventArgs);
+        }
+
+        private void GoToTime(Panel pnl, MouseEventArgs e) {
+            double clickedPercent = (e.X * 1.0 / pnl.Width);
+            double clickedTime = VideoLength * clickedPercent;
+            SensationPlayer.Sync(clickedTime);
+            WsBroadcast("GoTo_" + clickedTime);
+        }
+
+        private void btnOpenViewer_Click(object sender, EventArgs e) {
+            OpenVideoViewer();
         }
 
         private void ckbPlayOwo_CheckedChanged(object sender, EventArgs e) {
             SensationPlayer.MuteSensation = !ckbPlayOwo.Checked;
         }
 
-        StateEnum lastState = StateEnum.Unstarted;
-        public List<string> OnWsMessage(WsVideoData dto) {
+        public List<string> OnWsEvent(WsVideoData dto) {
             if (this.lblState.InvokeRequired) {
                 return (List<string>)this.lblState.Invoke(
-                  new Func<List<string>>(() => ActualOnWsMessage(dto))
+                  new Func<List<string>>(() => ActualOnWsEvent(dto))
                 );
             } else {
-                return ActualOnWsMessage(dto);
+                return ActualOnWsEvent(dto);
             }
 
         }
 
-        public delegate void OnWsMessageDelegate(WsVideoData dto);
-        public OnWsMessageDelegate wsMessageDelegate;
-        public List<string> ActualOnWsMessage(WsVideoData dto) {
+        private List<string> ActualOnWsEvent(WsVideoData dto) {
+            if (dto == null) {
+                OnWsClose();
+                return null;
+            } else {
+                return OnWsMessage(dto);
+            }
+        }
+
+        private void OnWsClose() {
+            WsVideoData dto = new WsVideoData();
+            dto.value = ((int) StateEnum.Unstarted).ToString();
+            dto.timeStamp = SensationPlayer.GetCurTime();
+            OnStateChange(dto, new List<string>());
+        }
+
+        private List<string> OnWsMessage(WsVideoData dto) {
 
             List<string> messages = new List<string>();
 
@@ -229,13 +351,14 @@ namespace hapticMedia.sensationEditor.components.pages {
             return messages;
         }
 
-
         private void OnStateChange(WsVideoData dto, List<string> messages) {
             StateEnum newState = (StateEnum)Int16.Parse(dto.value);
 
 
             if (lastState == StateEnum.Unstarted && !SensationPlayer.GetCurTime().Equals(0)) {
                 messages.Add("GoTo_" + SensationPlayer.GetCurTime());
+            } else {
+                SensationPlayer.Sync(dto.timeStamp);
             }
 
             if (lastState != StateEnum.Playing && newState == StateEnum.Playing) {
@@ -244,15 +367,19 @@ namespace hapticMedia.sensationEditor.components.pages {
                 SensationPlayer.Stop();
             }
 
-            lastState = newState;
             this.lblState.Text = lastState.ToString();
 
-            SensationPlayer.Sync(dto.timeStamp);
+            lastState = newState;
+        }
+
+        private void WsBroadcast(string message) {
+            WebSocketService.server.WebSocketServices[WsVideoEditorBehavior.Route].Sessions.Broadcast(message);
         }
 
 
         public override void OnLeave() {
             base.OnLeave();
+            SensationPlayer.Stop();
             bgwTime.CancelAsync();
         }
 
@@ -267,12 +394,39 @@ namespace hapticMedia.sensationEditor.components.pages {
             LabelService.SetFormatedTime(lblCurTime, SensationPlayer.GetCurTime());
         }
 
-        private void pnlTimeline_Click(object sender, EventArgs e) {
-
+        private void pnlTimeline_Paint(object sender, PaintEventArgs e) {
+            base.OnPaint(e);
+            AddTimelineBars(e, (Panel)sender, false);
         }
 
-        private void btnOpenViewer_Click(object sender, EventArgs e) {
-            OpenVideoViewer();
+        private void pnlDetailTimeline_Paint(object sender, PaintEventArgs e) {
+            base.OnPaint(e);
+            AddTimelineBars(e, (Panel)sender, true);
+        }
+
+        private void AddTimelineBars(PaintEventArgs e, Panel parent, bool isDetail) {
+            Pen pen = new Pen(Color.Black, 1);
+            using (Graphics g = e.Graphics) {
+
+                double time = 0;
+                while (time < VideoLength) {
+                    if (time % 10.0 == 0) {
+                        DrawLine(g, parent, pen, time, 100);
+                    } else if (isDetail && time % 5.0 == 0) {
+                        DrawLine(g, parent, pen, time, 20);
+                    } else if (isDetail && time % 1.0 == 0) {
+                        DrawLine(g, parent, pen, time, 5);
+                    }
+                    time++;
+                }
+            }
+        }
+
+        private void DrawLine(Graphics g, Panel parent, Pen pen, double time, int height) {
+            int x = (int)(time / VideoLength * parent.Width);
+            var point1 = new Point(x, 0);
+            var point2 = new Point(x, height);
+            g.DrawLine(pen, point1, point2);
         }
     }
 }

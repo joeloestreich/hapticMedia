@@ -18,9 +18,9 @@ namespace hapticMedia.sensationPlayer.sensationWrapper {
         Muscle[] muscles;
         string Name;
 
-        public SensationWrapperValues(double timestamp, int frequency, float durationSeconds, int intensityPercentage, 
+        public SensationWrapperValues(int frequency, float durationSeconds, int intensityPercentage, 
                 float RampUpMillies, float RampDownMillies, float ExitDelaySeconds, 
-                Muscle[] muscles, string name) : base (timestamp) {
+                Muscle[] muscles, string name) {
             this.frequency = frequency;
             this.durationSeconds = durationSeconds;
             this.intensityPercentage = intensityPercentage;

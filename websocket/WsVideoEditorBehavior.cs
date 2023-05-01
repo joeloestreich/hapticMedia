@@ -37,10 +37,17 @@ namespace hapticMedia.websocket {
             }
 
             VideoEditorPage viewer = (VideoEditorPage)genericComponents.pageDefinition.HapticMedia.Instance.CurrentPage;
-            List<string> messages = viewer.OnWsMessage(dto);
+            List<string> messages = viewer.OnWsEvent(dto);
             foreach (string m in messages) {
                 Send(m);
             }
+        }
+
+        protected override void OnClose(CloseEventArgs e) {
+            base.OnClose(e);
+
+            VideoEditorPage viewer = (VideoEditorPage)genericComponents.pageDefinition.HapticMedia.Instance.CurrentPage;
+            List<string> messages = viewer.OnWsEvent(null);
         }
 
     }

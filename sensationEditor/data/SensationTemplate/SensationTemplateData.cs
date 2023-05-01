@@ -19,12 +19,10 @@ namespace hapticMedia.sensationEditor.data.SensationTemplate {
 
         public TemplateType Type;
         public string Name;
-        public double Timestamp;
 
-        public SensationTemplateData(TemplateType type, string name, double timestamp) {
+        public SensationTemplateData(TemplateType type, string name) {
             this.Type = type;
             this.Name = name;
-            this.Timestamp = timestamp;
         }
 
         public abstract SensationWrapper GetSensationWrapper();

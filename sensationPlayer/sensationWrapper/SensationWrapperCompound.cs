@@ -10,7 +10,7 @@ namespace hapticMedia.sensationPlayer.sensationWrapper {
 
         Sensation[] sensations;
 
-        public SensationWrapperCompound(double timestamp, Sensation[] sensations) : base (timestamp) {
+        public SensationWrapperCompound(Sensation[] sensations) {
             this.sensations = sensations;
         }
 

@@ -12,7 +12,7 @@ namespace hapticMedia.sensationEditor.data.SensationTemplate {
 
         public Muscle[] GetMuscles() {
 
-            return null;
+            return new Muscle[] { Muscle.Abdominal_R };
         }
 
     }

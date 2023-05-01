@@ -37,7 +37,9 @@ namespace hapticMedia.sensationPlayer {
 
         public void Start() {
             Play = true;
-            this.BGWorker.RunWorkerAsync();
+            if (!this.BGWorker.IsBusy) {
+                this.BGWorker.RunWorkerAsync();
+            }
             Timer.Start();
         }
 
@@ -62,7 +64,7 @@ namespace hapticMedia.sensationPlayer {
             upcomingSensationKeys = new List<double>(SensationSequence.Keys);
 
             // Only Keys that end in future
-            upcomingSensationKeys = upcomingSensationKeys.FindAll(x => x + SensationSequence[x].GetLength() > LastCheckedTime);
+            upcomingSensationKeys = upcomingSensationKeys.FindAll(x => x + SensationSequence[x].GetLengthInSeconds() > LastCheckedTime);
 
             // Order
             upcomingSensationKeys = upcomingSensationKeys.OrderBy(x => x).ToList();

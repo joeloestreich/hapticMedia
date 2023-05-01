@@ -25,6 +25,9 @@ namespace hapticMedia.videoViewer.components.pages {
         static string FolderName = "viewer";
         string FileName = "videoViewer.html";
 
+        public delegate void OnWsMessageDelegate(WsVideoData dto);
+        public OnWsMessageDelegate wsMessageDelegate;
+
         string videoId;
 
         public VideoViewerPage(string videoId){
@@ -57,8 +60,6 @@ namespace hapticMedia.videoViewer.components.pages {
             
         }
 
-        public delegate void OnWsMessageDelegate(WsVideoData dto);
-        public OnWsMessageDelegate wsMessageDelegate;
         public List<string> ActualOnWsMessage(WsVideoData dto) {
 
             List<string> messages = new List<string>();

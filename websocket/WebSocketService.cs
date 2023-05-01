@@ -17,7 +17,7 @@ namespace hapticMedia.websocket {
 
         const string Address = "ws://127.0.0.1:";
 
-        static WebSocketServer server;
+        public static WebSocketServer server;
 
         private WebSocketService() {
         }

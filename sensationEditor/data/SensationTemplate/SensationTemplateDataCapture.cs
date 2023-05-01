@@ -10,21 +10,23 @@ using System.Xml.Linq;
 namespace hapticMedia.sensationEditor.data.SensationTemplate {
     public class SensationTemplateDataCapture : SensationTemplateData {
 
-        SensationTemplateData[] Sensations;
+        Dictionary<double, SensationTemplateData> Sensations;
+        double CaptureInsertTime;
         public List<double> Cuts = new List<double>(); // to double double object?
 
-        public SensationTemplateDataCapture(string name, double timestamp,
-                    SensationTemplateData[] sensations) : base(TemplateType.TemplateCapture, name, timestamp) {
+        public SensationTemplateDataCapture(string name, Dictionary<double, SensationTemplateData> sensations, double captureInsertTime) : base(TemplateType.TemplateCapture, name) {
             this.Sensations = sensations;
+            this.CaptureInsertTime = captureInsertTime;
         }
 
         public override SensationWrapper GetSensationWrapper() {
-            List<SensationWrapper> captures = new List<SensationWrapper>();
-            for (int i = 0; i < Sensations.Length; i++) {
-                // check for cuts
-                captures.Add(Sensations[i].GetSensationWrapper());
+            Dictionary<double, SensationWrapper> captures = new Dictionary<double, SensationWrapper>();
+            foreach (var entry in Sensations) {
+                double timestamp = entry.Key;
+                SensationTemplateData template = entry.Value;
+                captures.Add(timestamp, Sensations[timestamp].GetSensationWrapper());
             }
-            return new SensationWrapperCapture(Timestamp, captures);
+            return new SensationWrapperCapture(CaptureInsertTime, captures);
         }
 
     }

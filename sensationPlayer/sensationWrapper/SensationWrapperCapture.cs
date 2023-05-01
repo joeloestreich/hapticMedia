@@ -9,17 +9,24 @@ using System.Threading.Tasks;
 namespace hapticMedia.sensationPlayer.sensationWrapper {
     internal class SensationWrapperCapture : SensationWrapper {
 
-        List<SensationWrapper> Sensations;
+        double CaptureInsertTime;
 
-        public SensationWrapperCapture(double timestamp, List<SensationWrapper> sensations) : base (timestamp) {
+        Dictionary<double, SensationWrapper> Sensations;
+
+        public SensationWrapperCapture(double captureInsertTime, Dictionary<double, SensationWrapper> sensations) {
+            this.CaptureInsertTime = captureInsertTime;
             this.Sensations = sensations;
         }
 
         public SensationWrapper GetSensationWrapperForTime(double lastCheck, double curCheck) {
-            foreach (SensationWrapper sensation in Sensations) {
-                double normal = GetNormalizedTimestamp(sensation);
+
+            foreach (var entry in Sensations) {
+                double timestamp = entry.Key;
+                SensationWrapper wrapper = entry.Value;
+
+                double normal = GetNormalizedTimestamp(timestamp);
                 if (normal > lastCheck && normal <= curCheck) {
-                    return sensation;
+                    return wrapper;
                 } else if (normal < lastCheck) {
                     break;
                 }
@@ -27,16 +34,16 @@ namespace hapticMedia.sensationPlayer.sensationWrapper {
             return null;
         }
 
-        private double GetNormalizedTimestamp(SensationWrapper wrapper) {
-            return Timestamp + wrapper.Timestamp;
+        private double GetNormalizedTimestamp(double subTime) {
+            return CaptureInsertTime + subTime;
         }
 
         public override Sensation GetSensation() {
             throw new Exception("SensationWrapperCapture shouldnt call GetSensation(), but the GetSensation() of its child Sensations");
         }
 
-        public override double GetLength() {
-            return Timestamp + GetNormalizedTimestamp(Sensations.Last()) + Sensations.Last().GetLength();
+        public override double GetLengthInSeconds() {
+            return CaptureInsertTime + GetNormalizedTimestamp(Sensations.Last().Key) + Sensations.Last().Value.GetLengthInSeconds();
         }
 
     }
