@@ -42,5 +42,15 @@ namespace hapticMedia.sensationEditor.data.SensationTemplate {
                 RampUpMillies.Cur, RampDownMillies.Cur, ExitDelaySeconds.Cur, Muscles.GetMuscles(), Name);
         }
 
+        public SensationTemplateDataValue(SensationTemplateDataValue original) : base(TemplateType.TemplateValue, original.Name) {
+            this.Frequency = new SensationTemplateValueProvider<int>(original.Frequency);
+            this.DurationSeconds = new SensationTemplateValueProvider<float>(original.DurationSeconds);
+            this.IntensityPercentage = new SensationTemplateValueProvider<int>(original.IntensityPercentage);
+            this.RampUpMillies = new SensationTemplateValueProvider<float>(original.RampUpMillies);
+            this.RampDownMillies = new SensationTemplateValueProvider<float>(original.RampDownMillies);
+            this.ExitDelaySeconds = new SensationTemplateValueProvider<float>(original.ExitDelaySeconds);
+            this.Muscles = new SensationTemplateMuscleProvider(original.Muscles);
+        }
+
     }
 }

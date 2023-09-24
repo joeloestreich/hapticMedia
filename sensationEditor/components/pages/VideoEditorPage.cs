@@ -28,6 +28,7 @@ using System.Runtime.Remoting.Messaging;
 using static hapticMedia.videoViewer.data.WsVideoData;
 using static System.Windows.Forms.VisualStyles.VisualStyleElement.TextBox;
 using WebSocketSharp.Server;
+using hapticMedia.sensationEditor.components.TemplateComponents;
 
 namespace hapticMedia.sensationEditor.components.pages {
     public partial class VideoEditorPage : UserControlPage {
@@ -103,12 +104,12 @@ namespace hapticMedia.sensationEditor.components.pages {
         }
 
         private void initSensationsBase() {
-            Dictionary<string, Func<SensationTemplateData>> baseTemplates = new Dictionary<string, Func<SensationTemplateData>>();
-
-            baseTemplates.Add("Ball", BaseSensationConstants.Ball);
-            baseTemplates.Add("Dagger", BaseSensationConstants.Dagger);
-            baseTemplates.Add("Hug", BaseSensationConstants.Hug);
-            baseTemplates.Add("Shot With Exit", BaseSensationConstants.ShotWithExit);
+            Dictionary<string, Func<SensationTemplateData>> baseTemplates = new Dictionary<string, Func<SensationTemplateData>> {
+                { "Ball", BaseSensationConstants.Ball },
+                { "Dagger", BaseSensationConstants.Dagger },
+                { "Hug", BaseSensationConstants.Hug },
+                { "Shot With Exit", BaseSensationConstants.ShotWithExit }
+            };
 
             listBasicSensation.DataSource = new BindingSource(baseTemplates, null);
             listBasicSensation.DisplayMember = "Key";
@@ -163,6 +164,9 @@ namespace hapticMedia.sensationEditor.components.pages {
 
         private void AddBasicSensation() {
             SensationTemplateData template = ((Func<SensationTemplateData>)listBasicSensation.SelectedValue).Invoke();
+            if (template is SensationTemplateDataValue) {
+                template = new SensationTemplateDataCompound(template.Name, template);
+            }
             AddToTimeline(template);
         }
 
@@ -196,6 +200,7 @@ namespace hapticMedia.sensationEditor.components.pages {
 
             UpdateTimeline();
             EnableNavButtons();
+            openSensationTemplate(template);
         }
 
         private void UpdateTimeline() {
@@ -278,21 +283,145 @@ namespace hapticMedia.sensationEditor.components.pages {
             openSensationTemplate(Editor.Track[timestamps.Last()]);
         }
 
+        private void btnNavConflict_Click(object sender, EventArgs e) {
+            double lastSensationFinish = -1;
+            List<double> timestamps = new List<double>(Editor.Track.Keys).OrderBy(x => x).ToList();
+            foreach (double timestamp in timestamps) {
+                SensationTemplateData template = Editor.Track[timestamp];
+
+                double curSensationFinish = timestamp + template.GetSensationWrapper().GetLengthInSeconds();
+                if (curSensationFinish > lastSensationFinish) {
+                    lastSensationFinish = curSensationFinish;
+                } else {
+                    openSensationTemplate(template);
+                    break;
+                }
+            }
+        }
+
         private void openSensationTemplate(SensationTemplateData template) {
             SelectedSensation = template;
             EnableNavButtons();
             UpdateTimeline();
 
-            MessageBox.Show(template.Name);
+            tcSensationEditor.TabPages.Clear();
+            AddSensationTab(template, !(template is  SensationTemplateDataCapture));
+        }
+
+        private void AddSensationTab(SensationTemplateData template, bool addCreateTab) {
+            if (template is SensationTemplateDataCompound) {
+                SensationTemplateDataCompound compound = template as SensationTemplateDataCompound;
+                foreach (SensationTemplateData part in compound.Sensations) {
+                    AddSensationTab(part, false);
+                }
+            } else if(template is SensationTemplateDataValue) {
+                AddSensationTabValue(template);
+            } else if (template is SensationTemplateDataCapture) {
+
+            }
+
+            if (addCreateTab) {
+                AddSensationTabLoop(template);
+            }
+        }
+
+        private void AddSensationTabValue(SensationTemplateData template) {
+            TabPage tab = new TabPage(template.Name);
+
+            TemplateEditorValue edit = new TemplateEditorValue(template as SensationTemplateDataValue);
+            edit.TemplateChangedEvent += Edit_TemplateChangedEvent;
+            tab.Controls.Add(edit);
+
+            tcSensationEditor.TabPages.Add(tab);
+        }
+
+        private void AddSensationTabLoop(SensationTemplateData template) {
+            TabPage LoopTab = new TabPage("+");
+            CreateNewSensationPanel createPanel = new CreateNewSensationPanel(template);
+            createPanel.TemplateCreatedEvent += CreatePanel_TemplateCreatedEvent;
+            LoopTab.Controls.Add(createPanel);
+            tcSensationEditor.TabPages.Add(LoopTab);
+        }
+
+        private void CreatePanel_TemplateCreatedEvent(object sender, SensationTemplateData template) {
+            foreach (TabPage tp in tcSensationEditor.TabPages) {
+                foreach (var con in tp.Controls) {
+                    if (con is CreateNewSensationPanel) {
+
+                        if (SelectedSensation is SensationTemplateDataCompound) {
+                            AddSensationTab(template, false);
+                            ((SensationTemplateDataCompound)SelectedSensation).AddSensation(template);
+                            ReAddCreateTab(tp, tcSensationEditor.SelectedIndex);
+                            UpdateTimeline();
+                        } else if (SelectedSensation == null) {
+                            SensationTemplateDataCompound newTemplate =  new SensationTemplateDataCompound(template.Name, template);
+                            AddToTimeline(newTemplate);
+                            openSensationTemplate(newTemplate);
+                        }
+                        return;
+                    }
+                }
+            }
+        }
+
+        private void tcSensationEditor_Selected(object sender, TabControlEventArgs e) {
+            if (e.TabPage == null) {
+                return;
+            }
+
+            foreach (var con in e.TabPage.Controls) {
+                if (con is CreateNewSensationPanel && SelectedSensation is SensationTemplateDataCompound) {
+                    CreateNewSensationPanel createPanel = (CreateNewSensationPanel) con;
+
+                    List<SensationTemplateData> predefined = createPanel.OnOpenTab();
+                    if (predefined == null) {
+                        return;
+                    }
+
+                    foreach (SensationTemplateData part in predefined) {
+                        AddSensationTab(part, false);
+                        ((SensationTemplateDataCompound)SelectedSensation).AddSensation(part);
+                    }
+
+                    ReAddCreateTab(e.TabPage, e.TabPageIndex);
+                    UpdateTimeline();
+                }
+            }
+        }
+
+        private void ReAddCreateTab(TabPage tab, int index) {
+            tcSensationEditor.TabPages.Remove(tab);
+            tcSensationEditor.TabPages.Add(tab);
+            tcSensationEditor.SelectedIndex = index;
+        }
+
+        private void Edit_TemplateChangedEvent(object sender, SensationTemplateData editTemplate) {
+            foreach (var entry in Editor.Track) {
+                double timestamp = entry.Key;
+                SensationTemplateData template = entry.Value;
+
+                if (SelectedSensation is SensationTemplateDataCompound) {
+                    if (template is SensationTemplateDataCompound && ((SensationTemplateDataCompound)template).Sensations.Contains(editTemplate)) {
+                        SensationPlayer.SensationSequence[timestamp] = template.GetSensationWrapper();
+                        break;
+                    }
+                }
+            }
+            UpdateTimeline();
         }
 
         private void EnableNavButtons() {
             List<double> timestamps = new List<double>(Editor.Track.Keys).OrderBy(x => x).ToList();
+
+            btnNavConflict.Visible = HasCollision;
+
             if (!timestamps.Any()) {
                 btnNavFirst.Enabled = false;
                 btnNavBack.Enabled = false;
                 btnNavForward.Enabled = false;
                 btnNavLast.Enabled = false;
+
+                btnRemoveSensation.Visible = false;
                 return;
             }
 
@@ -312,13 +441,17 @@ namespace hapticMedia.sensationEditor.components.pages {
             if (SelectedSensation == null) {
                 btnNavBack.Enabled = false;
                 btnNavForward.Enabled = false;
+
+                btnRemoveSensation.Visible = false;
+            } else {
+                btnRemoveSensation.Visible = true;
             }
         }
 
         private void btnPreviewFeel_Click(object sender, EventArgs e) {
             SensationTemplateData template;
             if (tabControl1.SelectedIndex == 0) {
-                template = (SensationTemplateData) listBasicSensation.SelectedValue;
+                template = ((Func<SensationTemplateData>)listBasicSensation.SelectedValue).Invoke();
             } else if (tabControl1.SelectedIndex == 1) {
                 template = (SensationTemplateData) listSensationTemplates.SelectedValue;
             } else {
@@ -352,7 +485,14 @@ namespace hapticMedia.sensationEditor.components.pages {
             double clickedPercent = (e.X * 1.0 / pnl.Width);
             double clickedTime = VideoLength * clickedPercent;
             SensationPlayer.Sync(clickedTime);
-            RedrawDrimeline();
+
+            if (Editor.Track.ContainsKey(clickedTime)) {
+                openSensationTemplate(Editor.Track[clickedTime]);
+            } else {
+                openSensationTemplate(null);
+            }
+
+            ReDrawTimeline();
             WsBroadcast("GoTo_" + clickedTime);
         }
 
@@ -362,6 +502,16 @@ namespace hapticMedia.sensationEditor.components.pages {
 
         private void ckbPlayOwo_CheckedChanged(object sender, EventArgs e) {
             SensationPlayer.MuteSensation = !ckbPlayOwo.Checked;
+        }
+
+        private void btnRemoveSensation_Click(object sender, EventArgs e) {
+            foreach (var entry in Editor.Track) {
+                if (entry.Value.Equals(SelectedSensation)) {
+                    Editor.Track.Remove(entry.Key);
+                    openSensationTemplate(null);
+                    break;
+                }
+            }
         }
 
         public List<string> OnWsEvent(WsVideoData dto) {
@@ -411,7 +561,7 @@ namespace hapticMedia.sensationEditor.components.pages {
                 case "time":
                     bool gotSynced = SensationPlayer.TimeCheck(dto.timeStamp);
                     if (gotSynced) {
-                        RedrawDrimeline();
+                        ReDrawTimeline();
                     }
                     break;
                 default:
@@ -443,10 +593,10 @@ namespace hapticMedia.sensationEditor.components.pages {
             lastState = newState;
 
             this.lblState.Text = lastState.ToString();
-            RedrawDrimeline();
+            ReDrawTimeline();
         }
 
-        private void RedrawDrimeline() {
+        private void ReDrawTimeline() {
             this.pnlTimelineFull.Invalidate();
             this.pnlTimelineDetail.Invalidate();
         }
@@ -465,6 +615,7 @@ namespace hapticMedia.sensationEditor.components.pages {
         private void bgwTime_DoWork(object sender, DoWorkEventArgs e) {
             while (!bgwTime.CancellationPending) {
                 bgwTime.ReportProgress(0);
+                ReDrawTimeline();
                 Thread.Sleep(100);
             }
         }
@@ -497,10 +648,8 @@ namespace hapticMedia.sensationEditor.components.pages {
                 time++;
             }
 
-            if (lastState != StateEnum.Playing) {
-                Pen posPen = new Pen(Color.Black, 3);
-                DrawLine(e.Graphics, parent, posPen, SensationPlayer.GetCurTime(), 100);
-            }
+            Pen posPen = new Pen(Color.Black, 3);
+            DrawLine(e.Graphics, parent, posPen, SensationPlayer.GetCurTime(), 100);
         }
 
         private void DrawLine(Graphics g, Panel parent, Pen pen, double time, int height) {

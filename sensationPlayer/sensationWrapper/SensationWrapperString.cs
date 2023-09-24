@@ -15,7 +15,7 @@ namespace hapticMedia.sensationPlayer.sensationWrapper {
         }
 
         public override Sensation GetSensation() {
-            return (Sensation) sensationString;
+            return Sensation.Parse(sensationString);
         }
 
     }

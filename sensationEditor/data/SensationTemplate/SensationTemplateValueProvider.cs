@@ -50,5 +50,14 @@ namespace hapticMedia.sensationEditor.data.SensationTemplate {
             this.Cur = cur;
         }
 
+        public SensationTemplateValueProvider(SensationTemplateValueProvider<TValue> original) {
+            this.Selector = original.Selector;
+            this.Type = original.Type;
+            this.Min = original.Min;
+            this.Max = original.Max;
+            this.Default = original.Default;
+            this.Cur = original.Cur;
+        }
+
     }
 }

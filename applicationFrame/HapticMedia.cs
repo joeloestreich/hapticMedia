@@ -18,6 +18,7 @@ using Newtonsoft.Json;
 using hapticMedia.videoViewer.data;
 using hapticMedia.sensationEditor.components.pages;
 using hapticMedia.genericComponents.PageHeader;
+using hapticMedia.sensationEditor.components.TemplateComponents;
 
 namespace hapticMedia.genericComponents.pageDefinition {
     public sealed partial class HapticMedia : Form {

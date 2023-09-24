@@ -8,7 +8,13 @@ using System.Threading.Tasks;
 namespace hapticMedia.sensationEditor.data.SensationTemplate {
     public class SensationTemplateMuscleProvider {
 
+        public SensationTemplateMuscleProvider() {
 
+        }
+
+        public SensationTemplateMuscleProvider(SensationTemplateMuscleProvider original) {
+
+        }
 
         public Muscle[] GetMuscles() {
 

@@ -70,7 +70,7 @@
       <HintPath>packages\Newtonsoft.Json.13.0.3\lib\net45\Newtonsoft.Json.dll</HintPath>
     </Reference>
     <Reference Include="OWO, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>packages\OWO.2.1.1\lib\net45\OWO.dll</HintPath>
+      <HintPath>packages\OWO.2.3.6\lib\net48\OWO.dll</HintPath>
     </Reference>
     <Reference Include="PacketDotNet, Version=1.4.6.0, Culture=neutral, PublicKeyToken=451414c7667b2a58, processorArchitecture=MSIL">
       <HintPath>packages\PacketDotNet.1.4.6\lib\net47\PacketDotNet.dll</HintPath>
@@ -206,6 +206,18 @@
     <Compile Include="sensationEditor\components\pages\VideoEditorPage.Designer.cs">
       <DependentUpon>VideoEditorPage.cs</DependentUpon>
     </Compile>
+    <Compile Include="sensationEditor\components\TemplateComponents\CreateNewSensationPanel.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="sensationEditor\components\TemplateComponents\CreateNewSensationPanel.Designer.cs">
+      <DependentUpon>CreateNewSensationPanel.cs</DependentUpon>
+    </Compile>
+    <Compile Include="sensationEditor\components\TemplateComponents\TemplateEditorValue.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="sensationEditor\components\TemplateComponents\TemplateEditorValue.Designer.cs">
+      <DependentUpon>TemplateEditorValue.cs</DependentUpon>
+    </Compile>
     <Compile Include="sensationEditor\components\TimelinePanel.cs">
       <SubType>Component</SubType>
     </Compile>
@@ -327,6 +339,12 @@
     <EmbeddedResource Include="sensationEditor\components\pages\VideoEditorPage.resx">
       <DependentUpon>VideoEditorPage.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="sensationEditor\components\TemplateComponents\CreateNewSensationPanel.resx">
+      <DependentUpon>CreateNewSensationPanel.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="sensationEditor\components\TemplateComponents\TemplateEditorValue.resx">
+      <DependentUpon>TemplateEditorValue.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="sensationRecorder\components\pages\SensationRecorderPage.resx">
       <DependentUpon>SensationRecorderPage.cs</DependentUpon>
     </EmbeddedResource>
@@ -409,5 +427,6 @@
   <ItemGroup>
     <EmbeddedResource Include="resources\html\videoViewer.html" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

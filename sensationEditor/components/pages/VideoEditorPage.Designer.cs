@@ -32,6 +32,9 @@
             this.label2 = new System.Windows.Forms.Label();
             this.bgwTime = new System.ComponentModel.BackgroundWorker();
             this.pnlSensationConfig = new System.Windows.Forms.Panel();
+            this.tcSensationEditor = new System.Windows.Forms.TabControl();
+            this.tabPage4 = new System.Windows.Forms.TabPage();
+            this.createNewSensationPanel1 = new hapticMedia.sensationEditor.components.TemplateComponents.CreateNewSensationPanel();
             this.panel3 = new System.Windows.Forms.Panel();
             this.btnPreviewFeel = new System.Windows.Forms.Button();
             this.btnAddSensation = new System.Windows.Forms.Button();
@@ -53,6 +56,11 @@
             this.btnNavBack = new System.Windows.Forms.Button();
             this.btnNavLast = new System.Windows.Forms.Button();
             this.btnNavForward = new System.Windows.Forms.Button();
+            this.btnNavConflict = new System.Windows.Forms.Button();
+            this.btnRemoveSensation = new System.Windows.Forms.Button();
+            this.pnlSensationConfig.SuspendLayout();
+            this.tcSensationEditor.SuspendLayout();
+            this.tabPage4.SuspendLayout();
             this.panel3.SuspendLayout();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
@@ -139,10 +147,42 @@
             // 
             // pnlSensationConfig
             // 
+            this.pnlSensationConfig.Controls.Add(this.tcSensationEditor);
             this.pnlSensationConfig.Location = new System.Drawing.Point(3, 337);
             this.pnlSensationConfig.Name = "pnlSensationConfig";
             this.pnlSensationConfig.Size = new System.Drawing.Size(846, 380);
             this.pnlSensationConfig.TabIndex = 13;
+            // 
+            // tcSensationEditor
+            // 
+            this.tcSensationEditor.Controls.Add(this.tabPage4);
+            this.tcSensationEditor.Location = new System.Drawing.Point(0, 0);
+            this.tcSensationEditor.Name = "tcSensationEditor";
+            this.tcSensationEditor.SelectedIndex = 0;
+            this.tcSensationEditor.Size = new System.Drawing.Size(846, 380);
+            this.tcSensationEditor.TabIndex = 0;
+            this.tcSensationEditor.Selected += new System.Windows.Forms.TabControlEventHandler(this.tcSensationEditor_Selected);
+            // 
+            // tabPage4
+            // 
+            this.tabPage4.Controls.Add(this.createNewSensationPanel1);
+            this.tabPage4.Location = new System.Drawing.Point(4, 22);
+            this.tabPage4.Name = "tabPage4";
+            this.tabPage4.Padding = new System.Windows.Forms.Padding(3);
+            this.tabPage4.Size = new System.Drawing.Size(838, 354);
+            this.tabPage4.TabIndex = 0;
+            this.tabPage4.Text = "+";
+            this.tabPage4.UseVisualStyleBackColor = true;
+            // 
+            // createNewSensationPanel1
+            // 
+            this.createNewSensationPanel1.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+            this.createNewSensationPanel1.BackColor = System.Drawing.SystemColors.ControlLightLight;
+            this.createNewSensationPanel1.Location = new System.Drawing.Point(1, 0);
+            this.createNewSensationPanel1.Name = "createNewSensationPanel1";
+            this.createNewSensationPanel1.Size = new System.Drawing.Size(838, 354);
+            this.createNewSensationPanel1.TabIndex = 0;
+            this.createNewSensationPanel1.TemplateCreatedEvent += new hapticMedia.sensationEditor.components.TemplateComponents.CreateNewSensationPanel.TemplateCreated(this.CreatePanel_TemplateCreatedEvent);
             // 
             // panel3
             // 
@@ -371,10 +411,36 @@
             this.btnNavForward.UseVisualStyleBackColor = true;
             this.btnNavForward.Click += new System.EventHandler(this.btnNavForward_Click);
             // 
+            // btnNavConflict
+            // 
+            this.btnNavConflict.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnNavConflict.Location = new System.Drawing.Point(184, 306);
+            this.btnNavConflict.Name = "btnNavConflict";
+            this.btnNavConflict.Size = new System.Drawing.Size(38, 25);
+            this.btnNavConflict.TabIndex = 26;
+            this.btnNavConflict.Text = "!";
+            this.btnNavConflict.UseVisualStyleBackColor = true;
+            this.btnNavConflict.Visible = false;
+            this.btnNavConflict.Click += new System.EventHandler(this.btnNavConflict_Click);
+            // 
+            // btnRemoveSensation
+            // 
+            this.btnRemoveSensation.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnRemoveSensation.Location = new System.Drawing.Point(689, 306);
+            this.btnRemoveSensation.Name = "btnRemoveSensation";
+            this.btnRemoveSensation.Size = new System.Drawing.Size(160, 25);
+            this.btnRemoveSensation.TabIndex = 27;
+            this.btnRemoveSensation.Text = "Remove Sensation";
+            this.btnRemoveSensation.UseVisualStyleBackColor = true;
+            this.btnRemoveSensation.Visible = false;
+            this.btnRemoveSensation.Click += new System.EventHandler(this.btnRemoveSensation_Click);
+            // 
             // VideoEditorPage
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.Controls.Add(this.btnRemoveSensation);
+            this.Controls.Add(this.btnNavConflict);
             this.Controls.Add(this.btnNavLast);
             this.Controls.Add(this.btnNavForward);
             this.Controls.Add(this.btnNavBack);
@@ -396,6 +462,9 @@
             this.Controls.Add(this.label3);
             this.Controls.Add(this.label1);
             this.Name = "VideoEditorPage";
+            this.pnlSensationConfig.ResumeLayout(false);
+            this.tcSensationEditor.ResumeLayout(false);
+            this.tabPage4.ResumeLayout(false);
             this.panel3.ResumeLayout(false);
             this.tabControl1.ResumeLayout(false);
             this.tabPage1.ResumeLayout(false);
@@ -438,5 +507,10 @@
         private System.Windows.Forms.Button btnNavBack;
         private System.Windows.Forms.Button btnNavLast;
         private System.Windows.Forms.Button btnNavForward;
+        private System.Windows.Forms.Button btnNavConflict;
+        private System.Windows.Forms.TabControl tcSensationEditor;
+        private System.Windows.Forms.TabPage tabPage4;
+        private TemplateComponents.CreateNewSensationPanel createNewSensationPanel1;
+        private System.Windows.Forms.Button btnRemoveSensation;
     }
 }

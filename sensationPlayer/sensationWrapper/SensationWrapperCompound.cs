@@ -8,9 +8,9 @@ using System.Threading.Tasks;
 namespace hapticMedia.sensationPlayer.sensationWrapper {
     internal class SensationWrapperCompound : SensationWrapper {
 
-        Sensation[] sensations;
+        List<Sensation> sensations;
 
-        public SensationWrapperCompound(Sensation[] sensations) {
+        public SensationWrapperCompound(List<Sensation> sensations) {
             this.sensations = sensations;
         }
 
