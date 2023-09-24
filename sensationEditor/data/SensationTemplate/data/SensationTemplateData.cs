@@ -13,8 +13,7 @@ namespace hapticMedia.sensationEditor.data.SensationTemplate {
         public enum TemplateType {
             TemplateValue = 0,
             TemplateCapture = 1,
-            TemplateParse = 2,
-            TemplateCompound = 3
+            TemplateText = 2
         }
 
         public TemplateType Type;

@@ -58,6 +58,7 @@
             this.btnNavForward = new System.Windows.Forms.Button();
             this.btnNavConflict = new System.Windows.Forms.Button();
             this.btnRemoveSensation = new System.Windows.Forms.Button();
+            this.btnFeelSensation = new System.Windows.Forms.Button();
             this.pnlSensationConfig.SuspendLayout();
             this.tcSensationEditor.SuspendLayout();
             this.tabPage4.SuspendLayout();
@@ -159,9 +160,8 @@
             this.tcSensationEditor.Location = new System.Drawing.Point(0, 0);
             this.tcSensationEditor.Name = "tcSensationEditor";
             this.tcSensationEditor.SelectedIndex = 0;
-            this.tcSensationEditor.Size = new System.Drawing.Size(846, 380);
+            this.tcSensationEditor.Size = new System.Drawing.Size(846, 366);
             this.tcSensationEditor.TabIndex = 0;
-            this.tcSensationEditor.Selected += new System.Windows.Forms.TabControlEventHandler(this.tcSensationEditor_Selected);
             // 
             // tabPage4
             // 
@@ -169,7 +169,7 @@
             this.tabPage4.Location = new System.Drawing.Point(4, 22);
             this.tabPage4.Name = "tabPage4";
             this.tabPage4.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage4.Size = new System.Drawing.Size(838, 354);
+            this.tabPage4.Size = new System.Drawing.Size(838, 340);
             this.tabPage4.TabIndex = 0;
             this.tabPage4.Text = "+";
             this.tabPage4.UseVisualStyleBackColor = true;
@@ -426,19 +426,32 @@
             // btnRemoveSensation
             // 
             this.btnRemoveSensation.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnRemoveSensation.Location = new System.Drawing.Point(689, 306);
+            this.btnRemoveSensation.Location = new System.Drawing.Point(760, 306);
             this.btnRemoveSensation.Name = "btnRemoveSensation";
-            this.btnRemoveSensation.Size = new System.Drawing.Size(160, 25);
+            this.btnRemoveSensation.Size = new System.Drawing.Size(89, 25);
             this.btnRemoveSensation.TabIndex = 27;
-            this.btnRemoveSensation.Text = "Remove Sensation";
+            this.btnRemoveSensation.Text = "Remove";
             this.btnRemoveSensation.UseVisualStyleBackColor = true;
             this.btnRemoveSensation.Visible = false;
             this.btnRemoveSensation.Click += new System.EventHandler(this.btnRemoveSensation_Click);
+            // 
+            // btnFeelSensation
+            // 
+            this.btnFeelSensation.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnFeelSensation.Location = new System.Drawing.Point(692, 306);
+            this.btnFeelSensation.Name = "btnFeelSensation";
+            this.btnFeelSensation.Size = new System.Drawing.Size(62, 25);
+            this.btnFeelSensation.TabIndex = 28;
+            this.btnFeelSensation.Text = "Feel";
+            this.btnFeelSensation.UseVisualStyleBackColor = true;
+            this.btnFeelSensation.Visible = false;
+            this.btnFeelSensation.Click += new System.EventHandler(this.btnFeelSensation_Click);
             // 
             // VideoEditorPage
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.Controls.Add(this.btnFeelSensation);
             this.Controls.Add(this.btnRemoveSensation);
             this.Controls.Add(this.btnNavConflict);
             this.Controls.Add(this.btnNavLast);
@@ -512,5 +525,6 @@
         private System.Windows.Forms.TabPage tabPage4;
         private TemplateComponents.CreateNewSensationPanel createNewSensationPanel1;
         private System.Windows.Forms.Button btnRemoveSensation;
+        private System.Windows.Forms.Button btnFeelSensation;
     }
 }

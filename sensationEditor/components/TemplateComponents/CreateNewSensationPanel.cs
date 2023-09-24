@@ -13,7 +13,7 @@ using System.Windows.Forms;
 namespace hapticMedia.sensationEditor.components.TemplateComponents {
     public partial class CreateNewSensationPanel : UserControlBase {
 
-        public delegate void TemplateCreated(object sender, SensationTemplateData template);
+        public delegate void TemplateCreated(object sender, SensationTemplateDataValue template);
         public event TemplateCreated TemplateCreatedEvent;
 
         SensationTemplateData ParentTemplate = null;
@@ -27,16 +27,9 @@ namespace hapticMedia.sensationEditor.components.TemplateComponents {
             this.ParentTemplate = template;
         }
 
-        public List<SensationTemplateData> OnOpenTab() {
-            if (ParentTemplate is SensationTemplateDataCompound && ((SensationTemplateDataCompound) ParentTemplate).IsLooping()) {
-                return ((SensationTemplateDataCompound)ParentTemplate).GetLoop();
-            } 
-            return null;
-        }
-
         private void btnCreateBlank_Click(object sender, EventArgs e) {
 
-            SensationTemplateData template = BaseSensationConstants.NewBlank();
+            SensationTemplateDataValue template = BaseSensationConstants.NewBlank();
             template.Name = txtName.Text;
 
             TemplateCreatedEvent?.Invoke(this, template);

@@ -46,7 +46,7 @@ namespace hapticMedia.sensationEditor.data.SensationTemplate {
             );
         }
 
-        public static SensationTemplateDataCompound Dagger() {
+        public static SensationTemplateDataValue Dagger() {
             SensationTemplateDataValue daggerStab = new SensationTemplateDataValue("Stab",
                 new SensationTemplateValueProvider<int>(
                     SensationTemplateValueProvider<int>.SelectorType.Range, SensationTemplateValueProvider<int>.ProviderType.Frequency, 1, 100, 60),
@@ -62,7 +62,7 @@ namespace hapticMedia.sensationEditor.data.SensationTemplate {
                     SensationTemplateValueProvider<float>.SelectorType.Range, SensationTemplateValueProvider<float>.ProviderType.ExitDelay, 0, 2, 0),
                 new SensationTemplateMuscleProvider()
             );
-            SensationTemplateDataValue daggerLinger = new SensationTemplateDataValue("Linger",
+            SensationTemplateDataValue daggerTwist = new SensationTemplateDataValue("Twist",
                 new SensationTemplateValueProvider<int>(
                     SensationTemplateValueProvider<int>.SelectorType.Range, SensationTemplateValueProvider<int>.ProviderType.Frequency, 1, 100, 100),
                 new SensationTemplateValueProvider<float>(
@@ -77,10 +77,10 @@ namespace hapticMedia.sensationEditor.data.SensationTemplate {
                     SensationTemplateValueProvider<float>.SelectorType.Range, SensationTemplateValueProvider<float>.ProviderType.ExitDelay, 0, 2, 0),
                 new SensationTemplateMuscleProvider()
             );
-            return new SensationTemplateDataCompound("Dagger", daggerStab, daggerLinger);
+            return daggerStab.FollowUpSensation = daggerTwist;
         }
 
-        public static SensationTemplateDataCompound Hug() {
+        public static SensationTemplateDataValue Hug() {
             SensationTemplateDataValue embrace = new SensationTemplateDataValue("Embrace",
                 new SensationTemplateValueProvider<int>(
                     SensationTemplateValueProvider<int>.SelectorType.Range, SensationTemplateValueProvider<int>.ProviderType.Frequency, 1, 100, 100),
@@ -96,7 +96,7 @@ namespace hapticMedia.sensationEditor.data.SensationTemplate {
                     SensationTemplateValueProvider<float>.SelectorType.Range, SensationTemplateValueProvider<float>.ProviderType.ExitDelay, 0, 2, 0),
                 new SensationTemplateMuscleProvider()
             );
-            SensationTemplateDataValue pat1 = new SensationTemplateDataValue("Pat 1",
+            SensationTemplateDataValue pat = new SensationTemplateDataValue("Pat",
                 new SensationTemplateValueProvider<int>(
                     SensationTemplateValueProvider<int>.SelectorType.Range, SensationTemplateValueProvider<int>.ProviderType.Frequency, 1, 100, 80),
                 new SensationTemplateValueProvider<float>(
@@ -111,27 +111,14 @@ namespace hapticMedia.sensationEditor.data.SensationTemplate {
                     SensationTemplateValueProvider<float>.SelectorType.Range, SensationTemplateValueProvider<float>.ProviderType.ExitDelay, 0, 2, 0),
                 new SensationTemplateMuscleProvider()
             );
-            SensationTemplateDataValue pat2 = new SensationTemplateDataValue("Pat 2",
-                new SensationTemplateValueProvider<int>(
-                    SensationTemplateValueProvider<int>.SelectorType.Range, SensationTemplateValueProvider<int>.ProviderType.Frequency, 1, 100, 80),
-                new SensationTemplateValueProvider<float>(
-                    SensationTemplateValueProvider<float>.SelectorType.Range, SensationTemplateValueProvider<float>.ProviderType.Duration, 0.1f, 5, 0.2f),
-                new SensationTemplateValueProvider<int>(
-                    SensationTemplateValueProvider<int>.SelectorType.Range, SensationTemplateValueProvider<int>.ProviderType.Intensity, 0, 100, 100),
-                new SensationTemplateValueProvider<float>(
-                    SensationTemplateValueProvider<float>.SelectorType.Range, SensationTemplateValueProvider<float>.ProviderType.RampUp, 0, 2, 0),
-                new SensationTemplateValueProvider<float>(
-                    SensationTemplateValueProvider<float>.SelectorType.Range, SensationTemplateValueProvider<float>.ProviderType.RampDown, 0, 2, 0.100f),
-                new SensationTemplateValueProvider<float>(
-                    SensationTemplateValueProvider<float>.SelectorType.Range, SensationTemplateValueProvider<float>.ProviderType.ExitDelay, 0, 2, 0),
-                new SensationTemplateMuscleProvider()
-            );
-            SensationTemplateDataCompound compound = new SensationTemplateDataCompound("Hug", embrace, pat1, pat2);
-            compound.SetLoopingSensations(pat1, pat2);
-            return compound;
+
+            embrace.FollowUpSensation = pat;
+            pat.FollowUpSensation = new SensationTemplateDataValue(pat);
+
+            return embrace;
         }
 
-        public static SensationTemplateDataCompound ShotWithExit() {
+        public static SensationTemplateDataValue ShotWithExit() {
             SensationTemplateDataValue entry = new SensationTemplateDataValue("Entry",
                 new SensationTemplateValueProvider<int>(
                     SensationTemplateValueProvider<int>.SelectorType.Range, SensationTemplateValueProvider<int>.ProviderType.Frequency, 1, 100, 30),
@@ -162,7 +149,7 @@ namespace hapticMedia.sensationEditor.data.SensationTemplate {
                     SensationTemplateValueProvider<float>.SelectorType.Range, SensationTemplateValueProvider<float>.ProviderType.ExitDelay, 0, 2, 0),
                 new SensationTemplateMuscleProvider()
             );
-            SensationTemplateDataValue linger = new SensationTemplateDataValue("Linger",
+            SensationTemplateDataValue bleed = new SensationTemplateDataValue("bleed",
                 new SensationTemplateValueProvider<int>(
                     SensationTemplateValueProvider<int>.SelectorType.Range, SensationTemplateValueProvider<int>.ProviderType.Frequency, 1, 100, 50),
                 new SensationTemplateValueProvider<float>(
@@ -177,7 +164,11 @@ namespace hapticMedia.sensationEditor.data.SensationTemplate {
                     SensationTemplateValueProvider<float>.SelectorType.Range, SensationTemplateValueProvider<float>.ProviderType.ExitDelay, 0, 2, 0),
                 new SensationTemplateMuscleProvider()
             );
-            return new SensationTemplateDataCompound("Shot with exit", entry, exit, linger);
+
+            entry.FollowUpSensation = exit;
+            exit.FollowUpSensation = bleed;
+
+            return entry;
         }
     }
 }

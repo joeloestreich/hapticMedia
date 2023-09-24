@@ -18,6 +18,8 @@ namespace hapticMedia.sensationPlayer.sensationWrapper {
         Muscle[] muscles;
         string Name;
 
+        public SensationWrapperValues FollowUpSensation = null;
+
         public SensationWrapperValues(int frequency, float durationSeconds, int intensityPercentage, 
                 float RampUpMillies, float RampDownMillies, float ExitDelaySeconds, 
                 Muscle[] muscles, string name) {
@@ -33,8 +35,26 @@ namespace hapticMedia.sensationPlayer.sensationWrapper {
 
         public override Sensation GetSensation() {
             MicroSensation micro = SensationsFactory.Create(frequency, durationSeconds, intensityPercentage, RampUpMillies, RampDownMillies, ExitDelaySeconds);
-            micro.WithName(Name);
-            return micro.WithMuscles(muscles);
+            micro = micro.WithName(Name);
+            Sensation sensation = micro.WithMuscles(muscles);
+
+            SensationWrapperValues appendSensation = FollowUpSensation;
+            while (appendSensation != null) {
+                MicroSensation append = SensationsFactory.Create(
+                    appendSensation.frequency,
+                    appendSensation.durationSeconds,
+                    appendSensation.intensityPercentage,
+                    appendSensation.RampUpMillies, 
+                    appendSensation.RampDownMillies, 
+                    appendSensation.ExitDelaySeconds);
+                append = append.WithName(appendSensation.Name);
+                Sensation followUp = append.WithMuscles(appendSensation.muscles);
+
+                sensation = sensation.Append(followUp);
+                appendSensation = appendSensation.FollowUpSensation;
+            }
+
+            return sensation;
         }
     }
 }

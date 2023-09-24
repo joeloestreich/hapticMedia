@@ -19,7 +19,7 @@ namespace hapticMedia.sensationEditor.data.SensationTemplate {
         public override SensationWrapper GetSensationWrapper() {
             if (Type == TemplateType.TemplateCapture) {
                 return new SensationWrapperString(ParseCapture(Parameter));
-            } else if (Type == TemplateType.TemplateParse) {
+            } else if (Type == TemplateType.TemplateText) {
                 return new SensationWrapperString(Parameter);
             }
             return null;

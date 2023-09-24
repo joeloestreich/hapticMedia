@@ -23,6 +23,7 @@
         /// the contents of this method with the code editor.
         /// </summary>
         private void InitializeComponent() {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(TemplateEditorValue));
             this.splitContainer1 = new System.Windows.Forms.SplitContainer();
             this.lblExitCur = new System.Windows.Forms.Label();
             this.lblFOutCur = new System.Windows.Forms.Label();
@@ -54,8 +55,28 @@
             this.tbInt = new System.Windows.Forms.TrackBar();
             this.label2 = new System.Windows.Forms.Label();
             this.tbFreq = new System.Windows.Forms.TrackBar();
+            this.lblMusclePercent = new System.Windows.Forms.Label();
+            this.lblMusleMax = new System.Windows.Forms.Label();
+            this.lblMuscleMin = new System.Windows.Forms.Label();
+            this.lblMuscleSlider = new System.Windows.Forms.Label();
+            this.tbMuscleIntensity = new System.Windows.Forms.TrackBar();
+            this.cbEnableMuscle = new System.Windows.Forms.CheckBox();
+            this.lblMuscleName = new System.Windows.Forms.Label();
+            this.label17 = new System.Windows.Forms.Label();
+            this.lblLumbarR = new System.Windows.Forms.Label();
+            this.lblLumbarL = new System.Windows.Forms.Label();
+            this.lblDorsalR = new System.Windows.Forms.Label();
+            this.lblDorsalL = new System.Windows.Forms.Label();
+            this.lblAbdomR = new System.Windows.Forms.Label();
+            this.lblArmR = new System.Windows.Forms.Label();
+            this.lblPecR = new System.Windows.Forms.Label();
+            this.lblAbdomL = new System.Windows.Forms.Label();
+            this.lblArmL = new System.Windows.Forms.Label();
+            this.lblPecL = new System.Windows.Forms.Label();
+            this.picMuscles = new System.Windows.Forms.PictureBox();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
             this.splitContainer1.Panel1.SuspendLayout();
+            this.splitContainer1.Panel2.SuspendLayout();
             this.splitContainer1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.tbExit)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.tbFOut)).BeginInit();
@@ -63,6 +84,8 @@
             ((System.ComponentModel.ISupportInitialize)(this.tbDur)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.tbInt)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.tbFreq)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.tbMuscleIntensity)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.picMuscles)).BeginInit();
             this.SuspendLayout();
             // 
             // splitContainer1
@@ -103,6 +126,28 @@
             this.splitContainer1.Panel1.Controls.Add(this.tbInt);
             this.splitContainer1.Panel1.Controls.Add(this.label2);
             this.splitContainer1.Panel1.Controls.Add(this.tbFreq);
+            // 
+            // splitContainer1.Panel2
+            // 
+            this.splitContainer1.Panel2.Controls.Add(this.lblMusclePercent);
+            this.splitContainer1.Panel2.Controls.Add(this.lblMusleMax);
+            this.splitContainer1.Panel2.Controls.Add(this.lblMuscleMin);
+            this.splitContainer1.Panel2.Controls.Add(this.lblMuscleSlider);
+            this.splitContainer1.Panel2.Controls.Add(this.tbMuscleIntensity);
+            this.splitContainer1.Panel2.Controls.Add(this.cbEnableMuscle);
+            this.splitContainer1.Panel2.Controls.Add(this.lblMuscleName);
+            this.splitContainer1.Panel2.Controls.Add(this.label17);
+            this.splitContainer1.Panel2.Controls.Add(this.lblLumbarR);
+            this.splitContainer1.Panel2.Controls.Add(this.lblLumbarL);
+            this.splitContainer1.Panel2.Controls.Add(this.lblDorsalR);
+            this.splitContainer1.Panel2.Controls.Add(this.lblDorsalL);
+            this.splitContainer1.Panel2.Controls.Add(this.lblAbdomR);
+            this.splitContainer1.Panel2.Controls.Add(this.lblArmR);
+            this.splitContainer1.Panel2.Controls.Add(this.lblPecR);
+            this.splitContainer1.Panel2.Controls.Add(this.lblAbdomL);
+            this.splitContainer1.Panel2.Controls.Add(this.lblArmL);
+            this.splitContainer1.Panel2.Controls.Add(this.lblPecL);
+            this.splitContainer1.Panel2.Controls.Add(this.picMuscles);
             this.splitContainer1.Size = new System.Drawing.Size(838, 354);
             this.splitContainer1.SplitterDistance = 419;
             this.splitContainer1.TabIndex = 0;
@@ -152,11 +197,11 @@
             this.lblIntCur.TabIndex = 27;
             this.lblIntCur.Text = "0";
             // 
-            // lblFreCur
+            // lblFreqCur
             // 
             this.lblFreqCur.AutoSize = true;
             this.lblFreqCur.Location = new System.Drawing.Point(209, 11);
-            this.lblFreqCur.Name = "lblFreCur";
+            this.lblFreqCur.Name = "lblFreqCur";
             this.lblFreqCur.Size = new System.Drawing.Size(13, 13);
             this.lblFreqCur.TabIndex = 26;
             this.lblFreqCur.Text = "1";
@@ -382,6 +427,211 @@
             this.tbFreq.Value = 100;
             this.tbFreq.Scroll += new System.EventHandler(this.tbFreq_Scroll);
             // 
+            // lblMusclePercent
+            // 
+            this.lblMusclePercent.AutoSize = true;
+            this.lblMusclePercent.Location = new System.Drawing.Point(257, 243);
+            this.lblMusclePercent.Name = "lblMusclePercent";
+            this.lblMusclePercent.Size = new System.Drawing.Size(13, 13);
+            this.lblMusclePercent.TabIndex = 42;
+            this.lblMusclePercent.Text = "0";
+            this.lblMusclePercent.Visible = false;
+            // 
+            // lblMusleMax
+            // 
+            this.lblMusleMax.AutoSize = true;
+            this.lblMusleMax.Location = new System.Drawing.Point(369, 243);
+            this.lblMusleMax.Name = "lblMusleMax";
+            this.lblMusleMax.Size = new System.Drawing.Size(25, 13);
+            this.lblMusleMax.TabIndex = 41;
+            this.lblMusleMax.Text = "100";
+            this.lblMusleMax.Visible = false;
+            // 
+            // lblMuscleMin
+            // 
+            this.lblMuscleMin.AutoSize = true;
+            this.lblMuscleMin.Location = new System.Drawing.Point(28, 243);
+            this.lblMuscleMin.Name = "lblMuscleMin";
+            this.lblMuscleMin.Size = new System.Drawing.Size(13, 13);
+            this.lblMuscleMin.TabIndex = 40;
+            this.lblMuscleMin.Text = "0";
+            this.lblMuscleMin.Visible = false;
+            // 
+            // lblMuscleSlider
+            // 
+            this.lblMuscleSlider.AutoSize = true;
+            this.lblMuscleSlider.Location = new System.Drawing.Point(151, 243);
+            this.lblMuscleSlider.Name = "lblMuscleSlider";
+            this.lblMuscleSlider.Size = new System.Drawing.Size(100, 13);
+            this.lblMuscleSlider.TabIndex = 39;
+            this.lblMuscleSlider.Text = "Muscle Intensity (%)";
+            this.lblMuscleSlider.Visible = false;
+            // 
+            // tbMuscleIntensity
+            // 
+            this.tbMuscleIntensity.Location = new System.Drawing.Point(21, 259);
+            this.tbMuscleIntensity.Maximum = 100;
+            this.tbMuscleIntensity.Name = "tbMuscleIntensity";
+            this.tbMuscleIntensity.Size = new System.Drawing.Size(373, 45);
+            this.tbMuscleIntensity.TabIndex = 38;
+            this.tbMuscleIntensity.Value = 100;
+            this.tbMuscleIntensity.Visible = false;
+            this.tbMuscleIntensity.Scroll += new System.EventHandler(this.tbMuscleIntensity_Scroll);
+            // 
+            // cbEnableMuscle
+            // 
+            this.cbEnableMuscle.AutoSize = true;
+            this.cbEnableMuscle.Location = new System.Drawing.Point(85, 218);
+            this.cbEnableMuscle.Name = "cbEnableMuscle";
+            this.cbEnableMuscle.Size = new System.Drawing.Size(65, 17);
+            this.cbEnableMuscle.TabIndex = 18;
+            this.cbEnableMuscle.Text = "Enabled";
+            this.cbEnableMuscle.UseVisualStyleBackColor = true;
+            this.cbEnableMuscle.Visible = false;
+            this.cbEnableMuscle.CheckedChanged += new System.EventHandler(this.cbEnableMuscle_CheckedChanged);
+            // 
+            // lblMuscleName
+            // 
+            this.lblMuscleName.AutoSize = true;
+            this.lblMuscleName.Location = new System.Drawing.Point(82, 202);
+            this.lblMuscleName.Name = "lblMuscleName";
+            this.lblMuscleName.Size = new System.Drawing.Size(103, 13);
+            this.lblMuscleName.TabIndex = 17;
+            this.lblMuscleName.Text = "No Muscle Selected";
+            // 
+            // label17
+            // 
+            this.label17.AutoSize = true;
+            this.label17.Location = new System.Drawing.Point(32, 202);
+            this.label17.Name = "label17";
+            this.label17.Size = new System.Drawing.Size(44, 13);
+            this.label17.TabIndex = 16;
+            this.label17.Text = "Muscle:";
+            // 
+            // lblLumbarR
+            // 
+            this.lblLumbarR.AutoSize = true;
+            this.lblLumbarR.Location = new System.Drawing.Point(348, 143);
+            this.lblLumbarR.Name = "lblLumbarR";
+            this.lblLumbarR.Size = new System.Drawing.Size(27, 13);
+            this.lblLumbarR.TabIndex = 15;
+            this.lblLumbarR.Text = "OFF";
+            this.lblLumbarR.Click += new System.EventHandler(this.lblLumbarR_Click);
+            // 
+            // lblLumbarL
+            // 
+            this.lblLumbarL.AutoSize = true;
+            this.lblLumbarL.Location = new System.Drawing.Point(241, 143);
+            this.lblLumbarL.Name = "lblLumbarL";
+            this.lblLumbarL.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
+            this.lblLumbarL.Size = new System.Drawing.Size(27, 13);
+            this.lblLumbarL.TabIndex = 14;
+            this.lblLumbarL.Text = "OFF";
+            this.lblLumbarL.TextAlign = System.Drawing.ContentAlignment.TopRight;
+            this.lblLumbarL.Click += new System.EventHandler(this.lblLumbarL_Click);
+            // 
+            // lblDorsalR
+            // 
+            this.lblDorsalR.AutoSize = true;
+            this.lblDorsalR.Location = new System.Drawing.Point(348, 114);
+            this.lblDorsalR.Name = "lblDorsalR";
+            this.lblDorsalR.Size = new System.Drawing.Size(27, 13);
+            this.lblDorsalR.TabIndex = 13;
+            this.lblDorsalR.Text = "OFF";
+            this.lblDorsalR.Click += new System.EventHandler(this.lblDorsalR_Click);
+            // 
+            // lblDorsalL
+            // 
+            this.lblDorsalL.AutoSize = true;
+            this.lblDorsalL.Location = new System.Drawing.Point(241, 114);
+            this.lblDorsalL.Name = "lblDorsalL";
+            this.lblDorsalL.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
+            this.lblDorsalL.Size = new System.Drawing.Size(27, 13);
+            this.lblDorsalL.TabIndex = 12;
+            this.lblDorsalL.Text = "OFF";
+            this.lblDorsalL.TextAlign = System.Drawing.ContentAlignment.TopRight;
+            this.lblDorsalL.Click += new System.EventHandler(this.lblDorsalL_Click);
+            // 
+            // lblAbdomR
+            // 
+            this.lblAbdomR.AutoSize = true;
+            this.lblAbdomR.Location = new System.Drawing.Point(161, 143);
+            this.lblAbdomR.Name = "lblAbdomR";
+            this.lblAbdomR.Size = new System.Drawing.Size(27, 13);
+            this.lblAbdomR.TabIndex = 11;
+            this.lblAbdomR.Text = "OFF";
+            this.lblAbdomR.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.lblAbdomR.Click += new System.EventHandler(this.lblAbdomR_Click);
+            // 
+            // lblArmR
+            // 
+            this.lblArmR.AutoSize = true;
+            this.lblArmR.Location = new System.Drawing.Point(193, 78);
+            this.lblArmR.Name = "lblArmR";
+            this.lblArmR.Size = new System.Drawing.Size(27, 13);
+            this.lblArmR.TabIndex = 10;
+            this.lblArmR.Text = "OFF";
+            this.lblArmR.TextAlign = System.Drawing.ContentAlignment.BottomLeft;
+            this.lblArmR.Click += new System.EventHandler(this.lblArmR_Click);
+            // 
+            // lblPecR
+            // 
+            this.lblPecR.AutoSize = true;
+            this.lblPecR.Location = new System.Drawing.Point(148, 19);
+            this.lblPecR.Name = "lblPecR";
+            this.lblPecR.Size = new System.Drawing.Size(27, 13);
+            this.lblPecR.TabIndex = 9;
+            this.lblPecR.Text = "OFF";
+            this.lblPecR.TextAlign = System.Drawing.ContentAlignment.BottomLeft;
+            this.lblPecR.Click += new System.EventHandler(this.lblPecR_Click);
+            // 
+            // lblAbdomL
+            // 
+            this.lblAbdomL.AutoSize = true;
+            this.lblAbdomL.Location = new System.Drawing.Point(56, 143);
+            this.lblAbdomL.Name = "lblAbdomL";
+            this.lblAbdomL.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
+            this.lblAbdomL.Size = new System.Drawing.Size(27, 13);
+            this.lblAbdomL.TabIndex = 8;
+            this.lblAbdomL.Text = "OFF";
+            this.lblAbdomL.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.lblAbdomL.Click += new System.EventHandler(this.lblAbdomL_Click);
+            // 
+            // lblArmL
+            // 
+            this.lblArmL.AutoSize = true;
+            this.lblArmL.Location = new System.Drawing.Point(24, 78);
+            this.lblArmL.Name = "lblArmL";
+            this.lblArmL.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
+            this.lblArmL.Size = new System.Drawing.Size(27, 13);
+            this.lblArmL.TabIndex = 7;
+            this.lblArmL.Text = "OFF";
+            this.lblArmL.TextAlign = System.Drawing.ContentAlignment.BottomRight;
+            this.lblArmL.Click += new System.EventHandler(this.lblArmL_Click);
+            // 
+            // lblPecL
+            // 
+            this.lblPecL.AutoSize = true;
+            this.lblPecL.Location = new System.Drawing.Point(68, 19);
+            this.lblPecL.Name = "lblPecL";
+            this.lblPecL.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
+            this.lblPecL.Size = new System.Drawing.Size(27, 13);
+            this.lblPecL.TabIndex = 6;
+            this.lblPecL.Text = "OFF";
+            this.lblPecL.TextAlign = System.Drawing.ContentAlignment.BottomRight;
+            this.lblPecL.Click += new System.EventHandler(this.lblPecL_Click);
+            // 
+            // picMuscles
+            // 
+            this.picMuscles.Image = ((System.Drawing.Image)(resources.GetObject("picMuscles.Image")));
+            this.picMuscles.Location = new System.Drawing.Point(21, 11);
+            this.picMuscles.Name = "picMuscles";
+            this.picMuscles.Size = new System.Drawing.Size(373, 174);
+            this.picMuscles.TabIndex = 0;
+            this.picMuscles.TabStop = false;
+            this.picMuscles.MouseClick += new System.Windows.Forms.MouseEventHandler(this.picMuscles_MouseClick);
+            this.picMuscles.MouseDoubleClick += new System.Windows.Forms.MouseEventHandler(this.picMuscles_MouseDoubleClick);
+            // 
             // TemplateEditorValue
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -391,6 +641,8 @@
             this.Size = new System.Drawing.Size(838, 354);
             this.splitContainer1.Panel1.ResumeLayout(false);
             this.splitContainer1.Panel1.PerformLayout();
+            this.splitContainer1.Panel2.ResumeLayout(false);
+            this.splitContainer1.Panel2.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).EndInit();
             this.splitContainer1.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.tbExit)).EndInit();
@@ -399,6 +651,8 @@
             ((System.ComponentModel.ISupportInitialize)(this.tbDur)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.tbInt)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.tbFreq)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.tbMuscleIntensity)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.picMuscles)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -436,5 +690,24 @@
         private System.Windows.Forms.Label lblDurCur;
         private System.Windows.Forms.Label lblIntCur;
         private System.Windows.Forms.Label lblFreqCur;
+        private System.Windows.Forms.PictureBox picMuscles;
+        private System.Windows.Forms.Label lblMusclePercent;
+        private System.Windows.Forms.Label lblMusleMax;
+        private System.Windows.Forms.Label lblMuscleMin;
+        private System.Windows.Forms.Label lblMuscleSlider;
+        private System.Windows.Forms.TrackBar tbMuscleIntensity;
+        private System.Windows.Forms.CheckBox cbEnableMuscle;
+        private System.Windows.Forms.Label lblMuscleName;
+        private System.Windows.Forms.Label label17;
+        private System.Windows.Forms.Label lblLumbarR;
+        private System.Windows.Forms.Label lblDorsalR;
+        private System.Windows.Forms.Label lblDorsalL;
+        private System.Windows.Forms.Label lblAbdomR;
+        private System.Windows.Forms.Label lblArmR;
+        private System.Windows.Forms.Label lblPecR;
+        private System.Windows.Forms.Label lblAbdomL;
+        private System.Windows.Forms.Label lblArmL;
+        private System.Windows.Forms.Label lblPecL;
+        private System.Windows.Forms.Label lblLumbarL;
     }
 }

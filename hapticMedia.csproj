@@ -225,13 +225,13 @@
       <DependentUpon>TimelinePanel.cs</DependentUpon>
     </Compile>
     <Compile Include="sensationEditor\data\SensationEditorTrack.cs" />
-    <Compile Include="sensationEditor\data\SensationTemplate\SensationTemplateDataCapture.cs" />
-    <Compile Include="sensationEditor\data\SensationTemplate\SensationTemplateDataCompound.cs" />
-    <Compile Include="sensationEditor\data\SensationTemplate\SensationTemplateDataString.cs" />
-    <Compile Include="sensationEditor\data\SensationTemplate\SensationTemplateDataValue.cs" />
-    <Compile Include="sensationEditor\data\SensationTemplate\SensationTemplateData.cs" />
-    <Compile Include="sensationEditor\data\SensationTemplate\SensationTemplateMuscleProvider.cs" />
-    <Compile Include="sensationEditor\data\SensationTemplate\SensationTemplateValueProvider.cs" />
+    <Compile Include="sensationEditor\data\SensationTemplate\data\SensationTemplateDataCapture.cs" />
+    <Compile Include="sensationEditor\data\SensationTemplate\data\SensationTemplateDataString.cs" />
+    <Compile Include="sensationEditor\data\SensationTemplate\data\SensationTemplateDataValue.cs" />
+    <Compile Include="sensationEditor\data\SensationTemplate\data\SensationTemplateData.cs" />
+    <Compile Include="sensationEditor\data\SensationTemplate\muscle\MuscleConstants.cs" />
+    <Compile Include="sensationEditor\data\SensationTemplate\muscle\SensationTemplateMuscleProvider.cs" />
+    <Compile Include="sensationEditor\data\SensationTemplate\data\SensationTemplateValueProvider.cs" />
     <Compile Include="sensationPlayer\SensationPlayer.cs" />
     <Compile Include="sensationPlayer\SensationPlayerEditor.cs" />
     <Compile Include="sensationPlayer\sensationWrapper\SensationWrapper.cs" />
@@ -428,5 +428,8 @@
     <EmbeddedResource Include="resources\html\videoViewer.html" />
   </ItemGroup>
   <ItemGroup />
+  <ItemGroup>
+    <None Include="resources\images\owoMuscles.png" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
